@@ -15,8 +15,9 @@ all:
 	#$(CLANG_BIN)/clang++ --std=c++1z -emit-llvm --target=wasm32 -Wl,--no-threads -Oz src/TestSimple.cpp --compile -o build/dapp.wasm
 	$(BINARYEN_BIN)/s2wasm build/dapp.s > build/dapp.wast
 	$(WABT_BIN)/wast2wasm build/dapp.wast > build/dapp.wasm
-	$(WABT_BIN_NEW)/wat2wasm build/dapp.wast > build/dapp2.wasm
-	$(WABT_BIN_NEW)/wasm2wat build/dapp2.wasm > build/dapp2.wat
+	$(WABT_BIN)/wast-desugar build/dapp.wast > build/dapp.wat
+	#$(WABT_BIN_NEW)/wat2wasm build/dapp.wast > build/dapp2.wasm
+	#$(WABT_BIN_NEW)/wasm2wat build/dapp2.wasm > build/dapp2.wat
 
 
 
