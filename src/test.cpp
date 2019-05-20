@@ -1,8 +1,8 @@
 // https://mbebenita.github.io/WasmExplorer/
 //int x = 1024;
-#include<string>
+//#include<string>
 
-#include<array>
+//#include<array>
 
 //using namespace std::string_literals;
 
@@ -123,11 +123,12 @@ constexpr fixed8 operator "" _f8(long double v)
   return fixed8{(int)v*100000000L};
 }
 */
-
+/*
 constexpr long operator "" _fixed8(long double v)
 {
   return v*100000000L;
 }
+*/
 
 /*
 constexpr long toInt(fixed8 f)
@@ -215,7 +216,7 @@ constexpr byte* AddressToScriptHash(const char v[])
 
 // TODO: on C++17 perhaps possible to hash on compile time
 
-typedef std::array<byte, 20> _uint160; // perhaps not good.. too complex for instructions
+///typedef std::array<byte, 20> _uint160; // perhaps not good.. too complex for instructions
 // good only for internals constexpr
 
 struct uint160
@@ -223,12 +224,14 @@ struct uint160
   // nothing here
 };
 
+/*
 int TestSize(_uint160 address)
 {
   return address.size();
 }
+*/
 
-bytearray _toarray(_uint160 hash);
+///bytearray _toarray(_uint160 hash);
 
 bytearray toarray(uint160 hash);
 
@@ -278,7 +281,8 @@ int NeoMain(neostring op, array ops)
 
   bytearray b1 = toarray(t3);
 
-  constexpr long num = 0.3_fixed8;
+  //constexpr long num = 0.3_fixed8;
+  long num = 0;
 
   //float x2 = 3.5;
   //printf("%f",x2);
@@ -314,7 +318,7 @@ int NeoMain(neostring op, array ops)
   {
     const byte x[] = {0x00, 0x01, 0x02};
     bytearray ba = ConvertTobytearray(x);
-    printf("HELLO!!");
+    ///printf("HELLO!!");
     if( TestSecond(op) && TestMy(ba) )
       return 99+p-p2;
 
