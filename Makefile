@@ -3,7 +3,9 @@ BINARYEN_BIN=/home/imcoelho/git-reps/binaryen/build/bin
 WABT_BIN=/home/imcoelho/git-reps/wabt/build
 WABT_BIN_NEW=/home/imcoelho/git-reps/wabt/bin
 
-all:
+all: examples
+
+srctest:
 	# verify output without specific extension
 	#emcc --std=c++17 src/test.cpp -s WASM=1 -o build/dapp.wasm
 	#-s SIDE_MODULE=1 -Oz -s ONLY_MY_CODE=1
@@ -29,7 +31,7 @@ examples: HelloWorld
 # examples
 HelloWorld: examples/HelloWorld.cpp
 	echo "Building example $<"
-	$(CLANG_BIN)/clang++ --std=c++1z -emit-llvm --target=wasm32 -Oz $< -c -o build/examples/$@.bc
+	$(CLANG_BIN)/clang++ --std=c++1z -Isrc/ -emit-llvm --target=wasm32 -Oz $< -c -o build/examples/$@.bc
 	$(CLANG_BIN)/llc -asm-verbose=false -o build/examples/$@.s build/examples/$@.bc
 	$(BINARYEN_BIN)/s2wasm build/examples/$@.s > build/examples/$@.wast
 	@#$(WABT_BIN)/wast2wasm build/examples/$@.wast > build/examples/$@.wasm

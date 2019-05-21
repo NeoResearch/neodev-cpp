@@ -4,6 +4,11 @@
 
 //#include<array>
 
+#include<neodev/SmartContract.hpp>
+
+using namespace neodev;
+using namespace neodev::vmtype;
+
 //using namespace std::string_literals;
 
 //constexpr const std::string x = "test"s;
@@ -15,10 +20,6 @@ namespace neo
 
 using namespace neo;
 
-struct neobytearray
-{
-
-};
 
 struct neostring
 {
@@ -42,34 +43,8 @@ bool Equals(const neostring b, const char*);
 
 
 
-struct bytearray
-{
-  /*
-  const byte* base;
-  constexpr bytearray(const byte* t)
-  : base(t)
-  {
-  }
 
-  int size();
-
-  bool operator==(const bytearray b);
-  */
-
-  //extern "C" int Size3() const;
-
-  static int length();
-
-  static bytearray concat(bytearray ba);
-
-  //failure: cannot be non-member
-  // https://en.wikipedia.org/wiki/Operators_in_C_and_C%2B%2B
-  //byte operator[](int index);
-
-};
-
-
-bytearray ConvertTobytearray(const byte* t);
+ByteArray ConvertToByteArray(const byte* t);
 
 
 //constexpr char test[] = "test";
@@ -163,7 +138,7 @@ extern "C" int __Size3()
 
 
 
-int Size2(bytearray a);
+int Size2(ByteArray a);
 
 [[gnu::always_inline]]
 //[[deprecated("because Bla")]]
@@ -203,7 +178,7 @@ bool TestSecond(neostring op)
 
 
 
-extern "C" bool TestMy(bytearray bts)
+extern "C" bool TestMy(ByteArray bts)
 {
   //k = 2;
   array a;
@@ -242,15 +217,15 @@ int TestSize(_uint160 address)
 }
 */
 
-///bytearray _toarray(_uint160 hash);
+///ByteArray _toarray(_uint160 hash);
 
-bytearray toarray(uint160 hash);
+ByteArray toarray(uint160 hash);
 
 
 // cannot use _uint160 anywhere (not constexpr)
 //constexpr uint160 _convert160(_uint160 hash);
 
-int GetArrayLength(bytearray ba)
+int GetArrayLength(ByteArray ba)
 {
   return ba.length();
 }
@@ -259,7 +234,7 @@ bool ExperimentArrayLength()
 {
   // explicit byte arrays should be constexpr
   constexpr byte b[] = {0x04, 0x05, 0x06, 0x07};
-  bytearray ba = ConvertTobytearray(b);
+  ByteArray ba = ConvertToByteArray(b);
   // failure: non-member
   //byte bt = ba[0];
   return ba.length() > 7;
@@ -270,8 +245,8 @@ bool ExperimentConcat()
   // explicit byte arrays should be constexpr
   constexpr byte b1[] = {0x04, 0x05};
   constexpr byte b2[] = {0x06, 0x07};
-  bytearray ba1 = ConvertTobytearray(b1);
-  bytearray ba2 = ConvertTobytearray(b2);
+  ByteArray ba1 = ConvertToByteArray(b1);
+  ByteArray ba2 = ConvertToByteArray(b2);
   ba1.concat(ba2);
 
   return ba1.length() > 7;
@@ -294,7 +269,7 @@ int NeoMain(neostring op, array ops)
 
   uint160 t3;
 
-  bytearray b1 = toarray(t3);
+  ByteArray b1 = toarray(t3);
 
   constexpr long num2 = 0.3_fixed8;
   //long num3 = 0.3_unused;
@@ -335,7 +310,7 @@ int NeoMain(neostring op, array ops)
   else
   {
     const byte x[] = {0x00, 0x01, 0x02};
-    bytearray ba = ConvertTobytearray(x);
+    ByteArray ba = ConvertToByteArray(x);
     ///printf("HELLO!!");
     if( TestSecond(op) && TestMy(ba) )
       return 99+p-p2;
