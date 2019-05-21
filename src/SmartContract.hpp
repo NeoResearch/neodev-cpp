@@ -1,15 +1,15 @@
 #ifndef CPP_DEVPACK_NEO_SMARTCONTRACT_HPP
 #define CPP_DEVPACK_NEO_SMARTCONTRACT_HPP
 
-#include"VM.hpp"
+#include "VM.hpp"
 
 namespace neo
 {
     class SmartContract
     {
     public:
-        [OpCode(OpCode.SHA1)]
-        protected extern static byte[] Sha1(byte[] data);
+        
+        static byte[] Sha1(byte[] data);
 
         [OpCode(OpCode.SHA256)]
         protected extern static byte[] Sha256(byte[] data);
