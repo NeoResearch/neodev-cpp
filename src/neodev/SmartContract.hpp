@@ -1,7 +1,7 @@
 #ifndef NEODEV_SMARTCONTRACT_HPP
 #define NEODEV_SMARTCONTRACT_HPP
 
-#include "vmtype/types.hpp"
+#include "types.hpp"
 
 namespace neodev {
 

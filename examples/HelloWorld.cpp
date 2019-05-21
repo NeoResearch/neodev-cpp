@@ -1,45 +1,18 @@
-// https://mbebenita.github.io/WasmExplorer/
-//int x = 1024;
-//#include<string>
-
-//#include<array>
+// compiler reference: https://mbebenita.github.io/WasmExplorer/
 
 #include<neodev/SmartContract.hpp>
 
 using namespace neodev;
 using namespace neodev::vmtype;
-
-//using namespace std::string_literals;
-
-//constexpr const std::string x = "test"s;
-
-namespace neo
-{
-  typedef unsigned char byte;
-}
-
-using namespace neo;
+using namespace neodev::abitype;
 
 
-struct neostring
-{
-  //const char* base;
-  /*
-  const char* base;
-  constexpr neostring(const char* t)
-  : base(t)
-  {
-  }
-  */
-
-  //bool operator==(const neostring b);
-  //bool Equals(const neostring b) const;
-};
-
-neostring ConvertToString(const char* t);
 
 
-bool Equals(const neostring b, const char*);
+String ConvertToString(const char* t);
+
+
+bool Equals(const String b, const char*);
 
 
 
@@ -50,8 +23,8 @@ ByteArray ConvertToByteArray(const byte* t);
 //constexpr char test[] = "test";
 //constexpr char oi[] = "oi";
 /*
-constexpr neostring soi{ConvertToString("oi")};
-constexpr neostring stest{ConvertToString("test")};//est;
+constexpr String soi{ConvertToString("oi")};
+constexpr String stest{ConvertToString("test")};//est;
 */
 const char* soi{"oi"};
 const char* stest{"test"};//est;
@@ -144,12 +117,17 @@ int Size2(ByteArray a);
 //[[deprecated("because Bla")]]
 extern "C" int Size4() __attribute__((deprecated("tst"),alias("__Size3")));
 
+extern "C" int __Size9()
+{
+  return 1;
+}
+
 
 /*
 struct entrypoint
 {
   entrypoint(int argc, char* argv[]);
-  neostring getstring();
+  String getstring();
   any* getany();
 };
 
@@ -162,7 +140,7 @@ entrypoint Entry(int argc, char* argv[]);
   {
 
 
-bool TestSecond(neostring op)
+bool TestSecond(String op)
 {
   //return op == "nada";
   return Equals(op,"nada");
@@ -257,7 +235,7 @@ bool NothingToDo()
    return false;
 }
 
-int NeoMain(neostring op, array ops)
+int NeoMain(String op, array ops)
 {
 
   ExperimentArrayLength();
