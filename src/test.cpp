@@ -8,6 +8,7 @@
 
 //constexpr const std::string x = "test"s;
 
+
 namespace neo
 {
   typedef unsigned char byte;
@@ -123,12 +124,23 @@ constexpr fixed8 operator "" _f8(long double v)
   return fixed8{(int)v*100000000L};
 }
 */
-/*
+
 constexpr long operator "" _fixed8(long double v)
 {
   return v*100000000L;
 }
+
+
+/*
+// generates 'load' instructions (avoid at all costs)
+long operator "" _unused(long double v)
+{
+  return v*100000000L;
+}
 */
+
+
+
 
 /*
 constexpr long toInt(fixed8 f)
@@ -266,6 +278,10 @@ bool ExperimentConcat()
   return ba1.length() > 7;
 }
 
+bool NothingToDo()
+{
+   return false;
+}
 
 int NeoMain(neostring op, array ops)
 {
@@ -281,8 +297,10 @@ int NeoMain(neostring op, array ops)
 
   bytearray b1 = toarray(t3);
 
-  //constexpr long num = 0.3_fixed8;
-  long num = 0;
+  constexpr long num2 = 0.3_fixed8;
+  //long num3 = 0.3_unused;
+  long num3 = 0;
+  long num = num2 + NothingToDo() + num3;
 
   //float x2 = 3.5;
   //printf("%f",x2);
@@ -307,6 +325,7 @@ int NeoMain(neostring op, array ops)
     p2 = 50;
     p--;
   }
+
   //return op == std::string_literals::operator""s("test"s);
   //if(op == "mytest")//stest)
   if(Equals(op,"mytest"))//stest)

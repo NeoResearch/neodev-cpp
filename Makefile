@@ -15,7 +15,10 @@ all:
 	#$(CLANG_BIN)/clang++ --std=c++1z -emit-llvm --target=wasm32 -Wl,--no-threads -Oz src/TestSimple.cpp --compile -o build/dapp.wasm
 	$(BINARYEN_BIN)/s2wasm build/dapp.s > build/dapp.wast
 	$(WABT_BIN)/wast2wasm build/dapp.wast > build/dapp.wasm
-	$(WABT_BIN)/wast-desugar build/dapp.wast > build/dapp.wat
+	$(WABT_BIN)/wast-desugar --generate-names build/dapp.wast > build/dapp.wat
+	@echo "Number of Loads should be Zero. Checking!"
+	@test `cat build/dapp.wat | grep -c -E 'i32.load|i64.load|i32.store|i64.store|global'` -eq 0
+	@echo "Check passed!"
 	#$(WABT_BIN_NEW)/wat2wasm build/dapp.wast > build/dapp2.wasm
 	#$(WABT_BIN_NEW)/wasm2wat build/dapp2.wasm > build/dapp2.wat
 
