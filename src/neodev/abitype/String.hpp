@@ -8,6 +8,17 @@ namespace abitype {
 // On NeoVM level, String can be seen as a ByteArray
 // Anyway, useful programming functions String-related are provided here for developers
 
+/**
+ * @api {get} /user/:id Test Request User information
+ * @apiName GetUser
+ * @apiGroup User
+ *
+ * @apiParam {Number} id Users unique ID.
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ */
+
 struct String
 {
    static int length();

@@ -43,6 +43,8 @@ HelloWorld: examples/HelloWorld.cpp
 	 
 
 vendor:
+	@echo "Install docs"
+	sudo npm -g install apidoc
 	@echo "Should install llvm with clang. Also binaryen and wabt"
 	@echo TODO! See correct/compatible versions below on comments.
 
@@ -57,3 +59,8 @@ vendor:
 #(cd clang && git checkout e4de58127fa1d8d22ee8043cef9b4d8a807b6cde)
 #(cd llvm && git checkout 08b86793476e08fc0937e70058e2a94808c988e7)
 #(mkdir build && cd build && cmake -DLLVM_ENABLE_PROJECTS=clang -G "Unix Makefiles" -DLLVM_TARGETS_TO_BUILD= -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=WebAssembly ../llvm)
+
+
+
+doc:
+	apidoc -i src/ -f ".*\\.hpp$$" -o docs/

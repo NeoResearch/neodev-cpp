@@ -7,27 +7,8 @@ using namespace neodev::vmtype;
 using namespace neodev::abitype;
 
 
-
-
-String ConvertToString(const char* t);
-
-
-bool Equals(const String b, const char*);
-
-
-
-
-ByteArray ConvertToByteArray(const byte* t);
-
-
-//constexpr char test[] = "test";
-//constexpr char oi[] = "oi";
-/*
-constexpr String soi{ConvertToString("oi")};
-constexpr String stest{ConvertToString("test")};//est;
-*/
 const char* soi{"oi"};
-const char* stest{"test"};//est;
+const char* stest{"test"};
 
 namespace neo
 {
@@ -235,7 +216,23 @@ bool NothingToDo()
    return false;
 }
 
-int NeoMain(String op, array ops)
+/**
+ * @api {get} /user/:id Request User information
+ * @apiName GetUser
+ * @apiGroup User
+ *
+ * @apiParam {Number} id Users unique ID.
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ */
+
+Object main(String op, Object params[])
+{
+   int x = 10;
+}
+
+int NeoMain1(String op, array ops)
 {
 
   ExperimentArrayLength();
