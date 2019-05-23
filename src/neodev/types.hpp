@@ -13,6 +13,8 @@
 // types for Neo ABI (NEP-3)
 #include "abitype/Object.hpp"
 #include "abitype/String.hpp"
+#include "abitype/UInt160.hpp"
+#include "abitype/UInt256.hpp"
 
 // extra helper types
 
@@ -31,6 +33,11 @@ Equals(const abitype::String b, const char*);
 
 vmtype::ByteArray
 ConvertToByteArray(const byte* t);
+
+constexpr long operator"" _fixed8(long double v)
+{
+   return v * 100000000L;
+}
 
 } // namespace neodev
 

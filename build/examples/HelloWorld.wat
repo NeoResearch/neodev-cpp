@@ -3,10 +3,9 @@
   (type $FUNCSIG$i (func (result i32)))
   (type $FUNCSIG$vi (func (param i32)))
   (type $FUNCSIG$v (func))
-  (import "env" "_Z4SizeN3neo5arrayE" (func $_Z4SizeN3neo5arrayE (result i32)))
+  (import "env" "_Z4SizeN6neodev6vmtype5ArrayE" (func $_Z4SizeN6neodev6vmtype5ArrayE (result i32)))
   (import "env" "_Z5Size2N6neodev6vmtype9ByteArrayE" (func $_Z5Size2N6neodev6vmtype9ByteArrayE (result i32)))
-  (import "env" "_ZN11NeoContract7toarrayENS_7uint160E" (func $_ZN11NeoContract7toarrayENS_7uint160E))
-  (import "env" "_ZN3neo5array4TestEv" (func $_ZN3neo5array4TestEv (result i32)))
+  (import "env" "_ZN11NeoContract7toarrayEN6neodev7abitype7UInt160E" (func $_ZN11NeoContract7toarrayEN6neodev7abitype7UInt160E))
   (import "env" "_ZN6neodev18ConvertToByteArrayEPKh" (func $_ZN6neodev18ConvertToByteArrayEPKh (param i32)))
   (import "env" "_ZN6neodev6EqualsENS_7abitype6StringEPKc" (func $_ZN6neodev6EqualsENS_7abitype6StringEPKc (param i32) (result i32)))
   (import "env" "_ZN6neodev6vmtype9ByteArray6concatES1_" (func $_ZN6neodev6vmtype9ByteArray6concatES1_))
@@ -34,7 +33,7 @@
   (export "_ZN11NeoContract16ExperimentConcatEv" (func $_ZN11NeoContract16ExperimentConcatEv))
   (export "_ZN11NeoContract11NothingToDoEv" (func $_ZN11NeoContract11NothingToDoEv))
   (export "_ZN11NeoContract4mainEN6neodev7abitype6StringEPNS1_6ObjectE" (func $_ZN11NeoContract4mainEN6neodev7abitype6StringEPNS1_6ObjectE))
-  (export "_ZN11NeoContract8NeoMain1EN6neodev7abitype6StringEN3neo5arrayE" (func $_ZN11NeoContract8NeoMain1EN6neodev7abitype6StringEN3neo5arrayE))
+  (export "_ZN11NeoContract8NeoMain1EN6neodev7abitype6StringENS0_6vmtype5ArrayE" (func $_ZN11NeoContract8NeoMain1EN6neodev7abitype6StringENS0_6vmtype5ArrayE))
   (func $__Size3 (result i32)
     i32.const 1)
   (func $__Size9 (result i32)
@@ -43,15 +42,8 @@
     i32.const 48
     call $_ZN6neodev6EqualsENS_7abitype6StringEPKc)
   (func $TestMy (result i32)
-    i32.const 3
-    i32.const 2
-    call $_ZN3neo5array4TestEv
-    i32.const 0
-    i32.gt_s
-    select
     call $_Z5Size2N6neodev6vmtype9ByteArrayE
-    i32.add
-    i32.const 0
+    i32.const -2
     i32.gt_s)
   (func $_ZN11NeoContract14GetArrayLengthEN6neodev6vmtype9ByteArrayE (result i32)
     call $_ZN6neodev6vmtype9ByteArray6lengthEv)
@@ -72,15 +64,14 @@
     i32.gt_s)
   (func $_ZN11NeoContract11NothingToDoEv (result i32)
     i32.const 0)
-  (func $_ZN11NeoContract4mainEN6neodev7abitype6StringEPNS1_6ObjectE (param $0 i32)
-    unreachable)
-  (func $_ZN11NeoContract8NeoMain1EN6neodev7abitype6StringEN3neo5arrayE (result i32)
+  (func $_ZN11NeoContract4mainEN6neodev7abitype6StringEPNS1_6ObjectE (param $0 i32))
+  (func $_ZN11NeoContract8NeoMain1EN6neodev7abitype6StringENS0_6vmtype5ArrayE (result i32)
     (local $0 i32) (local $1 i32) (local $2 i32)
     call $_ZN11NeoContract21ExperimentArrayLengthEv
     drop
     call $_ZN11NeoContract16ExperimentConcatEv
     drop
-    call $_ZN11NeoContract7toarrayENS_7uint160E
+    call $_ZN11NeoContract7toarrayEN6neodev7abitype7UInt160E
     i32.const 30000030
     i32.const 50
     i32.const 112
@@ -103,7 +94,7 @@
       i32.add
       get_local $2
       i32.sub
-      call $_Z4SizeN3neo5arrayE
+      call $_Z4SizeN6neodev6vmtype5ArrayE
       i32.add
       return
     end
@@ -115,7 +106,7 @@
       get_local $1
       get_local $2
       i32.add
-      call $_Z4SizeN3neo5arrayE
+      call $_Z4SizeN6neodev6vmtype5ArrayE
       i32.add
       i32.const -1
       i32.add
@@ -128,8 +119,9 @@
       call $_ZN6neodev6EqualsENS_7abitype6StringEPKc
       i32.eqz
       br_if $label$2
-      call $TestMy
-      i32.eqz
+      call $_Z5Size2N6neodev6vmtype9ByteArrayE
+      i32.const -1
+      i32.lt_s
       br_if $label$2
       get_local $1
       i32.const 99
