@@ -20,8 +20,6 @@
 
 namespace neodev {
 
-// helper type: byte
-typedef unsigned char byte;
 
 // just a bunch of "unofficial" helpers...
 

@@ -31,13 +31,14 @@ examples: HelloWorld
 # examples
 HelloWorld: examples/HelloWorld.cpp
 	echo "Building example $<"
-	$(CLANG_BIN)/clang++ --std=c++1z -Isrc/ -emit-llvm --target=wasm32 -Oz $< -c -o build/examples/$@.bc
+	$(CLANG_BIN)/clang++ --std=c++1z -Isrc/ -emit-llvm --target=wasm32 -O1 $< -c -o build/examples/$@.bc
 	$(CLANG_BIN)/llc -asm-verbose=false -o build/examples/$@.s build/examples/$@.bc
 	$(BINARYEN_BIN)/s2wasm build/examples/$@.s > build/examples/$@.wast
 	@#$(WABT_BIN)/wast2wasm build/examples/$@.wast > build/examples/$@.wasm
 	$(WABT_BIN)/wast-desugar --generate-names build/examples/$@.wast > build/examples/$@.wat
 	@echo "Number of Loads should be Zero. Checking!"
 	@test `cat build/examples/$@.wat | grep -c -E 'i32.load|i64.load|i32.store|i64.store|global'` -eq 0
+	@./count_drop.sh
 	@echo "Check passed!"
 	@echo "Number of lines on s-expression file:" `wc -l build/examples/$@.wat`
 	 

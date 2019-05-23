@@ -21,7 +21,15 @@ namespace abitype {
 
 struct String
 {
-   static int length();
+   [[nodiscard]]
+   static int length(); //__attribute__((nodiscard));
+
+   // todo: operator[] ref
+   [[nodiscard]]
+   static char at(int index);
+
+   // todo: operator[] ref
+   static void set(int index, char value);
 
    //static ByteArray concat(ByteArray ba);
 
