@@ -1,6 +1,6 @@
 // compiler reference: https://mbebenita.github.io/WasmExplorer/
 
-int Main()
+int main()
 {
-   return 1;
+   return 10000;
 }

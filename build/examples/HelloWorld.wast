@@ -21,6 +21,7 @@
  (export "_Z14GetArrayLengthN6neodev6vmtype9ByteArrayE" (func $_Z14GetArrayLengthN6neodev6vmtype9ByteArrayE))
  (export "_ZN11NeoContract11NothingToDoEv" (func $_ZN11NeoContract11NothingToDoEv))
  (export "_ZN11NeoContract4mainEN6neodev7abitype6StringENS0_6vmtype5ArrayE" (func $_ZN11NeoContract4mainEN6neodev7abitype6StringENS0_6vmtype5ArrayE))
+ (export "main" (func $main))
  (func $_Z14GetArrayLengthN6neodev6vmtype9ByteArrayE (result i32)
   (select
    (i32.const 10)
@@ -69,5 +70,8 @@
    )
    (call $_ZN6neodev6vmtype9StackItem5asIntEv)
   )
+ )
+ (func $main (result i32)
+  (i32.const 1)
  )
 )

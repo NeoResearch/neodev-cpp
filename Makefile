@@ -25,12 +25,13 @@ srctest:
 	#$(WABT_BIN_NEW)/wat2wasm build/dapp.wast > build/dapp2.wasm
 	#$(WABT_BIN_NEW)/wasm2wat build/dapp2.wasm > build/dapp2.wat
 
-examples: HelloWorld HelloWorld_em Minimal Minimal_em
+examples: HelloWorld HelloWorld_em Minimal_emc
 	@echo Building examples!
 
 # examples
 %: examples/%.cpp
-	echo "Building example with clang + binaryen $<"
+	@echo 
+	@echo "Building example with clang + binaryen $<"
 	$(CLANG_BIN)/clang++ --std=c++1z -Isrc/ -emit-llvm --target=wasm32 -O1 $< -c -o build/examples/$@.bc
 	$(CLANG_BIN)/llc -asm-verbose=false -o build/examples/$@.s build/examples/$@.bc
 	$(BINARYEN_BIN)/s2wasm build/examples/$@.s > build/examples/$@.wast   # not real wast, perhaps?
@@ -38,21 +39,39 @@ examples: HelloWorld HelloWorld_em Minimal Minimal_em
 	$(WABT_BIN)/wast-desugar --generate-names build/examples/$@.wast > build/examples/$@.desugar.wast #wast or wat ?
 	@echo "Number of Loads should be Zero. Checking!"
 	@test `cat build/examples/$@.desugar.wast | grep -c -E 'i32.load|i64.load|i32.store|i64.store|global'` -eq 0
-	@./count_drop.sh $@
 	@echo "Check passed!"
+	@./count_drop.sh $@
 	@echo "Number of lines on s-expression file:" `wc -l build/examples/$@.desugar.wast`
-	@echo
-	$(WABT_BIN_NEW)/wast2json build/examples/$@.wast -o build/examples/$@.wast.json
+	@echo "Converting wast to json spec test (env should be zero!)"
+	@$(WABT_BIN_NEW)/wast2json build/examples/$@.wast -o build/examples/$@.wast.json
+	@./count_env.sh $@
 	@echo 
 
 #example with emscripten
 %_em: examples/%.cpp
-	echo "Building example with emscripten $<"
-	em++ -Isrc -std=c++17 -g $< -s WASM=1 -s SIDE_MODULE=1 -s ONLY_MY_CODE=1 -s EXPORTED_FUNCTIONS="[Main]" -o build/examples/$@.wasm
+	@echo 
+	@echo "Building example with emscripten $<"
+	em++ -Isrc -std=c++17 -g $< -s WASM=1 -s SIDE_MODULE=1 -s ONLY_MY_CODE=1 -o build/examples/$@.wasm
 	#em++ -Isrc -std=c++17 -g $< -s WASM=1 -s EXPORTED_FUNCTIONS="[_Z4Mainv]" -o build/examples/$@.wasm
 	$(WABT_BIN_NEW)/wasm2wat build/examples/$@.wasm > build/examples/$@.wat
 	$(WABT_BIN_NEW)/wat-desugar build/examples/$@.wat > build/examples/$@.desugar.wat
-	$(WABT_BIN_NEW)/wast2json build/examples/$@.wast -o build/examples/$@.wast.json
+	@echo "Converting wast to json spec test (env should be zero!)"
+	@$(WABT_BIN_NEW)/wast2json build/examples/$@.wast -o build/examples/$@.wast.json
+	@./count_env.sh $@
+	@echo "Number of lines on s-expression file:" `wc -l build/examples/$@.desugar.wat`
+	@echo 
+
+#example with emscripten
+%_emc: examples/%.c
+	@echo 
+	@echo "Building C example with emscripten $<"
+	emcc -Isrc -std=c89 -g $< -s WASM=1 -s ONLY_MY_CODE=1 -o build/examples/$@.wasm
+	#em++ -Isrc -std=c++17 -g $< -s WASM=1 -s EXPORTED_FUNCTIONS="[_Z4Mainv]" -o build/examples/$@.wasm
+	$(WABT_BIN_NEW)/wasm2wat --generate-names build/examples/$@.wasm > build/examples/$@.wat
+	$(WABT_BIN_NEW)/wat-desugar build/examples/$@.wat > build/examples/$@.desugar.wat
+	@echo "Converting wast to json spec test (env should be zero!)"
+	@$(WABT_BIN_NEW)/wast2json build/examples/$@.wast -o build/examples/$@.wast.json
+	@./count_env.sh $@
 	@echo "Number of lines on s-expression file:" `wc -l build/examples/$@.desugar.wat`
 	@echo 
 

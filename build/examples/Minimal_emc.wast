@@ -1,14 +1,13 @@
 (module
  (type $FUNCSIG$vi (func (param i32)))
- (import "env" "memory" (memory $memory 256))
- (import "env" "table" (table $table 0 funcref))
+ (import "env" "memory" (memory $memory 256 256))
+ (import "env" "table" (table $table 0 0 funcref))
  (import "env" "__memory_base" (global $__memory_base i32))
  (import "env" "__table_base" (global $__table_base i32))
  (import "env" "abortStackOverflow" (func $abortStackOverflow (param i32)))
- (global $STACKTOP (mut i32) (i32.const 0))
- (global $STACK_MAX (mut i32) (i32.const 0))
+ (global $STACKTOP (mut i32) (i32.const 2080))
+ (global $STACK_MAX (mut i32) (i32.const 5244960))
  (global $f0 (mut f32) (f32.const 0))
- (export "__post_instantiate" (func $__post_instantiate))
  (export "_main" (func $_main))
  (func $_main (; 1 ;) (result i32)
   (local $$0 i32)
@@ -40,20 +39,6 @@
   )
   (return
    (i32.const 10000)
-  )
- )
- (func $__post_instantiate (; 2 ;)
-  (global.set $STACKTOP
-   (i32.add
-    (global.get $__memory_base)
-    (i32.const 0)
-   )
-  )
-  (global.set $STACK_MAX
-   (i32.add
-    (global.get $STACKTOP)
-    (i32.const 5242880)
-   )
   )
  )
 )

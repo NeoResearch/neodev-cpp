@@ -236,3 +236,8 @@ NeoMain1(String op, Array ops)
 
 } // namespace
 
+
+int main()
+{
+   return 1;
+}
