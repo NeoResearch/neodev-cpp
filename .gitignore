@@ -1,7 +1,5 @@
 *~
 *.o
-*.wasm
-dapp.wat
 *.asm.js
 *.s
 *.bc

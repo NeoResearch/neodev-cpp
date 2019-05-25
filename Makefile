@@ -25,30 +25,32 @@ srctest:
 	#$(WABT_BIN_NEW)/wat2wasm build/dapp.wast > build/dapp2.wasm
 	#$(WABT_BIN_NEW)/wasm2wat build/dapp2.wasm > build/dapp2.wat
 
-examples: HelloWorld HelloWorld_em
+examples: HelloWorld HelloWorld_em Minimal Minimal_em
 	@echo Building examples!
 
 # examples
-HelloWorld: examples/HelloWorld.cpp
+%: examples/%.cpp
 	echo "Building example with clang + binaryen $<"
 	$(CLANG_BIN)/clang++ --std=c++1z -Isrc/ -emit-llvm --target=wasm32 -O1 $< -c -o build/examples/$@.bc
 	$(CLANG_BIN)/llc -asm-verbose=false -o build/examples/$@.s build/examples/$@.bc
-	$(BINARYEN_BIN)/s2wasm build/examples/$@.s > build/examples/$@.wast
+	$(BINARYEN_BIN)/s2wasm build/examples/$@.s > build/examples/$@.wast   # not real wast, perhaps?
 	@#$(WABT_BIN)/wast2wasm build/examples/$@.wast > build/examples/$@.wasm
-	$(WABT_BIN)/wast-desugar --generate-names build/examples/$@.wast > build/examples/$@.wat
+	$(WABT_BIN)/wast-desugar --generate-names build/examples/$@.wast > build/examples/$@.desugar.wast #wast or wat ?
 	@echo "Number of Loads should be Zero. Checking!"
-	@test `cat build/examples/$@.wat | grep -c -E 'i32.load|i64.load|i32.store|i64.store|global'` -eq 0
+	@test `cat build/examples/$@.desugar.wast | grep -c -E 'i32.load|i64.load|i32.store|i64.store|global'` -eq 0
 	@./count_drop.sh
 	@echo "Check passed!"
-	@echo "Number of lines on s-expression file:" `wc -l build/examples/$@.wat`
+	@echo "Number of lines on s-expression file:" `wc -l build/examples/$@.desugar.wast`
 	@echo 
 
 #example with emscripten
-HelloWorld_em: examples/HelloWorld.cpp
+%_em: examples/%.cpp
 	echo "Building example with emscripten $<"
-	em++ -Isrc -std=c++17 $< -s WASM=1 -s SIDE_MODULE=1 -o build/examples/$@.wasm
+	em++ -Isrc -std=c++17 -g $< -s WASM=1 -s SIDE_MODULE=1 -s ONLY_MY_CODE=1 -s EXPORTED_FUNCTIONS="[Main]" -o build/examples/$@.wasm
+	#em++ -Isrc -std=c++17 -g $< -s WASM=1 -s EXPORTED_FUNCTIONS="[_Z4Mainv]" -o build/examples/$@.wasm
 	$(WABT_BIN_NEW)/wasm2wat build/examples/$@.wasm > build/examples/$@.wat
-	@echo "Number of lines on s-expression file:" `wc -l build/examples/$@.wat`
+	$(WABT_BIN_NEW)/wat-desugar build/examples/$@.wat > build/examples/$@.desugar.wat
+	@echo "Number of lines on s-expression file:" `wc -l build/examples/$@.desugar.wat`
 	@echo 
 	 
 
