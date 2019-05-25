@@ -8,10 +8,10 @@
 #include "vmtype/ByteArray.hpp"
 #include "vmtype/Interop.hpp"
 #include "vmtype/Map.hpp"
+#include "vmtype/StackItem.hpp"
 #include "vmtype/Struct.hpp"
 
 // types for Neo ABI (NEP-3)
-#include "abitype/Object.hpp"
 #include "abitype/String.hpp"
 #include "abitype/UInt160.hpp"
 #include "abitype/UInt256.hpp"
@@ -19,7 +19,6 @@
 // extra helper types
 
 namespace neodev {
-
 
 // just a bunch of "unofficial" helpers...
 

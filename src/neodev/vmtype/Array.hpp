@@ -1,13 +1,17 @@
 #ifndef NEODEV_VMTYPE_ARRAY_HPP
 #define NEODEV_VMTYPE_ARRAY_HPP
 
+#include "StackItem.hpp"
+
 namespace neodev {
 
 namespace vmtype {
 
-struct Array
+struct Array : Object
 {
    static int size();
+
+   static Object at(int i);
 
    //failure: cannot be non-member
    //byte operator[](int index);

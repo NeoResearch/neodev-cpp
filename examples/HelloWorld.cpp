@@ -104,7 +104,7 @@ class Testing
 void nop(byte b);
 
 int
-main(String op, Object params[])
+main(String op, Array params)
 {
    int x = 10;
 
@@ -116,7 +116,7 @@ main(String op, Object params[])
    //x = t.k();
    //x = t.k() + z;
 
-   Object o = params[0];
+   Object o = params.at(0);
    ByteArray b = o.asByteArray();
    b.set(5, 0x01);
    //int b3 = b.operator[4];
@@ -124,7 +124,7 @@ main(String op, Object params[])
    //b1[4] = 0x0a+x; // memory store
    //b.at(2);
 
-   Object o2 = params[1];
+   Object o2 = params.at(1);
 
 
 /*

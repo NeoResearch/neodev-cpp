@@ -25,12 +25,12 @@ srctest:
 	#$(WABT_BIN_NEW)/wat2wasm build/dapp.wast > build/dapp2.wasm
 	#$(WABT_BIN_NEW)/wasm2wat build/dapp2.wasm > build/dapp2.wat
 
-examples: HelloWorld
+examples: HelloWorld HelloWorld_em
 	@echo Building examples!
 
 # examples
 HelloWorld: examples/HelloWorld.cpp
-	echo "Building example $<"
+	echo "Building example with clang + binaryen $<"
 	$(CLANG_BIN)/clang++ --std=c++1z -Isrc/ -emit-llvm --target=wasm32 -O1 $< -c -o build/examples/$@.bc
 	$(CLANG_BIN)/llc -asm-verbose=false -o build/examples/$@.s build/examples/$@.bc
 	$(BINARYEN_BIN)/s2wasm build/examples/$@.s > build/examples/$@.wast
@@ -41,6 +41,15 @@ HelloWorld: examples/HelloWorld.cpp
 	@./count_drop.sh
 	@echo "Check passed!"
 	@echo "Number of lines on s-expression file:" `wc -l build/examples/$@.wat`
+	@echo 
+
+#example with emscripten
+HelloWorld_em: examples/HelloWorld.cpp
+	echo "Building example with emscripten $<"
+	em++ -Isrc -std=c++17 $< -s WASM=1 -s SIDE_MODULE=1 -o build/examples/$@.wasm
+	$(WABT_BIN_NEW)/wasm2wat build/examples/$@.wasm > build/examples/$@.wat
+	@echo "Number of lines on s-expression file:" `wc -l build/examples/$@.wat`
+	@echo 
 	 
 
 vendor:
