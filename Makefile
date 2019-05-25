@@ -50,6 +50,7 @@ examples: HelloWorld HelloWorld_em Minimal Minimal_em
 	#em++ -Isrc -std=c++17 -g $< -s WASM=1 -s EXPORTED_FUNCTIONS="[_Z4Mainv]" -o build/examples/$@.wasm
 	$(WABT_BIN_NEW)/wasm2wat build/examples/$@.wasm > build/examples/$@.wat
 	$(WABT_BIN_NEW)/wat-desugar build/examples/$@.wat > build/examples/$@.desugar.wat
+	$(WABT_BIN_NEW)/wast2json build/examples/$@.wast -o build/examples/$@.wast.json
 	@echo "Number of lines on s-expression file:" `wc -l build/examples/$@.desugar.wat`
 	@echo 
 	 
