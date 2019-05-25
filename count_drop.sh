@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "Counting drops: $(cat build/examples/HelloWorld.wat | grep -c -E 'drop')"
+echo "Counting drops: $(cat build/examples/$1.wast | grep -c -E 'drop')"

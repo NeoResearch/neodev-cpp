@@ -1,0 +1,3 @@
+{"source_filename": "build/examples/HelloWorld.wast",
+ "commands": [
+  {"type": "module", "line": 1, "filename": "HelloWorld.wast.0.wasm"}]}

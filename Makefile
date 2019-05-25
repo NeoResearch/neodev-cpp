@@ -3,7 +3,7 @@ BINARYEN_BIN=/home/imcoelho/git-reps/binaryen/build/bin
 WABT_BIN=/home/imcoelho/git-reps/wabt/build
 WABT_BIN_NEW=/home/imcoelho/git-reps/wabt/bin
 
-all: examples
+all: examples spectests
 
 srctest:
 	# verify output without specific extension
@@ -38,9 +38,11 @@ examples: HelloWorld HelloWorld_em Minimal Minimal_em
 	$(WABT_BIN)/wast-desugar --generate-names build/examples/$@.wast > build/examples/$@.desugar.wast #wast or wat ?
 	@echo "Number of Loads should be Zero. Checking!"
 	@test `cat build/examples/$@.desugar.wast | grep -c -E 'i32.load|i64.load|i32.store|i64.store|global'` -eq 0
-	@./count_drop.sh
+	@./count_drop.sh $@
 	@echo "Check passed!"
 	@echo "Number of lines on s-expression file:" `wc -l build/examples/$@.desugar.wast`
+	@echo
+	$(WABT_BIN_NEW)/wast2json build/examples/$@.wast -o build/examples/$@.wast.json
 	@echo 
 
 #example with emscripten
@@ -53,7 +55,17 @@ examples: HelloWorld HelloWorld_em Minimal Minimal_em
 	$(WABT_BIN_NEW)/wast2json build/examples/$@.wast -o build/examples/$@.wast.json
 	@echo "Number of lines on s-expression file:" `wc -l build/examples/$@.desugar.wat`
 	@echo 
-	 
+
+spectests: build/examples/Minimal_em.wast.json
+	@echo
+	@echo " ============ Will run spec tests =============="
+	@echo "MINIMAL (clang)"
+	$(WABT_BIN_NEW)/spectest-interp build/examples/Minimal.wast.json
+	@echo
+	@echo "MINIMAL (emsdk)"
+	$(WABT_BIN_NEW)/spectest-interp build/examples/Minimal_em.wast.json
+	@echo
+
 
 vendor:
 	@echo "Install docs"
