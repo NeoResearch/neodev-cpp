@@ -16,15 +16,15 @@ struct Struct;
 
 struct StackItem
 {
-   static ByteArray asByteArray();
+   ByteArray asByteArray();
 
-   static Boolean asBoolean();
+   Boolean asBoolean();
 
-   static bool asBool();
+   bool asBool();
 
-   static BigInt asBigInt();
+   BigInt asBigInt();
 
-   static int asInt();
+   int asInt();
 
 };
 

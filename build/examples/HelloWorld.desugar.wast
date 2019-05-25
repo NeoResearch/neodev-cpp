@@ -1,16 +1,15 @@
 (module
   (type $FUNCSIG$i (func (result i32)))
-  (type $FUNCSIG$vi (func (param i32)))
-  (type $FUNCSIG$v (func))
-  (type $FUNCSIG$vii (func (param i32 i32)))
   (type $FUNCSIG$ii (func (param i32) (result i32)))
-  (import "env" "_ZN6neodev6vmtype5Array2atEi" (func $_ZN6neodev6vmtype5Array2atEi (param i32)))
+  (type $FUNCSIG$vii (func (param i32 i32)))
+  (type $FUNCSIG$vi (func (param i32)))
+  (import "env" "_ZN6neodev6vmtype5Array2atEi" (func $_ZN6neodev6vmtype5Array2atEi (param i32 i32)))
   (import "env" "_ZN6neodev6vmtype9ByteArray2atEi" (func $_ZN6neodev6vmtype9ByteArray2atEi (param i32) (result i32)))
   (import "env" "_ZN6neodev6vmtype9ByteArray3setEih" (func $_ZN6neodev6vmtype9ByteArray3setEih (param i32 i32)))
   (import "env" "_ZN6neodev6vmtype9ByteArray6lengthEv" (func $_ZN6neodev6vmtype9ByteArray6lengthEv (result i32)))
-  (import "env" "_ZN6neodev6vmtype9StackItem11asByteArrayEv" (func $_ZN6neodev6vmtype9StackItem11asByteArrayEv))
-  (import "env" "_ZN6neodev6vmtype9StackItem5asIntEv" (func $_ZN6neodev6vmtype9StackItem5asIntEv (result i32)))
-  (import "env" "_ZN6neodev7abitype6String6lengthEv" (func $_ZN6neodev7abitype6String6lengthEv (result i32)))
+  (import "env" "_ZN6neodev6vmtype9StackItem11asByteArrayEv" (func $_ZN6neodev6vmtype9StackItem11asByteArrayEv (param i32)))
+  (import "env" "_ZN6neodev6vmtype9StackItem5asIntEv" (func $_ZN6neodev6vmtype9StackItem5asIntEv (param i32) (result i32)))
+  (import "env" "_ZN6neodev7abitype6String6lengthEv" (func $_ZN6neodev7abitype6String6lengthEv (param i32) (result i32)))
   (table $T0 0 anyfunc)
   (memory $0 1)
   (data (i32.const 16) "oi\00")
@@ -32,18 +31,55 @@
   (func $_ZN11NeoContract11NothingToDoEv (result i32)
     i32.const 0)
   (func $_ZN11NeoContract4mainEN6neodev7abitype6StringENS0_6vmtype5ArrayE (result i32)
-    (local $0 i32)
+    (local $0 i32) (local $1 i32) (local $2 i32) (local $3 i32) (local $4 i32)
+    i32.const 0
+    i32.const 0
+    i32.load offset=4
+    i32.const 32
+    i32.sub
+    tee_local $4
+    i32.store offset=4
+    get_local $4
+    i32.const 24
+    i32.add
     call $_ZN6neodev7abitype6String6lengthEv
     set_local $0
+    get_local $4
+    i32.const 16
+    i32.add
     i32.const 0
     call $_ZN6neodev6vmtype5Array2atEi
+    get_local $4
+    i32.const 8
+    i32.add
     call $_ZN6neodev6vmtype9StackItem11asByteArrayEv
     i32.const 5
     i32.const 1
     call $_ZN6neodev6vmtype9ByteArray3setEih
+    get_local $4
+    i32.const 16
+    i32.add
     i32.const 1
     call $_ZN6neodev6vmtype5Array2atEi
+    get_local $4
+    i32.const 8
+    i32.add
     call $_ZN6neodev6vmtype9StackItem5asIntEv
+    set_local $1
+    i32.const 5
+    call $_ZN6neodev6vmtype9ByteArray2atEi
+    set_local $2
+    get_local $4
+    call $_ZN6neodev6vmtype9StackItem5asIntEv
+    set_local $3
+    i32.const 0
+    get_local $4
+    i32.const 32
+    i32.add
+    i32.store offset=4
+    get_local $3
+    get_local $2
+    get_local $1
     i32.const 11
     i32.const 10
     get_local $0
@@ -51,10 +87,7 @@
     i32.gt_s
     select
     i32.add
-    i32.const 5
-    call $_ZN6neodev6vmtype9ByteArray2atEi
     i32.add
-    call $_ZN6neodev6vmtype9StackItem5asIntEv
     i32.add)
   (func $main (result i32)
     i32.const 1))

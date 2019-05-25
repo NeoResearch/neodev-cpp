@@ -9,9 +9,9 @@ namespace vmtype {
 
 struct Array : Object
 {
-   static int size();
+   int size();
 
-   static Object at(int i);
+   Object at(int i);
 
    //failure: cannot be non-member
    //byte operator[](int index);

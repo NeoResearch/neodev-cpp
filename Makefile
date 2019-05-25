@@ -3,7 +3,7 @@ BINARYEN_BIN=/home/imcoelho/git-reps/binaryen/build/bin
 WABT_BIN=/home/imcoelho/git-reps/wabt/build
 WABT_BIN_NEW=/home/imcoelho/git-reps/wabt/bin
 
-all: examples spectests
+all: examples #spectests
 
 srctest:
 	# verify output without specific extension
@@ -35,11 +35,12 @@ examples: HelloWorld HelloWorld_em Minimal_emc
 	$(CLANG_BIN)/clang++ --std=c++1z -Isrc/ -emit-llvm --target=wasm32 -O1 $< -c -o build/examples/$@.bc
 	$(CLANG_BIN)/llc -asm-verbose=false -o build/examples/$@.s build/examples/$@.bc
 	$(BINARYEN_BIN)/s2wasm build/examples/$@.s > build/examples/$@.wast   # not real wast, perhaps?
-	@#$(WABT_BIN)/wast2wasm build/examples/$@.wast > build/examples/$@.wasm
+	$(WABT_BIN)/wast2wasm build/examples/$@.wast -o build/examples/$@.wasm
 	$(WABT_BIN)/wast-desugar --generate-names build/examples/$@.wast > build/examples/$@.desugar.wast #wast or wat ?
-	@echo "Number of Loads should be Zero. Checking!"
-	@test `cat build/examples/$@.desugar.wast | grep -c -E 'i32.load|i64.load|i32.store|i64.store|global'` -eq 0
-	@echo "Check passed!"
+	# cannot test for zero loads, as they seem necessary for object "this" pointers
+	#@echo "Number of Loads should be Zero. Checking!"	
+	#@test `cat build/examples/$@.desugar.wast | grep -c -E 'i32.load|i64.load|i32.store|i64.store|global'` -eq 0
+	#@echo "Check passed!"
 	@./count_drop.sh $@
 	@echo "Number of lines on s-expression file:" `wc -l build/examples/$@.desugar.wast`
 	@echo "Converting wast to json spec test (env should be zero!)"
@@ -75,14 +76,14 @@ examples: HelloWorld HelloWorld_em Minimal_emc
 	@echo "Number of lines on s-expression file:" `wc -l build/examples/$@.desugar.wat`
 	@echo 
 
-spectests: build/examples/Minimal_em.wast.json
+spectests: build/examples/Minimal_emc.wast.json
 	@echo
 	@echo " ============ Will run spec tests =============="
-	@echo "MINIMAL (clang)"
-	$(WABT_BIN_NEW)/spectest-interp build/examples/Minimal.wast.json
-	@echo
+	#@echo "MINIMAL (clang)"
+	#$(WABT_BIN_NEW)/spectest-interp build/examples/Minimal.wast.json
+	#@echo
 	@echo "MINIMAL (emsdk)"
-	$(WABT_BIN_NEW)/spectest-interp build/examples/Minimal_em.wast.json
+	$(WABT_BIN_NEW)/spectest-interp build/examples/Minimal_emc.wast.json
 	@echo
 
 
