@@ -55,7 +55,7 @@ public:
       return ss.str();
    }
 
-   static WasmField* parseField(Scanner& scanner);
+   static WasmField* parseField(Scanner& scanLine, Scanner& scanText);
 };
 
 // ===================================================================
@@ -279,7 +279,7 @@ public:
       if (!wdata)
          error("wdata->field should not be null!");
       //cout << "WILL READ DATA!!" << endl;
-      wdata->field = WasmField::parseField(scanLine);
+      wdata->field = WasmField::parseField(scanLine, scanner);
       string value = Scanner::trim(scanLine.nextLine());
       //cout << "DATA='" << value << "'" << endl;
       wdata->value = value.substr(0, value.size() - 1);
@@ -299,8 +299,8 @@ public:
 class WasmExport : public WasmComponent
 {
 public:
-   string sname; // export string name
-   string name;  // function name
+   string sname; // string name
+   string name; // function name
 
    WasmExport()
      : WasmComponent("export")
@@ -321,7 +321,7 @@ public:
       string func = scanLine.next();
       string name = scanLine.next();
       wexport->sname = sname;
-      wexport->name = name.substr(0, name.length()-2);
+      wexport->name = name.substr(0, name.length() - 2);
 
       return wexport;
    }
@@ -331,7 +331,71 @@ public:
    {
       stringstream ss;
       ss << "(export " << sname << " (func " << name << "))";
-      return ss.str(); 
+      return ss.str();
+   }
+};
+
+// Function implementation
+class WasmFunc : public WasmComponent
+{
+public:
+   string name; // function name
+   vector<WasmField*> parameters;
+   vector<WasmField*> commands;
+
+   WasmFunc()
+     : WasmComponent("func")
+   {
+   }
+
+   static WasmFunc* parseFunc(string line, Scanner& scanner)
+   {
+      Scanner scanLine(line);
+      string type = scanLine.next();
+      if (type != "(func") {
+         cerr << "found '" << type << "'" << endl;
+         error("expected '(func'");
+      }
+
+      WasmFunc* wfunc = new WasmFunc();
+      string name = scanLine.next();
+      wfunc->name = name;
+
+      cout << "will read fields for function: " << name << endl;
+      // consume parameters
+      while (scanLine.hasNext()) {
+         Scanner empty(""); // empty
+         WasmField* param = WasmField::parseField(scanLine, empty);
+         if(!param)
+            error("func PARAM IS NULL!!");
+         wfunc->parameters.push_back(param);
+      }
+
+      cout << "FUNC consumed parameters!" << endl;
+
+      string endline = Scanner::trim(scanner.nextLine());
+      while (endline != ")") {
+         cout << "DROPPING '" << endline << "'" << endl;
+         endline = Scanner::trim(scanner.nextLine());
+      }
+
+      cout << "FOUND CLOSING FUNC" << endl;
+
+      return wfunc;
+   }
+
+   // convert to s-expression
+   virtual string toSExpr()
+   {
+      stringstream ss;
+      ss << "(func " << name;
+      for (unsigned i = 0; i < parameters.size(); i++)
+         ss << " " << parameters[i]->toSExpr();
+      ss << endl;
+      ss << "(COMMANDS HERE)";
+      ss << endl;
+      ss << ")";
+      return ss.str();
    }
 };
 
@@ -353,18 +417,29 @@ WasmComponent::parseComponent(string line, Scanner& scanner)
       return WasmData::parseData(line, scanner);
    if (type == "(export")
       return WasmExport::parseExport(line, scanner);
+   if (type == "(func")
+      return WasmFunc::parseFunc(line, scanner);
 
    stringstream ss;
    ss << "unknown type: '" << type << "'";
    error(ss.str());
 }
 
+// Field may consume a single (current) or multiple lines
 WasmField*
-WasmField::parseField(Scanner& scanLine)
+WasmField::parseField(Scanner& scanLine, Scanner& scanText)
 {
    string fieldName = scanLine.next();
    if (fieldName == "(i32.const") {
-      string val = scanLine.next();
+      string val = scanLine.next(); // e.g. (i32.const 40) -> on "(data"
+      scanLine.nextLine(); // drop rest of line
+      vector<string> options(1, val.substr(0, val.size() - 1));
+      return new WasmField(fieldName, options);
+   }
+
+   if (fieldName == "(result") {
+      string val = scanLine.next(); // e.g. (result i32) -> on "(func"
+      scanLine.nextLine(); // drop rest of line
       vector<string> options(1, val.substr(0, val.size() - 1));
       return new WasmField(fieldName, options);
    }
