@@ -296,6 +296,45 @@ public:
    }
 };
 
+class WasmExport : public WasmComponent
+{
+public:
+   string sname; // export string name
+   string name;  // function name
+
+   WasmExport()
+     : WasmComponent("export")
+   {
+   }
+
+   static WasmExport* parseExport(string line, Scanner& scanner)
+   {
+      Scanner scanLine(line);
+      string type = scanLine.next();
+      if (type != "(export") {
+         cerr << "found '" << type << "'" << endl;
+         error("expected '(export'");
+      }
+
+      WasmExport* wexport = new WasmExport();
+      string sname = scanLine.next();
+      string func = scanLine.next();
+      string name = scanLine.next();
+      wexport->sname = sname;
+      wexport->name = name.substr(0, name.length()-2);
+
+      return wexport;
+   }
+
+   // convert to s-expression
+   virtual string toSExpr()
+   {
+      stringstream ss;
+      ss << "(export " << sname << " (func " << name << "))";
+      return ss.str(); 
+   }
+};
+
 // implementation of static method (general parser)
 WasmComponent*
 WasmComponent::parseComponent(string line, Scanner& scanner)
@@ -312,6 +351,8 @@ WasmComponent::parseComponent(string line, Scanner& scanner)
       return WasmMemory::parseMemory(line, scanner);
    if (type == "(data")
       return WasmData::parseData(line, scanner);
+   if (type == "(export")
+      return WasmExport::parseExport(line, scanner);
 
    stringstream ss;
    ss << "unknown type: '" << type << "'";
