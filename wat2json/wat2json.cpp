@@ -26,6 +26,8 @@ public:
 
    // convert to S-expression
    virtual string toSExpr() = 0;
+
+   static WasmComponent* parseComponent(string line, Scanner& scanner);
 };
 
 class WasmModule : public WasmComponent
@@ -44,6 +46,13 @@ public:
          error("expected '(module'");
 
       WasmModule* module = new WasmModule();
+
+      string line2 = scanner.nextLine();
+      while (line2 != ")") {
+         WasmComponent* component = WasmComponent::parseComponent(line2, scanner);
+         module->innerParts.push_back(component);
+      }
+
       return module;
    }
 
@@ -58,6 +67,58 @@ public:
       return ss.str();
    }
 };
+
+class WasmType : public WasmComponent
+{
+public:
+   vector<WasmComponent*> innerParts;
+
+   WasmType()
+     : WasmComponent("type")
+   {
+   }
+
+   static WasmType* parseWType(string line, Scanner& scanner)
+   {
+      Scanner scanLine(line);
+      string type = scanLine.next();
+      if (type != "(type") {
+         cerr << "found '" << type << "'" << endl;
+         error("expected '(type'");
+      }
+
+      WasmType* wtype = new WasmType();
+
+      error("found type!");
+
+      return wtype;
+   }
+
+   // convert to s-expression
+   virtual string toSExpr()
+   {
+      stringstream ss;
+      ss << "(type" << endl;
+      //for (unsigned i = 0; i < innerParts.size(); i++)
+      //   ss << innerParts[i]->toSExpr() << endl;
+      ss << ")";
+      return ss.str();
+   }
+};
+
+// implementation of static method (general parser)
+WasmComponent*
+WasmComponent::parseComponent(string line, Scanner& scanner)
+{
+   Scanner scanLine(line);
+   string type = scanLine.next();
+   if (type == "(type")
+      return WasmType::parseWType(line, scanner);
+
+   stringstream ss;
+   ss << "unknown type" << type;
+   error(ss.str());
+}
 
 int
 parseWat(string input, string output)
