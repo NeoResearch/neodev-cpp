@@ -49,6 +49,9 @@ public:
 
       string line2 = scanner.nextLine();
       while (line2 != ")") {
+         cout << "CURRENT MODULE:" << endl;
+         cout << module->toSExpr() << endl;
+         cout << endl;
          WasmComponent* component = WasmComponent::parseComponent(line2, scanner);
          module->innerParts.push_back(component);
          line2 = scanner.nextLine();
@@ -150,6 +153,78 @@ public:
    }
 };
 
+class WasmTable : public WasmComponent
+{
+public:
+   string name;
+
+   WasmTable()
+     : WasmComponent("table")
+   {
+   }
+
+   static WasmTable* parseTable(string line, Scanner& scanner)
+   {
+      Scanner scanLine(line);
+      string type = scanLine.next();
+      if (type != "(table") {
+         cerr << "found '" << type << "'" << endl;
+         error("expected '(table'");
+      }
+
+      WasmTable* wtable = new WasmTable();
+
+      return wtable;
+   }
+
+   // convert to s-expression
+   virtual string toSExpr()
+   {
+      stringstream ss;
+      ss << "(table ... ";
+      //for (unsigned i = 0; i < innerParts.size(); i++)
+      //   ss << innerParts[i]->toSExpr() << endl;
+      ss << ")";
+      return ss.str();
+   }
+};
+
+class WasmMemory : public WasmComponent
+{
+public:
+   string name;
+
+   WasmMemory()
+     : WasmComponent("memory")
+   {
+   }
+
+   static WasmMemory* parseMemory(string line, Scanner& scanner)
+   {
+      Scanner scanLine(line);
+      string type = scanLine.next();
+      if (type != "(memory") {
+         cerr << "found '" << type << "'" << endl;
+         error("expected '(memory'");
+      }
+
+      WasmMemory* wmemory = new WasmMemory();
+
+      return wmemory;
+   }
+
+   // convert to s-expression
+   virtual string toSExpr()
+   {
+      stringstream ss;
+      ss << "(memory ... ";
+      //for (unsigned i = 0; i < innerParts.size(); i++)
+      //   ss << innerParts[i]->toSExpr() << endl;
+      ss << ")";
+      return ss.str();
+   }
+};
+
 // implementation of static method (general parser)
 WasmComponent*
 WasmComponent::parseComponent(string line, Scanner& scanner)
@@ -160,6 +235,10 @@ WasmComponent::parseComponent(string line, Scanner& scanner)
       return WasmType::parseWType(line, scanner);
    if (type == "(import")
       return WasmImport::parseImport(line, scanner);
+   if (type == "(table")
+      return WasmTable::parseTable(line, scanner);
+   if (type == "(memory")
+      return WasmMemory::parseMemory(line, scanner);
 
    stringstream ss;
    ss << "unknown type: '" << type << "'";
