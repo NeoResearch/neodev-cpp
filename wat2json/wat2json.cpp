@@ -1,16 +1,87 @@
 #include <iostream>
+#include <sstream>
+#include <vector>
 
 #include "Scanner++/Scanner.h"
 
 using namespace std;
 using namespace scannerpp;
 
+void
+error(string msg)
+{
+   cerr << "error:" << msg << endl;
+   exit(1);
+}
+
+class WasmComponent
+{
+public:
+   string type;
+
+   WasmComponent(string _type)
+     : type(_type)
+   {
+   }
+
+   // convert to S-expression
+   virtual string toSExpr() = 0;
+};
+
+class WasmModule : public WasmComponent
+{
+public:
+   vector<WasmComponent*> innerParts;
+
+   WasmModule()
+     : WasmComponent("module")
+   {
+   }
+
+   static WasmModule* parseModule(string line, Scanner& scanner)
+   {
+      if (line != "(module")
+         error("expected '(module'");
+
+      WasmModule* module = new WasmModule();
+      return module;
+   }
+
+   // convert to s-expression
+   virtual string toSExpr()
+   {
+      stringstream ss;
+      ss << "(module" << endl;
+      for (unsigned i = 0; i < innerParts.size(); i++)
+         ss << innerParts[i]->toSExpr() << endl;
+      ss << ")";
+      return ss.str();
+   }
+};
+
 int
 parseWat(string input, string output)
 {
- 
    Scanner scanner(new File(input));
- 
+
+   string line = scanner.nextLine();
+
+   WasmModule* module = WasmModule::parseModule(line, scanner);
+
+   cout << "parsed!" << endl;
+
+   cout << endl;
+
+   cout << "will print s-expression:" << endl;
+   cout << module->toSExpr() << endl;
+
+   cout << endl;
+
+   cout << "will print json:" << endl;
+   cout << module->toSExpr() << endl;
+
+   cout << endl;
+
    cout << "finished successfully!" << endl;
 
    return 0;
