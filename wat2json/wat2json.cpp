@@ -14,6 +14,7 @@ error(string msg)
    exit(1);
 }
 
+// bigger components
 class WasmComponent
 {
 public:
@@ -29,6 +30,35 @@ public:
 
    static WasmComponent* parseComponent(string line, Scanner& scanner);
 };
+
+// smaller fields
+class WasmField
+{
+public:
+   string fieldName;
+   vector<string> options;
+
+   WasmField(string _fieldName, vector<string> _options)
+     : fieldName(_fieldName)
+     , options(_options)
+   {
+   }
+
+   // convert to S-expression
+   virtual string toSExpr()
+   {
+      stringstream ss;
+      ss << fieldName;
+      for (unsigned i = 0; i < options.size(); i++)
+         ss << " " << options[i];
+      ss << ")";
+      return ss.str();
+   }
+
+   static WasmField* parseField(Scanner& scanner);
+};
+
+// ===================================================================
 
 class WasmModule : public WasmComponent
 {
@@ -225,6 +255,47 @@ public:
    }
 };
 
+class WasmData : public WasmComponent
+{
+public:
+   WasmField* field;
+   string value;
+
+   WasmData()
+     : WasmComponent("data")
+   {
+   }
+
+   static WasmData* parseData(string line, Scanner& scanner)
+   {
+      Scanner scanLine(line);
+      string type = scanLine.next();
+      if (type != "(data") {
+         cerr << "found '" << type << "'" << endl;
+         error("expected '(data'");
+      }
+
+      WasmData* wdata = new WasmData();
+      if (!wdata)
+         error("wdata->field should not be null!");
+      //cout << "WILL READ DATA!!" << endl;
+      wdata->field = WasmField::parseField(scanLine);
+      string value = Scanner::trim(scanLine.nextLine());
+      //cout << "DATA='" << value << "'" << endl;
+      wdata->value = value.substr(0, value.size() - 1);
+
+      return wdata;
+   }
+
+   // convert to s-expression
+   virtual string toSExpr()
+   {
+      stringstream ss;
+      ss << "(data " << field->toSExpr() << " " << value << ")";
+      return ss.str();
+   }
+};
+
 // implementation of static method (general parser)
 WasmComponent*
 WasmComponent::parseComponent(string line, Scanner& scanner)
@@ -239,11 +310,28 @@ WasmComponent::parseComponent(string line, Scanner& scanner)
       return WasmTable::parseTable(line, scanner);
    if (type == "(memory")
       return WasmMemory::parseMemory(line, scanner);
+   if (type == "(data")
+      return WasmData::parseData(line, scanner);
 
    stringstream ss;
    ss << "unknown type: '" << type << "'";
    error(ss.str());
 }
+
+WasmField*
+WasmField::parseField(Scanner& scanLine)
+{
+   string fieldName = scanLine.next();
+   if (fieldName == "(i32.const") {
+      string val = scanLine.next();
+      vector<string> options(1, val.substr(0, val.size() - 1));
+      return new WasmField(fieldName, options);
+   }
+
+   return nullptr;
+}
+
+// ===================================================================
 
 int
 parseWat(string input, string output)
