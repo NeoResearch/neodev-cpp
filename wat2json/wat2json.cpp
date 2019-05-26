@@ -51,6 +51,7 @@ public:
       while (line2 != ")") {
          WasmComponent* component = WasmComponent::parseComponent(line2, scanner);
          module->innerParts.push_back(component);
+         line2 = scanner.nextLine();
       }
 
       return module;
@@ -71,7 +72,7 @@ public:
 class WasmType : public WasmComponent
 {
 public:
-   vector<WasmComponent*> innerParts;
+   string name;
 
    WasmType()
      : WasmComponent("type")
@@ -88,8 +89,8 @@ public:
       }
 
       WasmType* wtype = new WasmType();
-
-      error("found type!");
+      string name = scanLine.next();
+      wtype->name = name;
 
       return wtype;
    }
@@ -98,7 +99,50 @@ public:
    virtual string toSExpr()
    {
       stringstream ss;
-      ss << "(type" << endl;
+      ss << "(type"
+         << " ";
+      ss << name;
+      //for (unsigned i = 0; i < innerParts.size(); i++)
+      //   ss << innerParts[i]->toSExpr() << endl;
+      ss << ")";
+      return ss.str();
+   }
+};
+
+class WasmImport : public WasmComponent
+{
+public:
+   string name;
+
+   WasmImport()
+     : WasmComponent("import")
+   {
+   }
+
+   static WasmImport* parseImport(string line, Scanner& scanner)
+   {
+      Scanner scanLine(line);
+      string type = scanLine.next();
+      if (type != "(import") {
+         cerr << "found '" << type << "'" << endl;
+         error("expected '(import'");
+      }
+
+      WasmImport* wimport = new WasmImport();
+      string env = scanLine.next();
+      string sname = scanLine.next();
+      string func = scanLine.next();
+      string name = scanLine.next();
+      wimport->name = name;
+
+      return wimport;
+   }
+
+   // convert to s-expression
+   virtual string toSExpr()
+   {
+      stringstream ss;
+      ss << "(import \"env\" ... " << name;
       //for (unsigned i = 0; i < innerParts.size(); i++)
       //   ss << innerParts[i]->toSExpr() << endl;
       ss << ")";
@@ -114,9 +158,11 @@ WasmComponent::parseComponent(string line, Scanner& scanner)
    string type = scanLine.next();
    if (type == "(type")
       return WasmType::parseWType(line, scanner);
+   if (type == "(import")
+      return WasmImport::parseImport(line, scanner);
 
    stringstream ss;
-   ss << "unknown type" << type;
+   ss << "unknown type: '" << type << "'";
    error(ss.str());
 }
 
