@@ -1,6 +1,8 @@
 #ifndef NEODEV_ABITYPE_STRUCT_HPP
 #define NEODEV_ABITYPE_STRUCT_HPP
 
+#include "../vmtype/StackItem.hpp"
+
 namespace neodev {
 
 namespace abitype {
@@ -19,7 +21,7 @@ namespace abitype {
  * @apiSuccess {String} lastname  Lastname of the User.
  */
 
-struct String
+struct String : vmtype::Object
 {
    [[nodiscard]]
    int length(); //__attribute__((nodiscard));

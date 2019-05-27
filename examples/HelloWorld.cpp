@@ -1,6 +1,5 @@
 // compiler reference: https://mbebenita.github.io/WasmExplorer/
 
-
 #include <neodev/SmartContract.hpp>
 
 using namespace neodev;
@@ -10,8 +9,10 @@ using namespace neodev::abitype;
 const char* soi{ "oi" };
 const char* stest{ "test" };
 
-
-
+namespace neodev {
+struct emit_abi{};
+#define EXPORT_ABI template<typename _emit_abi = emit_abi>
+}
 
 ByteArray
 toarray(UInt160 hash);
@@ -19,13 +20,12 @@ toarray(UInt160 hash);
 // cannot use _UInt160 anywhere (not constexpr)
 //constexpr UInt160 _convert160(_UInt160 hash);
 
-
 int
 GetArrayLength(ByteArray ba)
 {
-   if(ba.length() > 0)
+   if (ba.length() > 0)
       return 10;
-   else 
+   else
       return 30;
    //return ba.length();
 }
@@ -101,14 +101,34 @@ class Testing
 
 
 
-void nop(byte b);
+void
+nop(byte b);
 
+template<typename rtype = int>
+rtype
+test1(int x, float k, Object b, Array c);
+
+EXPORT_ABI 
 int
-main(String op, Array params)
+test2(int x, float k, Object b, Array c);
+
+EXPORT_ABI
+void test3(int k);
+
+EXPORT_ABI
+void test4();
+
+EXPORT_ABI
+int
+neomain(String op, Array params)
 {
+   nop(1);
+   int y1 = test1(10, 5.1f, op, params);
+   int y2 = test2(10, 5.1f, op, params);
+
    int x = 10;
 
-   if(op.length()>0)
+   if (op.length() > 0)
       x++;
 
    //Testing t;
@@ -126,8 +146,7 @@ main(String op, Array params)
 
    Object o2 = params.at(1);
 
-
-/*
+   /*
    int b3[6] = {0,0,0,0,0,0};
    int z = 8;
 
@@ -154,7 +173,6 @@ main(String op, Array params)
    //op.length();
    //op.length();
 
-   
    //b1[0] = 0x10;
 
    //char c[10];
@@ -169,9 +187,8 @@ main(String op, Array params)
    //return x+c[0]+b3[0]+b3[1]+b3[2];
    //return x+c[0]+b3[0]+b3[1]+b3[2]+z;
    //return o;
-   return o.asInt()+x+b.at(5)+o2.asInt();
+   return o.asInt() + x + b.at(5) + o2.asInt();
 }
-
 
 /*
 int
@@ -231,13 +248,20 @@ NeoMain1(String op, Array ops)
 */
 //}
 
-
 //}; // end class
 
 } // namespace
 
-
 int main()
 {
-   return 1;
+   NeoContract::test3(10);
+   NeoContract::test4();
+   String s; Array a; NeoContract::neomain(s,a);
+   return 0;
 }
+
+//int
+//main() __attribute__((alias,"__neomain"));
+//{
+//   return 1;
+//}

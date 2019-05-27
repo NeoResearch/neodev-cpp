@@ -5,6 +5,9 @@
 
 #include "Scanner++/Scanner.h"
 
+// execute external command
+#include "Exec.hpp"
+
 using namespace std;
 using namespace scannerpp;
 
@@ -511,6 +514,8 @@ public:
    vector<WasmField*> locals; // local fields
    vector<WasmCommand*> commands;
 
+   cppUtils::CppFunction cppf; // beautiful demangled items
+
    WasmFunc()
      : WasmComponent("func")
    {
@@ -528,6 +533,7 @@ public:
       WasmFunc* wfunc = new WasmFunc();
       string name = scanLine.next();
       wfunc->name = name;
+      wfunc->cppf = cppUtils::Exec::demangle(name);
 
       cout << "will read fields for function: " << name << endl;
       // consume parameters
@@ -590,7 +596,15 @@ public:
    virtual string toJSON() override
    {
       stringstream ss;
-      ss << "{\"declare\":\"func\", \"name\":\"" << name << "\", \"params\":[";
+      ss << "{\"declare\":\"func\", \"name\":\"" << name << "\"";
+      bool cppdemangle = true;
+      if (cppdemangle) {
+         ss << ",\"cppdemangle\":{\"name\":\"" << cppf.name << "\",\"params\":[";
+         for (unsigned i = 0; i < cppf.params.size(); i++)
+            ss << (i == 0 ? "" : ",") << "\"" << cppf.params[i] << "\"";
+         ss << "]}";
+      }
+      ss << ",\"params\":[";
       for (unsigned i = 0; i < parameters.size(); i++)
          ss << (i == 0 ? "" : ",") << parameters[i]->toJSON();
       ss << "]," << endl;
@@ -803,5 +817,16 @@ main(int argc, char* argv[])
    if (ext_output != ".json")
       return usage();
 
+/*
+   //cppUtils::CppFunction f = cppUtils::Exec::demangle("_Z14GetArrayLengthN6neodev6vmtype9ByteArrayE");
+   cppUtils::CppFunction f = cppUtils::Exec::demangle("_ZN11NeoContract4mainEN6neodev7abitype6StringENS0_6vmtype5ArrayE");
+
+   cout << f.name << endl;
+   for (unsigned i = 0; i < f.params.size(); i++)
+      cout << f.params[i] << endl;
+
+   int x;
+   cin >> x;
+*/
    return parseWat(input, output);
 }
