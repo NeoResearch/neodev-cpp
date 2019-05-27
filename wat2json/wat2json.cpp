@@ -371,6 +371,7 @@ class WasmFunc : public WasmComponent
 public:
    string name; // function name
    vector<WasmField*> parameters;
+   vector<WasmField*> locals; // local fields
    vector<WasmCommand*> commands;
 
    WasmFunc()
@@ -405,12 +406,25 @@ public:
       string endline = Scanner::trim(scanner.nextLine());
       while (endline != ")") {
          cout << "-----> parseFunc: got line '" << endline << "'" << endl;
-         Scanner scanLine2(endline);
-         WasmCommand* cmd = WasmCommand::parseCommand(scanLine2, scanner);
-         cout << "FUNC got command!" << endl;
-         if (!cmd)
-            error("COMMAND IS NULL ON FUNC!!");
-         wfunc->commands.push_back(cmd);
+         Scanner scanLineTestLocal(endline);
+         string testLocal = scanLineTestLocal.next();
+         if (testLocal == "(local") {
+            Scanner scanLocal(endline);
+            WasmField* local = WasmField::parseField(scanLocal);
+            if (!local)
+               error("error reading local!");
+            wfunc->locals.push_back(local);
+         } else // command
+         {
+            Scanner scanLine2(endline);
+            WasmCommand* cmd = WasmCommand::parseCommand(scanLine2, scanner);
+            cout << "FUNC got command!" << endl;
+            if (!cmd)
+               error("COMMAND IS NULL ON FUNC!!");
+
+            wfunc->commands.push_back(cmd);
+         }
+
          endline = Scanner::trim(scanner.nextLine());
       }
 
