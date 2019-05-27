@@ -81,7 +81,14 @@ public:
       ss << cmdName;
       for (unsigned i = 0; i < options.size(); i++)
          ss << " " << options[i];
-      ss << ")";
+      if (commands.size() == 0)
+         ss << ")";
+      else {
+         ss << endl;
+         for (unsigned i = 0; i < commands.size(); i++)
+            ss << commands[i]->toSExpr() << endl;
+         ss << ")";
+      }
       return ss.str();
    }
 
@@ -441,6 +448,8 @@ public:
       for (unsigned i = 0; i < parameters.size(); i++)
          ss << " " << parameters[i]->toSExpr();
       ss << endl;
+      for (unsigned i = 0; i < locals.size(); i++)
+         ss << locals[i]->toSExpr() << endl;
       for (unsigned i = 0; i < commands.size(); i++)
          ss << commands[i]->toSExpr() << endl;
       ss << ")";
@@ -517,7 +526,7 @@ WasmCommand::parseCommand(Scanner& scanLine, Scanner& scanText)
    vector<WasmCommand*> commands;
 
    // single line command
-   if ((cmdName == "(i32.const") || (cmdName == "(call") || (cmdName == "(get_local")) {
+   if ((cmdName == "(i32.const") || (cmdName == "(get_local")) {
       string val = scanLine.next(); // e.g. (i32.const 40)
       scanLine.nextLine();          // drop rest of line
       vector<string> options(1, val.substr(0, val.size() - 1));
@@ -549,6 +558,28 @@ WasmCommand::parseCommand(Scanner& scanLine, Scanner& scanText)
          WasmCommand* cmd = WasmCommand::parseCommand(scanLine2, scanText);
          commands.push_back(cmd);
          line2 = Scanner::trim(scanText.nextLine());
+      }
+      return new WasmCommand(cmdName, options, commands);
+   }
+
+   // hybrid single and multiline (special for call)
+   if ((cmdName == "(call")) {
+      // call may be single line: (call $function)
+      // or it may be multiline: (call $function
+      //                             more commands
+      //                         )
+      string val = scanLine.next();
+      scanLine.nextLine();               // drop rest of line
+      if (val.at(val.size() - 1) == ')') // single line
+         options.push_back(val.substr(0, val.size() - 1));
+      else {
+         string line2 = Scanner::trim(scanText.nextLine());
+         while (line2 != ")") {
+            Scanner scanLine2(line2);
+            WasmCommand* cmd = WasmCommand::parseCommand(scanLine2, scanText);
+            commands.push_back(cmd);
+            line2 = Scanner::trim(scanText.nextLine());
+         }
       }
       return new WasmCommand(cmdName, options, commands);
    }
