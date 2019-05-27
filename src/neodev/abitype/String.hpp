@@ -26,6 +26,8 @@ namespace abitype {
 
 struct String : vmtype::Object
 {
+   static String& Init();
+
    [[nodiscard]]
    int length(); //__attribute__((nodiscard));
 

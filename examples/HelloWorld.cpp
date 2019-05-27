@@ -4,7 +4,7 @@ class NeoContract
 {
 public:
    ENTRYPOINT
-   static void main(String op, Array params)
+   static void main(String op, Array& params)
    {
       StorageContext ctx = Storage::CurrentContext();
 
@@ -13,4 +13,4 @@ public:
 };
 
 // declare entrypoint NeoContract::main as real main function
-DECLARE_MAIN(NeoContract::main(String(), Array()))
+DECLARE_MAIN(NeoContract::main(String::Init(), Array::Init()))

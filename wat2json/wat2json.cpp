@@ -266,7 +266,7 @@ public:
       string func = scanLine.next();
       string name = scanLine.next();
       Scanner cleanName(name);
-      cleanName.useSeparators(")"); 
+      cleanName.useSeparators(")");
       wimport->name = cleanName.next(); // removing ')' from name
       wimport->cppf = cppUtils::Exec::demangle(wimport->name);
 
@@ -544,6 +544,14 @@ public:
       wfunc->cppf = cppUtils::Exec::demangle(name);
 
       cout << "will read fields for function: " << name << endl;
+      cout << "demangled name: " << wfunc->cppf.name << endl;
+      cout << "parameter count: " << wfunc->cppf.params.size() << endl;
+      for (unsigned i = 0; i < wfunc->cppf.params.size(); i++)
+         cout << wfunc->cppf.params[i] << endl;
+      cout << "template count: " << wfunc->cppf.templates.size() << endl;
+      for (unsigned i = 0; i < wfunc->cppf.templates.size(); i++)
+         cout << wfunc->cppf.templates[i] << endl;
+
       // consume parameters
       while (scanLine.hasNext()) {
          WasmField* param = WasmField::parseField(scanLine);
@@ -658,10 +666,21 @@ WasmField*
 WasmField::parseField(Scanner& scanLine)
 {
    string fieldName = scanLine.next();
+
    if (fieldName == "(i32.const") {
       string val = scanLine.next(); // e.g. (i32.const 40) -> on "(data"
       //scanLine.nextLine();          // drop rest of line
       vector<string> options(1, val.substr(0, val.size() - 1));
+      return new WasmField(fieldName, options);
+   }
+
+   if (fieldName == "(param") {
+      string val1 = scanLine.next(); // e.g. (param $0 i32) -> on "(func"
+      string val2 = scanLine.next(); // e.g. (param $0 i32) -> on "(func"
+      //scanLine.nextLine();          // drop rest of line
+      vector<string> options;
+      options.push_back(val1);
+      options.push_back(val2.substr(0, val2.size() - 1));
       return new WasmField(fieldName, options);
    }
 
@@ -682,6 +701,9 @@ WasmField::parseField(Scanner& scanLine)
       options.push_back(val2.substr(0, val2.size() - 1));
       return new WasmField(fieldName, options);
    }
+
+   cout << "PARSING FIELD '" << fieldName << "'" << endl;
+   error("field cannot be null!");
 
    return nullptr;
 }
@@ -705,7 +727,7 @@ WasmCommand::parseCommand(Scanner& scanLine, Scanner& scanText)
    }
 
    // disabled single line commands
-   if ( (cmdName == "(f32.const") ) {
+   if ((cmdName == "(f32.const")) {
       error("FLOAT POINT OPERATIONS IS NOT SUPPORTED INSIDE NeoVM! USE (BIG)INTEGER");
       return nullptr;
    }
@@ -750,6 +772,7 @@ WasmCommand::parseCommand(Scanner& scanLine, Scanner& scanText)
       if (val.at(val.size() - 1) == ')') // single line
          options.push_back(val.substr(0, val.size() - 1));
       else {
+         options.push_back(val);
          string line2 = Scanner::trim(scanText.nextLine());
          while (line2 != ")") {
             Scanner scanLine2(line2);

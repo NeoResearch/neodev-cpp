@@ -151,7 +151,10 @@
           ]
         },
         {
-          "cmd": "(drop",
+          "cmd": "(call",
+          "params": [
+            "$_ZN11NeoContract4mainIN6neodev13smartcontract9framework15emit_entrypointEEEvNS1_7abitype6StringERNS1_6vmtype5ArrayE"
+          ],
           "deps": [
             {
               "cmd": "(call",
@@ -159,12 +162,6 @@
                 "$_ZN6neodev6vmtype5Array4InitEv"
               ]
             }
-          ]
-        },
-        {
-          "cmd": "(call",
-          "params": [
-            "$_ZN11NeoContract4mainIN6neodev13smartcontract9framework15emit_entrypointEEEvNS1_7abitype6StringENS1_6vmtype5ArrayE"
           ]
         },
         {
@@ -177,7 +174,7 @@
     },
     {
       "declare": "func",
-      "name": "$_ZN11NeoContract4mainIN6neodev13smartcontract9framework15emit_entrypointEEEvNS1_7abitype6StringENS1_6vmtype5ArrayE",
+      "name": "$_ZN11NeoContract4mainIN6neodev13smartcontract9framework15emit_entrypointEEEvNS1_7abitype6StringERNS1_6vmtype5ArrayE",
       "cppdemangle": {
         "name": "NeoContract::main",
         "rtype": "void",
@@ -186,10 +183,18 @@
         ],
         "params": [
           "neodev::abitype::String",
-          "neodev::vmtype::Array"
+          "neodev::vmtype::Array&"
         ]
       },
-      "params": [],
+      "params": [
+        {
+          "name": "(param",
+          "params": [
+            "$0",
+            "i32"
+          ]
+        }
+      ],
       "commands": [
         {
           "cmd": "(call",
@@ -199,6 +204,9 @@
         },
         {
           "cmd": "(call",
+          "params": [
+            "$_ZN6neodev7abitype3StrINS_7_noemitEEENS0_6StringEPKc"
+          ],
           "deps": [
             {
               "cmd": "(i32.const",
@@ -210,6 +218,9 @@
         },
         {
           "cmd": "(call",
+          "params": [
+            "$_ZN6neodev7abitype3StrINS_7_noemitEEENS0_6StringEPKc"
+          ],
           "deps": [
             {
               "cmd": "(i32.const",

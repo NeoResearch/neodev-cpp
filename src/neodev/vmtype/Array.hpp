@@ -9,6 +9,8 @@ namespace vmtype {
 
 struct Array : Object
 {
+   static Array& Init();
+
    int size();
 
    Object at(int i);
