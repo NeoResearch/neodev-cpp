@@ -24,7 +24,7 @@ To compile, you will need emscripten `emcc`, since the process uses using WebAss
 
 ### clang + llvm + Binaryen + WABT (specific 2017 version)
 
-A good combination is manually install clang + llvm
+A good combination is manually install clang + llvm (**WARNING: this will take 30 Gigabytes and several hours**)
 ```
 mkdir make-llvm
 mkdir clang (and clone)
@@ -44,6 +44,11 @@ mkdir wabt (and clone)
 each of these require specific builds as well.. all cmake style
 ```
 
+## dependencies II (using EMSDK)
+
+EMSDK looks promising as it is a all-in-one solution for cpp -> wasm. 
+However, it's still slightly 
+
 ### Building EMSDK
 
 ```
@@ -56,6 +61,8 @@ cd emsdk
 source ./emsdk_env.sh
 ```
 
+WABT may still be needed...
+
 ### Building WABT (WebAssembly Toolkit)
 
 ```
@@ -66,6 +73,13 @@ cd build
 cmake ..
 cmake --build .
 ```
+
+## dependencies III (using wac)
+
+Another interesting project is `wac`, for a direct translation and execution of web assembly using C language. No much testing have been done on it, but at least, its docker image is quite small! (less than 2GB)
+
+### Building wac
+No build info now.
 
 
 ## License
