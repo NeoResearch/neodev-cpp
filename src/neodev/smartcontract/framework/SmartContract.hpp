@@ -1,9 +1,9 @@
 #ifndef NEODEV_SMARTCONTRACT_HPP
 #define NEODEV_SMARTCONTRACT_HPP
 
-#include "types.hpp"
+#include "../../types.hpp"
 
-namespace neodev {
+namespace neodev::smartcontract::framework {
 
 struct emit_abi
 {};

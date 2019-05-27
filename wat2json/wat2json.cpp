@@ -694,12 +694,18 @@ WasmCommand::parseCommand(Scanner& scanLine, Scanner& scanText)
    vector<WasmCommand*> commands;
 
    // single line command
-   if ((cmdName == "(i32.const") || (cmdName == "(f32.const") || (cmdName == "(get_local")) {
+   if ((cmdName == "(i32.const") || (cmdName == "(get_local")) {
       string val = scanLine.next(); // e.g. (i32.const 40)
       scanLine.nextLine();          // drop rest of line
       vector<string> options(1, val.substr(0, val.size() - 1));
       cout << "creating new command!" << endl;
       return new WasmCommand(cmdName, options, commands);
+   }
+
+   // disabled single line commands
+   if ( (cmdName == "(f32.const") ) {
+      error("FLOAT POINT OPERATIONS IS NOT SUPPORTED INSIDE NeoVM! USE (BIG)INTEGER");
+      return nullptr;
    }
 
    // multi line command
