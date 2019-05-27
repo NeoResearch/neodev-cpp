@@ -22,6 +22,10 @@
       "name": "$FUNCSIG$vii"
     },
     {
+      "declare": "type",
+      "name": "$FUNCSIG$viii"
+    },
+    {
       "declare": "import",
       "type": "env",
       "notimplemented": true,
@@ -503,7 +507,7 @@
                     {
                       "cmd": "(i32.const",
                       "params": [
-                        "32"
+                        "48"
                       ]
                     }
                   ]
@@ -643,7 +647,7 @@
                     {
                       "cmd": "(i32.const",
                       "params": [
-                        "24"
+                        "40"
                       ]
                     }
                   ]
@@ -667,7 +671,7 @@
                 {
                   "cmd": "(i32.const",
                   "params": [
-                    "16"
+                    "32"
                   ]
                 }
               ]
@@ -695,26 +699,9 @@
                 {
                   "cmd": "(i32.const",
                   "params": [
-                    "8"
+                    "24"
                   ]
                 }
-              ]
-            }
-          ]
-        },
-        {
-          "cmd": "(call",
-          "deps": [
-            {
-              "cmd": "(i32.const",
-              "params": [
-                "5"
-              ]
-            },
-            {
-              "cmd": "(i32.const",
-              "params": [
-                "1"
               ]
             }
           ]
@@ -735,6 +722,51 @@
                   "cmd": "(i32.const",
                   "params": [
                     "16"
+                  ]
+                }
+              ]
+            },
+            {
+              "cmd": "(i32.const",
+              "params": [
+                "5"
+              ]
+            },
+            {
+              "cmd": "(i32.const",
+              "params": [
+                "1"
+              ]
+            }
+          ]
+        },
+        {
+          "cmd": "(call",
+          "deps": [
+            {
+              "cmd": "(i32.const",
+              "params": [
+                "0"
+              ]
+            }
+          ]
+        },
+        {
+          "cmd": "(call",
+          "deps": [
+            {
+              "cmd": "(i32.add",
+              "deps": [
+                {
+                  "cmd": "(get_local",
+                  "params": [
+                    "$4"
+                  ]
+                },
+                {
+                  "cmd": "(i32.const",
+                  "params": [
+                    "32"
                   ]
                 }
               ]
@@ -768,7 +800,7 @@
                     {
                       "cmd": "(i32.const",
                       "params": [
-                        "8"
+                        "24"
                       ]
                     }
                   ]
@@ -806,9 +838,20 @@
               "cmd": "(call",
               "deps": [
                 {
-                  "cmd": "(get_local",
-                  "params": [
-                    "$4"
+                  "cmd": "(i32.add",
+                  "deps": [
+                    {
+                      "cmd": "(get_local",
+                      "params": [
+                        "$4"
+                      ]
+                    },
+                    {
+                      "cmd": "(i32.const",
+                      "params": [
+                        "8"
+                      ]
+                    }
                   ]
                 }
               ]
@@ -839,7 +882,7 @@
                 {
                   "cmd": "(i32.const",
                   "params": [
-                    "32"
+                    "48"
                   ]
                 }
               ]

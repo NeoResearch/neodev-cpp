@@ -4,6 +4,8 @@ WABT_BIN=/home/imcoelho/git-reps/wabt/build
 WABT_BIN_NEW=/home/imcoelho/git-reps/wabt/bin
 
 all: examples #spectests
+	cp build/examples/HelloWorld.wast wat2json/input.wast
+	(cd wat2json && make && make run)
 
 srctest:
 	# verify output without specific extension

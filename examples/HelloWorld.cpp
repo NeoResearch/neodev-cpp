@@ -155,6 +155,9 @@ neomain(String op, Array params)
    Object o = params.at(0);
    ByteArray b = o.asByteArray();
    b.set(5, 0x01);
+   nopbyte(0);
+   //b[7] = 0x02; (i32.store 8 => BAD!
+
    //int b3 = b.operator[4];
    //byte* b1 = b.asBytes(); // memory store
    //b1[4] = 0x0a+x; // memory store

@@ -32,13 +32,10 @@ struct ByteArray
    [[nodiscard]] static byte at(int index);
 
    // todo: operator[] ref
-   static void set(int index, byte value);
+   void set(int index, byte value);
 
-   //friend byte operator[](ByteArray b, int index)  __attribute__((deprecated("tst"),alias("__op")));
-
-   //failure: cannot be non-member
-   //byte operator[](int index);
-   //https://en.wikipedia.org/wiki/Operators_in_C_and_C%2B%2B
+   // member operator
+   //byte& operator[](int index); // generates i32.store 8... not good now.
 };
 
 } // namespace vmtype

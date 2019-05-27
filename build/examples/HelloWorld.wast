@@ -4,6 +4,7 @@
  (type $FUNCSIG$iif (func (param i32 f32) (result i32)))
  (type $FUNCSIG$ii (func (param i32) (result i32)))
  (type $FUNCSIG$vii (func (param i32 i32)))
+ (type $FUNCSIG$viii (func (param i32 i32 i32)))
  (import "env" "_ZN11NeoContract4nopuEj" (func $_ZN11NeoContract4nopuEj (param i32)))
  (import "env" "_ZN11NeoContract5test1IiEET_ifN6neodev6vmtype9StackItemENS3_5ArrayE" (func $_ZN11NeoContract5test1IiEET_ifN6neodev6vmtype9StackItemENS3_5ArrayE (param i32 f32) (result i32)))
  (import "env" "_ZN11NeoContract5test2IN6neodev8emit_abiEEEiifNS1_6vmtype9StackItemENS3_5ArrayE" (func $_ZN11NeoContract5test2IN6neodev8emit_abiEEEiifNS1_6vmtype9StackItemENS3_5ArrayE (param i32 f32) (result i32)))
@@ -14,7 +15,7 @@
  (import "env" "_ZN11NeoContract8nopucharEh" (func $_ZN11NeoContract8nopucharEh (param i32)))
  (import "env" "_ZN6neodev6vmtype5Array2atEi" (func $_ZN6neodev6vmtype5Array2atEi (param i32 i32)))
  (import "env" "_ZN6neodev6vmtype9ByteArray2atEi" (func $_ZN6neodev6vmtype9ByteArray2atEi (param i32) (result i32)))
- (import "env" "_ZN6neodev6vmtype9ByteArray3setEih" (func $_ZN6neodev6vmtype9ByteArray3setEih (param i32 i32)))
+ (import "env" "_ZN6neodev6vmtype9ByteArray3setEih" (func $_ZN6neodev6vmtype9ByteArray3setEih (param i32 i32 i32)))
  (import "env" "_ZN6neodev6vmtype9ByteArray6lengthEv" (func $_ZN6neodev6vmtype9ByteArray6lengthEv (result i32)))
  (import "env" "_ZN6neodev6vmtype9StackItem11asByteArrayEv" (func $_ZN6neodev6vmtype9StackItem11asByteArrayEv (param i32)))
  (import "env" "_ZN6neodev6vmtype9StackItem5asIntEv" (func $_ZN6neodev6vmtype9StackItem5asIntEv (param i32) (result i32)))
@@ -61,7 +62,7 @@
      (i32.load offset=4
       (i32.const 0)
      )
-     (i32.const 32)
+     (i32.const 48)
     )
    )
   )
@@ -99,31 +100,38 @@
    (call $_ZN6neodev7abitype6String6lengthEv
     (i32.add
      (get_local $4)
-     (i32.const 24)
+     (i32.const 40)
     )
    )
   )
   (call $_ZN6neodev6vmtype5Array2atEi
    (i32.add
     (get_local $4)
-    (i32.const 16)
+    (i32.const 32)
    )
    (i32.const 0)
   )
   (call $_ZN6neodev6vmtype9StackItem11asByteArrayEv
    (i32.add
     (get_local $4)
-    (i32.const 8)
+    (i32.const 24)
    )
   )
   (call $_ZN6neodev6vmtype9ByteArray3setEih
+   (i32.add
+    (get_local $4)
+    (i32.const 16)
+   )
    (i32.const 5)
    (i32.const 1)
+  )
+  (call $_ZN11NeoContract7nopbyteEh
+   (i32.const 0)
   )
   (call $_ZN6neodev6vmtype5Array2atEi
    (i32.add
     (get_local $4)
-    (i32.const 16)
+    (i32.const 32)
    )
    (i32.const 1)
   )
@@ -131,7 +139,7 @@
    (call $_ZN6neodev6vmtype9StackItem5asIntEv
     (i32.add
      (get_local $4)
-     (i32.const 8)
+     (i32.const 24)
     )
    )
   )
@@ -142,14 +150,17 @@
   )
   (set_local $3
    (call $_ZN6neodev6vmtype9StackItem5asIntEv
-    (get_local $4)
+    (i32.add
+     (get_local $4)
+     (i32.const 8)
+    )
    )
   )
   (i32.store offset=4
    (i32.const 0)
    (i32.add
     (get_local $4)
-    (i32.const 32)
+    (i32.const 48)
    )
   )
   (i32.add
