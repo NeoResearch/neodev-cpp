@@ -9,11 +9,6 @@ using namespace neodev::abitype;
 const char* soi{ "oi" };
 const char* stest{ "test" };
 
-namespace neodev {
-struct emit_abi{};
-#define EXPORT_ABI template<typename _emit_abi = emit_abi>
-}
-
 ByteArray
 toarray(UInt160 hash);
 
@@ -99,8 +94,6 @@ class Testing
 };
 */
 
-
-
 void
 nop(byte b);
 
@@ -108,17 +101,19 @@ template<typename rtype = int>
 rtype
 test1(int x, float k, Object b, Array c);
 
-EXPORT_ABI 
+EXPORT_ABI
 int
 test2(int x, float k, Object b, Array c);
 
 EXPORT_ABI
-void test3(int k);
+void
+test3(int k);
 
 EXPORT_ABI
-void test4();
+void
+test4();
 
-EXPORT_ABI
+ENTRYPOINT
 int
 neomain(String op, Array params)
 {
@@ -252,16 +247,20 @@ NeoMain1(String op, Array ops)
 
 } // namespace
 
-int main()
+class NeoContract1
 {
-   NeoContract::test3(10);
-   NeoContract::test4();
-   String s; Array a; NeoContract::neomain(s,a);
-   return 0;
-}
+};
 
-//int
-//main() __attribute__((alias,"__neomain"));
-//{
-//   return 1;
-//}
+class MyContract : public NeoContract1
+{
+public:
+   ENTRYPOINT
+   static int xxmain(String op, Array args)
+   {
+      return 100;
+   }
+};
+
+INVOKE_ENTRYPOINT(NeoContract::neomain(String(), Array()))
+
+// xxmain is ignored during optimization, since it's not used ;)

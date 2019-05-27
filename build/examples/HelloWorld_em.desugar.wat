@@ -1,28 +1,26 @@
 (module
   (type (;0;) (func (param i32)))
   (type (;1;) (func (param i32 f64 i32 i32) (result i32)))
-  (type (;2;) (func))
-  (type (;3;) (func (param i32 i32)))
-  (type (;4;) (func (param i32) (result i32)))
-  (type (;5;) (func (result i32)))
-  (type (;6;) (func (param i32 i32) (result i32)))
+  (type (;2;) (func (param i32 i32)))
+  (type (;3;) (func (param i32) (result i32)))
+  (type (;4;) (func (result i32)))
+  (type (;5;) (func (param i32 i32) (result i32)))
+  (type (;6;) (func))
   (import "env" "abortStackOverflow" (func $abortStackOverflow (type 0)))
   (import "env" "__ZN11NeoContract3nopEh" (func $__ZN11NeoContract3nopEh (type 0)))
   (import "env" "__ZN11NeoContract5test1IiEET_ifN6neodev6vmtype9StackItemENS3_5ArrayE" (func $__ZN11NeoContract5test1IiEET_ifN6neodev6vmtype9StackItemENS3_5ArrayE (type 1)))
   (import "env" "__ZN11NeoContract5test2IN6neodev8emit_abiEEEiifNS1_6vmtype9StackItemENS3_5ArrayE" (func $__ZN11NeoContract5test2IN6neodev8emit_abiEEEiifNS1_6vmtype9StackItemENS3_5ArrayE (type 1)))
-  (import "env" "__ZN11NeoContract5test3IN6neodev8emit_abiEEEvi" (func $__ZN11NeoContract5test3IN6neodev8emit_abiEEEvi (type 0)))
-  (import "env" "__ZN11NeoContract5test4IN6neodev8emit_abiEEEvv" (func $__ZN11NeoContract5test4IN6neodev8emit_abiEEEvv (type 2)))
-  (import "env" "__ZN6neodev6vmtype5Array2atEi" (func $__ZN6neodev6vmtype5Array2atEi (type 3)))
-  (import "env" "__ZN6neodev6vmtype9ByteArray2atEi" (func $__ZN6neodev6vmtype9ByteArray2atEi (type 4)))
-  (import "env" "__ZN6neodev6vmtype9ByteArray3setEih" (func $__ZN6neodev6vmtype9ByteArray3setEih (type 3)))
+  (import "env" "__ZN6neodev6vmtype5Array2atEi" (func $__ZN6neodev6vmtype5Array2atEi (type 2)))
+  (import "env" "__ZN6neodev6vmtype9ByteArray2atEi" (func $__ZN6neodev6vmtype9ByteArray2atEi (type 3)))
+  (import "env" "__ZN6neodev6vmtype9ByteArray3setEih" (func $__ZN6neodev6vmtype9ByteArray3setEih (type 2)))
   (import "env" "__ZN6neodev6vmtype9StackItem11asByteArrayEv" (func $__ZN6neodev6vmtype9StackItem11asByteArrayEv (type 0)))
-  (import "env" "__ZN6neodev6vmtype9StackItem5asIntEv" (func $__ZN6neodev6vmtype9StackItem5asIntEv (type 4)))
-  (import "env" "__ZN6neodev7abitype6String6lengthEv" (func $__ZN6neodev7abitype6String6lengthEv (type 4)))
+  (import "env" "__ZN6neodev6vmtype9StackItem5asIntEv" (func $__ZN6neodev6vmtype9StackItem5asIntEv (type 3)))
+  (import "env" "__ZN6neodev7abitype6String6lengthEv" (func $__ZN6neodev7abitype6String6lengthEv (type 3)))
   (import "env" "__memory_base" (global (;0;) i32))
   (import "env" "__table_base" (global (;1;) i32))
   (import "env" "memory" (memory (;0;) 256))
   (import "env" "table" (table (;0;) 0 funcref))
-  (func $_main (type 5) (result i32)
+  (func $_main (type 4) (result i32)
     (local i32 i32 i32 i32 i32 i32 i32)
     global.get 2
     local.set 6
@@ -55,9 +53,6 @@
     local.set 4
     i32.const 0
     local.set 2
-    i32.const 10
-    call $__ZN11NeoContract5test3IN6neodev8emit_abiEEEvi
-    call $__ZN11NeoContract5test4IN6neodev8emit_abiEEEvv
     local.get 0
     local.get 3
     i32.load8_s
@@ -68,13 +63,13 @@
     i32.store8
     local.get 0
     local.get 1
-    call $__ZN11NeoContract7neomainIN6neodev8emit_abiEEEiNS1_7abitype6StringENS1_6vmtype5ArrayE
+    call $__ZN11NeoContract7neomainIN6neodev15emit_entrypointEEEiNS1_7abitype6StringENS1_6vmtype5ArrayE
     drop
     local.get 6
     global.set 2
     i32.const 0
     return)
-  (func $__ZN11NeoContract7neomainIN6neodev8emit_abiEEEiNS1_7abitype6StringENS1_6vmtype5ArrayE (type 6) (param i32 i32) (result i32)
+  (func $__ZN11NeoContract7neomainIN6neodev15emit_entrypointEEEiNS1_7abitype6StringENS1_6vmtype5ArrayE (type 5) (param i32 i32) (result i32)
     (local i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32)
     global.get 2
     local.set 30
@@ -225,7 +220,7 @@
     global.set 2
     local.get 21
     return)
-  (func $__apply_relocations (type 2)
+  (func $__apply_relocations (type 6)
     (local i32)
     global.get 0
     i32.const 0
@@ -251,7 +246,7 @@
     i32.add
     i32.add
     i32.store)
-  (func $__post_instantiate (type 2)
+  (func $__post_instantiate (type 6)
     global.get 0
     i32.const 16
     i32.add

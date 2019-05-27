@@ -5,6 +5,22 @@
 
 namespace neodev {
 
+struct emit_abi
+{};
+struct emit_entrypoint
+{};
+// marks function to export ABI
+#define EXPORT_ABI template<typename _emit = emit_abi>
+// marks function as contract entrypoint
+#define ENTRYPOINT template<typename _emit = emit_entrypoint>
+// ensures compiler won't optimize-out the main method ;)
+#define INVOKE_ENTRYPOINT(f) \
+   int main()                \
+   {                         \
+      f;                     \
+      return 0;              \
+   };
+
 class SmartContract
 {
 public:
@@ -29,7 +45,6 @@ public:
    //[Syscall("Neo.Crypto.CheckMultiSig")]
    static bool VerifySignatures(vmtype::ByteArray signatures[], vmtype::ByteArray pubkeys[]);
 };
-
 }
 
 #endif

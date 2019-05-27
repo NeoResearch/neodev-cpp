@@ -135,6 +135,12 @@
     {
       "declare": "func",
       "name": "$_Z14GetArrayLengthN6neodev6vmtype9ByteArrayE",
+      "cppdemangle": {
+        "name": "GetArrayLength",
+        "params": [
+          "neodev::vmtype::ByteArray"
+        ]
+      },
       "params": [
         {
           "name": "(result",
@@ -183,6 +189,10 @@
     {
       "declare": "func",
       "name": "$_ZN11NeoContract11NothingToDoEv",
+      "cppdemangle": {
+        "name": "NeoContract::NothingToDo",
+        "params": []
+      },
       "params": [
         {
           "name": "(result",
@@ -203,6 +213,13 @@
     {
       "declare": "func",
       "name": "$_ZN11NeoContract4mainEN6neodev7abitype6StringENS0_6vmtype5ArrayE",
+      "cppdemangle": {
+        "name": "NeoContract::main",
+        "params": [
+          "neodev::abitype::String",
+          "neodev::vmtype::Array"
+        ]
+      },
       "params": [
         {
           "name": "(result",
@@ -592,6 +609,10 @@
     {
       "declare": "func",
       "name": "$main",
+      "cppdemangle": {
+        "name": "main",
+        "params": []
+      },
       "params": [
         {
           "name": "(result",
