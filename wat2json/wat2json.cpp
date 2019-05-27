@@ -265,8 +265,10 @@ public:
       string sname = scanLine.next();
       string func = scanLine.next();
       string name = scanLine.next();
-      wimport->name = name;
-      wimport->cppf = cppUtils::Exec::demangle(name);
+      Scanner cleanName(name);
+      cleanName.useSeparators(")"); 
+      wimport->name = cleanName.next(); // removing ')' from name
+      wimport->cppf = cppUtils::Exec::demangle(wimport->name);
 
       return wimport;
    }

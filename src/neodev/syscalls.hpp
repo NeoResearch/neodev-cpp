@@ -3,6 +3,10 @@
 
 namespace neodev {
 
+#define NOEMIT() template<typename _1 = _noemit>
+struct _noemit
+{};
+
 #define EMIT_SYSCALL(x) template<typename _ = _emit_syscall_##x>
 
 // example: EMIT_SYSCALL(Neo_Storage_GetContext) expands to _emit_syscall_Neo_Storage_GetContext
@@ -10,6 +14,9 @@ namespace neodev {
 #define DECLARE_SYSCALL(x)  \
    struct _emit_syscall_##x \
    {};
+
+// composite syscalls (manually for now)
+#define EMIT_SYSCALL2(x1, x2) template<typename _1 = _emit_syscall_##x1, typename _2 = _emit_syscall_##x2>
 
 // example: DECLARE_SYSCALL(Neo_Storage_GetContext)
 // =>

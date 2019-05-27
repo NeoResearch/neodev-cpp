@@ -3,6 +3,10 @@
 
 #include "../../types.hpp"
 
+// globally using vmtype and abitype every time this is used (good for users!)
+using namespace neodev::vmtype;
+using namespace neodev::abitype;
+
 namespace neodev::smartcontract::framework {
 
 struct emit_abi
@@ -14,7 +18,7 @@ struct emit_entrypoint
 // marks function as contract entrypoint
 #define ENTRYPOINT template<typename _emit = emit_entrypoint>
 // ensures compiler won't optimize-out the main method ;)
-#define INVOKE_ENTRYPOINT(f) \
+#define DECLARE_MAIN(f) \
    int main()                \
    {                         \
       f;                     \

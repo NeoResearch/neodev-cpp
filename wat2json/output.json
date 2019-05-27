@@ -3,57 +3,41 @@
   "contents": [
     {
       "declare": "type",
-      "name": "$FUNCSIG$i"
+      "name": "$FUNCSIG$v"
     },
     {
       "declare": "type",
       "name": "$FUNCSIG$vi"
     },
     {
-      "declare": "type",
-      "name": "$FUNCSIG$iif"
-    },
-    {
-      "declare": "type",
-      "name": "$FUNCSIG$ii"
-    },
-    {
-      "declare": "type",
-      "name": "$FUNCSIG$vii"
-    },
-    {
-      "declare": "type",
-      "name": "$FUNCSIG$viii"
-    },
-    {
       "declare": "import",
       "type": "env",
       "notimplemented": true,
-      "name": "$_ZN11NeoContract4nopuEj",
+      "name": "$_ZN6neodev13smartcontract9framework8services3neo7Storage14CurrentContextINS_36_emit_syscall_Neo_Storage_GetContextEEENS3_14StorageContextEv",
       "cppdemangle": {
-        "name": "NeoContract::nopu",
-        "rtype": "",
-        "params": [
-          "unsigned int"
-        ]
+        "name": "neodev::smartcontract::framework::services::neo::Storage::CurrentContext",
+        "rtype": "neodev::smartcontract::framework::services::neo::StorageContext",
+        "templates": [
+          "neodev::_emit_syscall_Neo_Storage_GetContext"
+        ],
+        "params": []
       }
     },
     {
       "declare": "import",
       "type": "env",
       "notimplemented": true,
-      "name": "$_ZN11NeoContract5test1IiEET_ifN6neodev6vmtype9StackItemENS3_5ArrayE",
+      "name": "$_ZN6neodev13smartcontract9framework8services3neo7Storage3PutINS_29_emit_syscall_Neo_Storage_PutEEEvNS3_14StorageContextENS_7abitype6StringES9_",
       "cppdemangle": {
-        "name": "NeoContract::test1",
-        "rtype": "int",
+        "name": "neodev::smartcontract::framework::services::neo::Storage::Put",
+        "rtype": "void",
         "templates": [
-          "int"
+          "neodev::_emit_syscall_Neo_Storage_Put"
         ],
         "params": [
-          "int",
-          "float",
-          "neodev::vmtype::StackItem",
-          "neodev::vmtype::Array"
+          "neodev::smartcontract::framework::services::neo::StorageContext",
+          "neodev::abitype::String",
+          "neodev::abitype::String"
         ]
       }
     },
@@ -61,168 +45,17 @@
       "declare": "import",
       "type": "env",
       "notimplemented": true,
-      "name": "$_ZN11NeoContract5test2IN6neodev8emit_abiEEEiifNS1_6vmtype9StackItemENS3_5ArrayE",
+      "name": "$_ZN6neodev7abitype3StrINS_7_noemitEEENS0_6StringEPKc",
       "cppdemangle": {
-        "name": "NeoContract::test2",
-        "rtype": "int",
+        "name": "neodev::abitype::Str",
+        "rtype": "neodev::abitype::String",
         "templates": [
-          "neodev::emit_abi"
+          "neodev::_noemit"
         ],
         "params": [
-          "int",
-          "float",
-          "neodev::vmtype::StackItem",
-          "neodev::vmtype::Array"
+          "char",
+          "const*"
         ]
-      }
-    },
-    {
-      "declare": "import",
-      "type": "env",
-      "notimplemented": true,
-      "name": "$_ZN11NeoContract6nopintEi",
-      "cppdemangle": {
-        "name": "NeoContract::nopint",
-        "rtype": "",
-        "params": [
-          "int"
-        ]
-      }
-    },
-    {
-      "declare": "import",
-      "type": "env",
-      "notimplemented": true,
-      "name": "$_ZN11NeoContract7nopbyteEh",
-      "cppdemangle": {
-        "name": "NeoContract::nopbyte",
-        "rtype": "",
-        "params": [
-          "unsigned char"
-        ]
-      }
-    },
-    {
-      "declare": "import",
-      "type": "env",
-      "notimplemented": true,
-      "name": "$_ZN11NeoContract7nopcharEc",
-      "cppdemangle": {
-        "name": "NeoContract::nopchar",
-        "rtype": "",
-        "params": [
-          "char"
-        ]
-      }
-    },
-    {
-      "declare": "import",
-      "type": "env",
-      "notimplemented": true,
-      "name": "$_ZN11NeoContract7nopuintEj",
-      "cppdemangle": {
-        "name": "NeoContract::nopuint",
-        "rtype": "",
-        "params": [
-          "unsigned int"
-        ]
-      }
-    },
-    {
-      "declare": "import",
-      "type": "env",
-      "notimplemented": true,
-      "name": "$_ZN11NeoContract8nopucharEh",
-      "cppdemangle": {
-        "name": "NeoContract::nopuchar",
-        "rtype": "",
-        "params": [
-          "unsigned char"
-        ]
-      }
-    },
-    {
-      "declare": "import",
-      "type": "env",
-      "notimplemented": true,
-      "name": "$_ZN6neodev6vmtype5Array2atEi",
-      "cppdemangle": {
-        "name": "neodev::vmtype::Array::at",
-        "rtype": "",
-        "params": [
-          "int"
-        ]
-      }
-    },
-    {
-      "declare": "import",
-      "type": "env",
-      "notimplemented": true,
-      "name": "$_ZN6neodev6vmtype9ByteArray2atEi",
-      "cppdemangle": {
-        "name": "neodev::vmtype::ByteArray::at",
-        "rtype": "",
-        "params": [
-          "int"
-        ]
-      }
-    },
-    {
-      "declare": "import",
-      "type": "env",
-      "notimplemented": true,
-      "name": "$_ZN6neodev6vmtype9ByteArray3setEih",
-      "cppdemangle": {
-        "name": "neodev::vmtype::ByteArray::set",
-        "rtype": "",
-        "params": [
-          "int",
-          "unsigned char"
-        ]
-      }
-    },
-    {
-      "declare": "import",
-      "type": "env",
-      "notimplemented": true,
-      "name": "$_ZN6neodev6vmtype9ByteArray6lengthEv",
-      "cppdemangle": {
-        "name": "neodev::vmtype::ByteArray::length",
-        "rtype": "",
-        "params": []
-      }
-    },
-    {
-      "declare": "import",
-      "type": "env",
-      "notimplemented": true,
-      "name": "$_ZN6neodev6vmtype9StackItem11asByteArrayEv",
-      "cppdemangle": {
-        "name": "neodev::vmtype::StackItem::asByteArray",
-        "rtype": "",
-        "params": []
-      }
-    },
-    {
-      "declare": "import",
-      "type": "env",
-      "notimplemented": true,
-      "name": "$_ZN6neodev6vmtype9StackItem5asIntEv",
-      "cppdemangle": {
-        "name": "neodev::vmtype::StackItem::asInt",
-        "rtype": "",
-        "params": []
-      }
-    },
-    {
-      "declare": "import",
-      "type": "env",
-      "notimplemented": true,
-      "name": "$_ZN6neodev7abitype6String6lengthEv",
-      "cppdemangle": {
-        "name": "neodev::abitype::String::length",
-        "rtype": "",
-        "params": []
       }
     },
     {
@@ -274,104 +107,34 @@
       "value": "0x20000000"
     },
     {
+      "declare": "data",
+      "field": {
+        "name": "(i32.const",
+        "params": [
+          "48"
+        ]
+      },
+      "value": "0x48656c6c6f00"
+    },
+    {
+      "declare": "data",
+      "field": {
+        "name": "(i32.const",
+        "params": [
+          "64"
+        ]
+      },
+      "value": "0x576f726c6400"
+    },
+    {
       "declare": "export",
       "sname": "memory",
       "func": "$0"
     },
     {
       "declare": "export",
-      "sname": "_Z14GetArrayLengthN6neodev6vmtype9ByteArrayE",
-      "func": "$_Z14GetArrayLengthN6neodev6vmtype9ByteArrayE"
-    },
-    {
-      "declare": "export",
-      "sname": "_ZN11NeoContract11NothingToDoEv",
-      "func": "$_ZN11NeoContract11NothingToDoEv"
-    },
-    {
-      "declare": "export",
       "sname": "main",
       "func": "$main"
-    },
-    {
-      "declare": "func",
-      "name": "$_Z14GetArrayLengthN6neodev6vmtype9ByteArrayE",
-      "cppdemangle": {
-        "name": "GetArrayLength",
-        "rtype": "",
-        "params": [
-          "neodev::vmtype::ByteArray"
-        ]
-      },
-      "params": [
-        {
-          "name": "(result",
-          "params": [
-            "i32"
-          ]
-        }
-      ],
-      "commands": [
-        {
-          "cmd": "(select",
-          "deps": [
-            {
-              "cmd": "(i32.const",
-              "params": [
-                "10"
-              ]
-            },
-            {
-              "cmd": "(i32.const",
-              "params": [
-                "30"
-              ]
-            },
-            {
-              "cmd": "(i32.gt_s",
-              "deps": [
-                {
-                  "cmd": "(call",
-                  "params": [
-                    "$_ZN6neodev6vmtype9ByteArray6lengthEv"
-                  ]
-                },
-                {
-                  "cmd": "(i32.const",
-                  "params": [
-                    "0"
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "declare": "func",
-      "name": "$_ZN11NeoContract11NothingToDoEv",
-      "cppdemangle": {
-        "name": "NeoContract::NothingToDo",
-        "rtype": "",
-        "params": []
-      },
-      "params": [
-        {
-          "name": "(result",
-          "params": [
-            "i32"
-          ]
-        }
-      ],
-      "commands": [
-        {
-          "cmd": "(i32.const",
-          "params": [
-            "0"
-          ]
-        }
-      ]
     },
     {
       "declare": "func",
@@ -391,14 +154,9 @@
       ],
       "commands": [
         {
-          "cmd": "(drop",
-          "deps": [
-            {
-              "cmd": "(call",
-              "params": [
-                "$_ZN11NeoContract7neomainIN6neodev15emit_entrypointEEEiNS1_7abitype6StringENS1_6vmtype5ArrayE"
-              ]
-            }
+          "cmd": "(call",
+          "params": [
+            "$_ZN11NeoContract4mainIN6neodev13smartcontract9framework15emit_entrypointEEEvNS1_7abitype6StringENS1_6vmtype5ArrayE"
           ]
         },
         {
@@ -411,107 +169,33 @@
     },
     {
       "declare": "func",
-      "name": "$_ZN11NeoContract7neomainIN6neodev15emit_entrypointEEEiNS1_7abitype6StringENS1_6vmtype5ArrayE",
+      "name": "$_ZN11NeoContract4mainIN6neodev13smartcontract9framework15emit_entrypointEEEvNS1_7abitype6StringENS1_6vmtype5ArrayE",
       "cppdemangle": {
-        "name": "NeoContract::neomain",
-        "rtype": "int",
+        "name": "NeoContract::main",
+        "rtype": "void",
         "templates": [
-          "neodev::emit_entrypoint"
+          "neodev::smartcontract::framework::emit_entrypoint"
         ],
         "params": [
           "neodev::abitype::String",
           "neodev::vmtype::Array"
         ]
       },
-      "params": [
-        {
-          "name": "(result",
-          "params": [
-            "i32"
-          ]
-        }
-      ],
-      "locals": [
-        {
-          "name": "(local",
-          "params": [
-            "$0",
-            "i32"
-          ]
-        },
-        {
-          "name": "(local",
-          "params": [
-            "$1",
-            "i32"
-          ]
-        },
-        {
-          "name": "(local",
-          "params": [
-            "$2",
-            "i32"
-          ]
-        },
-        {
-          "name": "(local",
-          "params": [
-            "$3",
-            "i32"
-          ]
-        },
-        {
-          "name": "(local",
-          "params": [
-            "$4",
-            "i32"
-          ]
-        }
-      ],
+      "params": [],
       "commands": [
         {
-          "cmd": "(i32.store",
+          "cmd": "(call",
           "params": [
-            "offset=4"
-          ],
+            "$_ZN6neodev13smartcontract9framework8services3neo7Storage14CurrentContextINS_36_emit_syscall_Neo_Storage_GetContextEEENS3_14StorageContextEv"
+          ]
+        },
+        {
+          "cmd": "(call",
           "deps": [
             {
               "cmd": "(i32.const",
               "params": [
-                "0"
-              ]
-            },
-            {
-              "cmd": "(tee_local",
-              "params": [
-                "$4"
-              ],
-              "deps": [
-                {
-                  "cmd": "(i32.sub",
-                  "deps": [
-                    {
-                      "cmd": "(i32.load",
-                      "params": [
-                        "offset=4"
-                      ],
-                      "deps": [
-                        {
-                          "cmd": "(i32.const",
-                          "params": [
-                            "0"
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "cmd": "(i32.const",
-                      "params": [
-                        "48"
-                      ]
-                    }
-                  ]
-                }
+                "48"
               ]
             }
           ]
@@ -522,438 +206,15 @@
             {
               "cmd": "(i32.const",
               "params": [
-                "1"
+                "64"
               ]
             }
           ]
         },
         {
           "cmd": "(call",
-          "deps": [
-            {
-              "cmd": "(i32.const",
-              "params": [
-                "1"
-              ]
-            }
-          ]
-        },
-        {
-          "cmd": "(call",
-          "deps": [
-            {
-              "cmd": "(i32.const",
-              "params": [
-                "1"
-              ]
-            }
-          ]
-        },
-        {
-          "cmd": "(call",
-          "deps": [
-            {
-              "cmd": "(i32.const",
-              "params": [
-                "1"
-              ]
-            }
-          ]
-        },
-        {
-          "cmd": "(call",
-          "deps": [
-            {
-              "cmd": "(i32.const",
-              "params": [
-                "1"
-              ]
-            }
-          ]
-        },
-        {
-          "cmd": "(call",
-          "deps": [
-            {
-              "cmd": "(i32.const",
-              "params": [
-                "1"
-              ]
-            }
-          ]
-        },
-        {
-          "cmd": "(drop",
-          "deps": [
-            {
-              "cmd": "(call",
-              "deps": [
-                {
-                  "cmd": "(i32.const",
-                  "params": [
-                    "10"
-                  ]
-                },
-                {
-                  "cmd": "(f32.const",
-                  "params": [
-                    "5.099999904632568"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "cmd": "(drop",
-          "deps": [
-            {
-              "cmd": "(call",
-              "deps": [
-                {
-                  "cmd": "(i32.const",
-                  "params": [
-                    "10"
-                  ]
-                },
-                {
-                  "cmd": "(f32.const",
-                  "params": [
-                    "5.099999904632568"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "cmd": "(set_local",
           "params": [
-            "$0"
-          ],
-          "deps": [
-            {
-              "cmd": "(call",
-              "deps": [
-                {
-                  "cmd": "(i32.add",
-                  "deps": [
-                    {
-                      "cmd": "(get_local",
-                      "params": [
-                        "$4"
-                      ]
-                    },
-                    {
-                      "cmd": "(i32.const",
-                      "params": [
-                        "40"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "cmd": "(call",
-          "deps": [
-            {
-              "cmd": "(i32.add",
-              "deps": [
-                {
-                  "cmd": "(get_local",
-                  "params": [
-                    "$4"
-                  ]
-                },
-                {
-                  "cmd": "(i32.const",
-                  "params": [
-                    "32"
-                  ]
-                }
-              ]
-            },
-            {
-              "cmd": "(i32.const",
-              "params": [
-                "0"
-              ]
-            }
-          ]
-        },
-        {
-          "cmd": "(call",
-          "deps": [
-            {
-              "cmd": "(i32.add",
-              "deps": [
-                {
-                  "cmd": "(get_local",
-                  "params": [
-                    "$4"
-                  ]
-                },
-                {
-                  "cmd": "(i32.const",
-                  "params": [
-                    "24"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "cmd": "(call",
-          "deps": [
-            {
-              "cmd": "(i32.add",
-              "deps": [
-                {
-                  "cmd": "(get_local",
-                  "params": [
-                    "$4"
-                  ]
-                },
-                {
-                  "cmd": "(i32.const",
-                  "params": [
-                    "16"
-                  ]
-                }
-              ]
-            },
-            {
-              "cmd": "(i32.const",
-              "params": [
-                "5"
-              ]
-            },
-            {
-              "cmd": "(i32.const",
-              "params": [
-                "1"
-              ]
-            }
-          ]
-        },
-        {
-          "cmd": "(call",
-          "deps": [
-            {
-              "cmd": "(i32.const",
-              "params": [
-                "0"
-              ]
-            }
-          ]
-        },
-        {
-          "cmd": "(call",
-          "deps": [
-            {
-              "cmd": "(i32.add",
-              "deps": [
-                {
-                  "cmd": "(get_local",
-                  "params": [
-                    "$4"
-                  ]
-                },
-                {
-                  "cmd": "(i32.const",
-                  "params": [
-                    "32"
-                  ]
-                }
-              ]
-            },
-            {
-              "cmd": "(i32.const",
-              "params": [
-                "1"
-              ]
-            }
-          ]
-        },
-        {
-          "cmd": "(set_local",
-          "params": [
-            "$1"
-          ],
-          "deps": [
-            {
-              "cmd": "(call",
-              "deps": [
-                {
-                  "cmd": "(i32.add",
-                  "deps": [
-                    {
-                      "cmd": "(get_local",
-                      "params": [
-                        "$4"
-                      ]
-                    },
-                    {
-                      "cmd": "(i32.const",
-                      "params": [
-                        "24"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "cmd": "(set_local",
-          "params": [
-            "$2"
-          ],
-          "deps": [
-            {
-              "cmd": "(call",
-              "deps": [
-                {
-                  "cmd": "(i32.const",
-                  "params": [
-                    "5"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "cmd": "(set_local",
-          "params": [
-            "$3"
-          ],
-          "deps": [
-            {
-              "cmd": "(call",
-              "deps": [
-                {
-                  "cmd": "(i32.add",
-                  "deps": [
-                    {
-                      "cmd": "(get_local",
-                      "params": [
-                        "$4"
-                      ]
-                    },
-                    {
-                      "cmd": "(i32.const",
-                      "params": [
-                        "8"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "cmd": "(i32.store",
-          "params": [
-            "offset=4"
-          ],
-          "deps": [
-            {
-              "cmd": "(i32.const",
-              "params": [
-                "0"
-              ]
-            },
-            {
-              "cmd": "(i32.add",
-              "deps": [
-                {
-                  "cmd": "(get_local",
-                  "params": [
-                    "$4"
-                  ]
-                },
-                {
-                  "cmd": "(i32.const",
-                  "params": [
-                    "48"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "cmd": "(i32.add",
-          "deps": [
-            {
-              "cmd": "(get_local",
-              "params": [
-                "$3"
-              ]
-            },
-            {
-              "cmd": "(i32.add",
-              "deps": [
-                {
-                  "cmd": "(get_local",
-                  "params": [
-                    "$2"
-                  ]
-                },
-                {
-                  "cmd": "(i32.add",
-                  "deps": [
-                    {
-                      "cmd": "(get_local",
-                      "params": [
-                        "$1"
-                      ]
-                    },
-                    {
-                      "cmd": "(select",
-                      "deps": [
-                        {
-                          "cmd": "(i32.const",
-                          "params": [
-                            "11"
-                          ]
-                        },
-                        {
-                          "cmd": "(i32.const",
-                          "params": [
-                            "10"
-                          ]
-                        },
-                        {
-                          "cmd": "(i32.gt_s",
-                          "deps": [
-                            {
-                              "cmd": "(get_local",
-                              "params": [
-                                "$0"
-                              ]
-                            },
-                            {
-                              "cmd": "(i32.const",
-                              "params": [
-                                "0"
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
+            "$_ZN6neodev13smartcontract9framework8services3neo7Storage3PutINS_29_emit_syscall_Neo_Storage_PutEEEvNS3_14StorageContextENS_7abitype6StringES9_"
           ]
         }
       ]

@@ -2,6 +2,7 @@
 #define NEODEV_ABITYPE_STRUCT_HPP
 
 #include "../vmtype/StackItem.hpp"
+#include "../syscalls.hpp"
 
 namespace neodev {
 
@@ -21,6 +22,8 @@ namespace abitype {
  * @apiSuccess {String} lastname  Lastname of the User.
  */
 
+
+
 struct String : vmtype::Object
 {
    [[nodiscard]]
@@ -39,6 +42,12 @@ struct String : vmtype::Object
    //byte operator[](int index);
    //https://en.wikipedia.org/wiki/Operators_in_C_and_C%2B%2B
 };
+
+// convert const char (string) on neo abi String (or ByteArray)
+NOEMIT()
+String Str(const char op[]);
+//String operator"" _S(const char op[], unsigned int size);
+// TODO: think about operator"" ... working already for some compilers.
 
 } // namespace abitype
 
