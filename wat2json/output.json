@@ -30,8 +30,7 @@
         "name": "NeoContract::nopu",
         "rtype": "",
         "params": [
-          "unsigned",
-          "int"
+          "unsigned int"
         ]
       }
     },
@@ -95,8 +94,7 @@
         "name": "NeoContract::nopbyte",
         "rtype": "",
         "params": [
-          "unsigned",
-          "char"
+          "unsigned char"
         ]
       }
     },
@@ -122,8 +120,7 @@
         "name": "NeoContract::nopuint",
         "rtype": "",
         "params": [
-          "unsigned",
-          "int"
+          "unsigned int"
         ]
       }
     },
@@ -136,8 +133,7 @@
         "name": "NeoContract::nopuchar",
         "rtype": "",
         "params": [
-          "unsigned",
-          "char"
+          "unsigned char"
         ]
       }
     },
@@ -177,8 +173,7 @@
         "rtype": "",
         "params": [
           "int",
-          "unsigned",
-          "char"
+          "unsigned char"
         ]
       }
     },

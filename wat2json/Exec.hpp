@@ -85,8 +85,7 @@ public:
       // step 1: look for templates and return value
       bool hasReturn = false;
       string returnValue = ""; // default empty string (unknown return value)
-      if (ret.find("<") != -1)
-      {
+      if (ret.find("<") != -1) {
          hasReturn = true; // name mangling for templates include return value
          cout << "FOUND RETURN FOR: " << ret << endl;
       }
@@ -96,8 +95,13 @@ public:
          returnValue = scanner.next();
       cppf.rtype = returnValue;
       cppf.name = scanner.next();
-      while (scanner.hasNext())
-         cppf.params.push_back(scanner.next());
+      while (scanner.hasNext()) {
+         stringstream ss;
+         ss << scanner.next();
+         if ((ss.str() == "unsigned")) // merge modifiers
+            ss << " " << scanner.next();
+         cppf.params.push_back(ss.str());
+      }
 
       // step 2: update template parameters
       Scanner scanName(cppf.name);
