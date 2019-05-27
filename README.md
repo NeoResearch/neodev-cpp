@@ -27,8 +27,9 @@ To compile, you will need emscripten `emcc`, since the process uses using WebAss
 A good combination is manually install clang + llvm (**WARNING: this will take 30 Gigabytes and several hours**)
 ```
 mkdir make-llvm
-mkdir clang (and clone)
-mkdir llvm (and clone)
+cd make-llvm
+git clone git@github.com:llvm-mirror/clang.git
+git clone git@github.com:llvm-mirror/llvm.git
 (cd clang && git checkout e4de58127fa1d8d22ee8043cef9b4d8a807b6cde)
 (cd llvm && git checkout 08b86793476e08fc0937e70058e2a94808c988e7)
 (mkdir build && cd build && cmake -DLLVM_ENABLE_PROJECTS=clang -G "Unix Makefiles" -DLLVM_TARGETS_TO_BUILD= -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=WebAssembly ../llvm)
@@ -36,9 +37,10 @@ mkdir llvm (and clone)
 
 You will also need specific version of binaryen and wabt
 ```
-mkdir binaryen (and clone)
+git clone git@github.com:WebAssembly/binaryen.git
 (cd binaryen && git checkout b16768ec9b72d075ae2e36cc85aa216fdf4fd354)
-mkdir wabt (and clone)
+
+git clone https://github.com/WebAssembly/wabt
 (cd wabt && git checkout 8e1f6031e9889ba770c7be4a9b084da5f14456a0)
 
 each of these require specific builds as well.. all cmake style
