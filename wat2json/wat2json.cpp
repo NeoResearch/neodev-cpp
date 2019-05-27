@@ -28,6 +28,9 @@ public:
    // convert to S-expression
    virtual string toSExpr() = 0;
 
+   // convert to JSON
+   virtual string toJSON() = 0;
+
    static WasmComponent* parseComponent(string line, Scanner& scanner);
 };
 
@@ -52,6 +55,17 @@ public:
       for (unsigned i = 0; i < options.size(); i++)
          ss << " " << options[i];
       ss << ")";
+      return ss.str();
+   }
+
+   // convert to JSON
+   virtual string toJSON()
+   {
+      stringstream ss;
+      ss << "{\"name\":\"" << fieldName << "\", \"params\":[";
+      for (unsigned i = 0; i < options.size(); i++)
+         ss << (i == 0 ? "" : ",") << "\"" << options[i] << "\"";
+      ss << "]}";
       return ss.str();
    }
 
@@ -92,6 +106,22 @@ public:
       return ss.str();
    }
 
+   // convert to JSON
+   virtual string toJSON()
+   {
+      stringstream ss;
+      ss << "{\"cmd\":\"" << cmdName << "\",\"parameters\":[";
+      for (unsigned i = 0; i < options.size(); i++)
+         ss << (i == 0 ? "" : ",") << "\"" << options[i] << "\"";
+      ss << "]";
+      ss << ",\"commands\":[";
+      for (unsigned i = 0; i < commands.size(); i++)
+         ss << (i == 0 ? "" : ",") << commands[i]->toJSON() << endl;
+      ss << "]}";
+
+      return ss.str();
+   }
+
    static WasmCommand* parseCommand(Scanner& scanLine, Scanner& scanText);
 };
 
@@ -128,13 +158,24 @@ public:
    }
 
    // convert to s-expression
-   virtual string toSExpr()
+   virtual string toSExpr() override
    {
       stringstream ss;
       ss << "(module" << endl;
       for (unsigned i = 0; i < innerParts.size(); i++)
          ss << innerParts[i]->toSExpr() << endl;
       ss << ")";
+      return ss.str();
+   }
+
+   // convert to JSON
+   virtual string toJSON() override
+   {
+      stringstream ss;
+      ss << "{\"declare\": \"module\", \"contents\":[" << endl;
+      for (unsigned i = 0; i < innerParts.size(); i++)
+         ss << (i == 0 ? "" : ",") << innerParts[i]->toJSON() << endl;
+      ss << "]}";
       return ss.str();
    }
 };
@@ -166,7 +207,7 @@ public:
    }
 
    // convert to s-expression
-   virtual string toSExpr()
+   virtual string toSExpr() override
    {
       stringstream ss;
       ss << "(type"
@@ -175,6 +216,16 @@ public:
       //for (unsigned i = 0; i < innerParts.size(); i++)
       //   ss << innerParts[i]->toSExpr() << endl;
       ss << ")";
+      return ss.str();
+   }
+
+   // convert to JSON
+   virtual string toJSON() override
+   {
+      stringstream ss;
+      ss << "{\"declare\": \"type\",";
+      ss << "\"name\":\"" << name << "\"";
+      ss << "}";
       return ss.str();
    }
 };
@@ -209,13 +260,22 @@ public:
    }
 
    // convert to s-expression
-   virtual string toSExpr()
+   virtual string toSExpr() override
    {
       stringstream ss;
       ss << "(import \"env\" ... " << name;
       //for (unsigned i = 0; i < innerParts.size(); i++)
       //   ss << innerParts[i]->toSExpr() << endl;
       ss << ")";
+      return ss.str();
+   }
+
+   // convert to JSON
+   virtual string toJSON() override
+   {
+      stringstream ss;
+      ss << "{\"declare\":\"import\", \"type\": \"env\" , \"notimplemented\": true, \"name\":\"" << name << "\"";
+      ss << "}";
       return ss.str();
    }
 };
@@ -245,13 +305,22 @@ public:
    }
 
    // convert to s-expression
-   virtual string toSExpr()
+   virtual string toSExpr() override
    {
       stringstream ss;
       ss << "(table ... ";
       //for (unsigned i = 0; i < innerParts.size(); i++)
       //   ss << innerParts[i]->toSExpr() << endl;
       ss << ")";
+      return ss.str();
+   }
+
+   // convert to JSON
+   virtual string toJSON() override
+   {
+      stringstream ss;
+      ss << "{\"declare\": \"table\", \"notimplemented\": true ";
+      ss << "}";
       return ss.str();
    }
 };
@@ -281,13 +350,22 @@ public:
    }
 
    // convert to s-expression
-   virtual string toSExpr()
+   virtual string toSExpr() override
    {
       stringstream ss;
       ss << "(memory ... ";
       //for (unsigned i = 0; i < innerParts.size(); i++)
       //   ss << innerParts[i]->toSExpr() << endl;
       ss << ")";
+      return ss.str();
+   }
+
+   // convert to JSON
+   virtual string toJSON() override
+   {
+      stringstream ss;
+      ss << "{\"declare\": \"memory\", \"notimplemented\": true";
+      ss << "}";
       return ss.str();
    }
 };
@@ -325,10 +403,18 @@ public:
    }
 
    // convert to s-expression
-   virtual string toSExpr()
+   virtual string toSExpr() override
    {
       stringstream ss;
       ss << "(data " << field->toSExpr() << " " << value << ")";
+      return ss.str();
+   }
+
+   // convert to JSON
+   virtual string toJSON() override
+   {
+      stringstream ss;
+      ss << "{\"declare\": \"data\", \"field\":" << field->toJSON() << ",\"value\":\"" << value << "\"}";
       return ss.str();
    }
 };
@@ -364,10 +450,18 @@ public:
    }
 
    // convert to s-expression
-   virtual string toSExpr()
+   virtual string toSExpr() override
    {
       stringstream ss;
       ss << "(export " << sname << " (func " << name << "))";
+      return ss.str();
+   }
+
+   // convert to JSON
+   virtual string toJSON() override
+   {
+      stringstream ss;
+      ss << "{\"declare\":\"export\", \"sname\": " << sname << ", \"func\": \"" << name << "\"}";
       return ss.str();
    }
 };
@@ -441,7 +535,7 @@ public:
    }
 
    // convert to s-expression
-   virtual string toSExpr()
+   virtual string toSExpr() override
    {
       stringstream ss;
       ss << "(func " << name;
@@ -453,6 +547,25 @@ public:
       for (unsigned i = 0; i < commands.size(); i++)
          ss << commands[i]->toSExpr() << endl;
       ss << ")";
+      return ss.str();
+   }
+
+   // convert to JSON
+   virtual string toJSON() override
+   {
+      stringstream ss;
+      ss << "{\"declare\":\"func\", \"name\":\"" << name << "\", \"parameters\":[";
+      for (unsigned i = 0; i < parameters.size(); i++)
+         ss << (i == 0 ? "" : ",") << parameters[i]->toJSON();
+      ss << "]," << endl;
+      ss << "\"locals\":[";
+      for (unsigned i = 0; i < locals.size(); i++)
+         ss << (i == 0 ? "" : ",") << locals[i]->toJSON();
+      ss << "]," << endl;
+      ss << "\"commands\":[";
+      for (unsigned i = 0; i < commands.size(); i++)
+         ss << (i == 0 ? "" : ",") << commands[i]->toJSON() << endl;
+      ss << "]}";
       return ss.str();
    }
 };
@@ -610,7 +723,7 @@ parseWat(string input, string output)
    cout << endl;
 
    cout << "will print json:" << endl;
-   cout << module->toSExpr() << endl;
+   cout << module->toJSON() << endl;
 
    cout << endl;
 

@@ -1,0 +1,673 @@
+{
+  "declare": "module",
+  "contents": [
+    {
+      "declare": "type",
+      "name": "$FUNCSIG$i"
+    },
+    {
+      "declare": "type",
+      "name": "$FUNCSIG$ii"
+    },
+    {
+      "declare": "type",
+      "name": "$FUNCSIG$vii"
+    },
+    {
+      "declare": "type",
+      "name": "$FUNCSIG$vi"
+    },
+    {
+      "declare": "import",
+      "type": "env",
+      "notimplemented": true,
+      "name": "$_ZN6neodev6vmtype5Array2atEi"
+    },
+    {
+      "declare": "import",
+      "type": "env",
+      "notimplemented": true,
+      "name": "$_ZN6neodev6vmtype9ByteArray2atEi"
+    },
+    {
+      "declare": "import",
+      "type": "env",
+      "notimplemented": true,
+      "name": "$_ZN6neodev6vmtype9ByteArray3setEih"
+    },
+    {
+      "declare": "import",
+      "type": "env",
+      "notimplemented": true,
+      "name": "$_ZN6neodev6vmtype9ByteArray6lengthEv"
+    },
+    {
+      "declare": "import",
+      "type": "env",
+      "notimplemented": true,
+      "name": "$_ZN6neodev6vmtype9StackItem11asByteArrayEv"
+    },
+    {
+      "declare": "import",
+      "type": "env",
+      "notimplemented": true,
+      "name": "$_ZN6neodev6vmtype9StackItem5asIntEv"
+    },
+    {
+      "declare": "import",
+      "type": "env",
+      "notimplemented": true,
+      "name": "$_ZN6neodev7abitype6String6lengthEv"
+    },
+    {
+      "declare": "table",
+      "notimplemented": true
+    },
+    {
+      "declare": "memory",
+      "notimplemented": true
+    },
+    {
+      "declare": "data",
+      "field": {
+        "name": "(i32.const",
+        "params": [
+          "16"
+        ]
+      },
+      "value": ""
+    },
+    {
+      "declare": "data",
+      "field": {
+        "name": "(i32.const",
+        "params": [
+          "20"
+        ]
+      },
+      "value": ""
+    },
+    {
+      "declare": "data",
+      "field": {
+        "name": "(i32.const",
+        "params": [
+          "32"
+        ]
+      },
+      "value": ""
+    },
+    {
+      "declare": "data",
+      "field": {
+        "name": "(i32.const",
+        "params": [
+          "40"
+        ]
+      },
+      "value": ""
+    },
+    {
+      "declare": "export",
+      "sname": "memory",
+      "func": "$0"
+    },
+    {
+      "declare": "export",
+      "sname": "_Z14GetArrayLengthN6neodev6vmtype9ByteArrayE",
+      "func": "$_Z14GetArrayLengthN6neodev6vmtype9ByteArrayE"
+    },
+    {
+      "declare": "export",
+      "sname": "_ZN11NeoContract11NothingToDoEv",
+      "func": "$_ZN11NeoContract11NothingToDoEv"
+    },
+    {
+      "declare": "export",
+      "sname": "_ZN11NeoContract4mainEN6neodev7abitype6StringENS0_6vmtype5ArrayE",
+      "func": "$_ZN11NeoContract4mainEN6neodev7abitype6StringENS0_6vmtype5ArrayE"
+    },
+    {
+      "declare": "export",
+      "sname": "main",
+      "func": "$main"
+    },
+    {
+      "declare": "func",
+      "name": "$_Z14GetArrayLengthN6neodev6vmtype9ByteArrayE",
+      "parameters": [
+        {
+          "name": "(result",
+          "params": [
+            "i32"
+          ]
+        }
+      ],
+      "locals": [],
+      "commands": [
+        {
+          "cmd": "(select",
+          "parameters": [],
+          "commands": [
+            {
+              "cmd": "(i32.const",
+              "parameters": [
+                "10"
+              ],
+              "commands": []
+            },
+            {
+              "cmd": "(i32.const",
+              "parameters": [
+                "30"
+              ],
+              "commands": []
+            },
+            {
+              "cmd": "(i32.gt_s",
+              "parameters": [],
+              "commands": [
+                {
+                  "cmd": "(call",
+                  "parameters": [
+                    "$_ZN6neodev6vmtype9ByteArray6lengthEv"
+                  ],
+                  "commands": []
+                },
+                {
+                  "cmd": "(i32.const",
+                  "parameters": [
+                    "0"
+                  ],
+                  "commands": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "declare": "func",
+      "name": "$_ZN11NeoContract11NothingToDoEv",
+      "parameters": [
+        {
+          "name": "(result",
+          "params": [
+            "i32"
+          ]
+        }
+      ],
+      "locals": [],
+      "commands": [
+        {
+          "cmd": "(i32.const",
+          "parameters": [
+            "0"
+          ],
+          "commands": []
+        }
+      ]
+    },
+    {
+      "declare": "func",
+      "name": "$_ZN11NeoContract4mainEN6neodev7abitype6StringENS0_6vmtype5ArrayE",
+      "parameters": [
+        {
+          "name": "(result",
+          "params": [
+            "i32"
+          ]
+        }
+      ],
+      "locals": [
+        {
+          "name": "(local",
+          "params": [
+            "$0",
+            "i32"
+          ]
+        },
+        {
+          "name": "(local",
+          "params": [
+            "$1",
+            "i32"
+          ]
+        },
+        {
+          "name": "(local",
+          "params": [
+            "$2",
+            "i32"
+          ]
+        },
+        {
+          "name": "(local",
+          "params": [
+            "$3",
+            "i32"
+          ]
+        },
+        {
+          "name": "(local",
+          "params": [
+            "$4",
+            "i32"
+          ]
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "(i32.store",
+          "parameters": [
+            "offset=4"
+          ],
+          "commands": [
+            {
+              "cmd": "(i32.const",
+              "parameters": [
+                "0"
+              ],
+              "commands": []
+            },
+            {
+              "cmd": "(tee_local",
+              "parameters": [
+                "$4"
+              ],
+              "commands": [
+                {
+                  "cmd": "(i32.sub",
+                  "parameters": [],
+                  "commands": [
+                    {
+                      "cmd": "(i32.load",
+                      "parameters": [
+                        "offset=4"
+                      ],
+                      "commands": [
+                        {
+                          "cmd": "(i32.const",
+                          "parameters": [
+                            "0"
+                          ],
+                          "commands": []
+                        }
+                      ]
+                    },
+                    {
+                      "cmd": "(i32.const",
+                      "parameters": [
+                        "32"
+                      ],
+                      "commands": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cmd": "(set_local",
+          "parameters": [
+            "$0"
+          ],
+          "commands": [
+            {
+              "cmd": "(call",
+              "parameters": [],
+              "commands": [
+                {
+                  "cmd": "(i32.add",
+                  "parameters": [],
+                  "commands": [
+                    {
+                      "cmd": "(get_local",
+                      "parameters": [
+                        "$4"
+                      ],
+                      "commands": []
+                    },
+                    {
+                      "cmd": "(i32.const",
+                      "parameters": [
+                        "24"
+                      ],
+                      "commands": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cmd": "(call",
+          "parameters": [],
+          "commands": [
+            {
+              "cmd": "(i32.add",
+              "parameters": [],
+              "commands": [
+                {
+                  "cmd": "(get_local",
+                  "parameters": [
+                    "$4"
+                  ],
+                  "commands": []
+                },
+                {
+                  "cmd": "(i32.const",
+                  "parameters": [
+                    "16"
+                  ],
+                  "commands": []
+                }
+              ]
+            },
+            {
+              "cmd": "(i32.const",
+              "parameters": [
+                "0"
+              ],
+              "commands": []
+            }
+          ]
+        },
+        {
+          "cmd": "(call",
+          "parameters": [],
+          "commands": [
+            {
+              "cmd": "(i32.add",
+              "parameters": [],
+              "commands": [
+                {
+                  "cmd": "(get_local",
+                  "parameters": [
+                    "$4"
+                  ],
+                  "commands": []
+                },
+                {
+                  "cmd": "(i32.const",
+                  "parameters": [
+                    "8"
+                  ],
+                  "commands": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cmd": "(call",
+          "parameters": [],
+          "commands": [
+            {
+              "cmd": "(i32.const",
+              "parameters": [
+                "5"
+              ],
+              "commands": []
+            },
+            {
+              "cmd": "(i32.const",
+              "parameters": [
+                "1"
+              ],
+              "commands": []
+            }
+          ]
+        },
+        {
+          "cmd": "(call",
+          "parameters": [],
+          "commands": [
+            {
+              "cmd": "(i32.add",
+              "parameters": [],
+              "commands": [
+                {
+                  "cmd": "(get_local",
+                  "parameters": [
+                    "$4"
+                  ],
+                  "commands": []
+                },
+                {
+                  "cmd": "(i32.const",
+                  "parameters": [
+                    "16"
+                  ],
+                  "commands": []
+                }
+              ]
+            },
+            {
+              "cmd": "(i32.const",
+              "parameters": [
+                "1"
+              ],
+              "commands": []
+            }
+          ]
+        },
+        {
+          "cmd": "(set_local",
+          "parameters": [
+            "$1"
+          ],
+          "commands": [
+            {
+              "cmd": "(call",
+              "parameters": [],
+              "commands": [
+                {
+                  "cmd": "(i32.add",
+                  "parameters": [],
+                  "commands": [
+                    {
+                      "cmd": "(get_local",
+                      "parameters": [
+                        "$4"
+                      ],
+                      "commands": []
+                    },
+                    {
+                      "cmd": "(i32.const",
+                      "parameters": [
+                        "8"
+                      ],
+                      "commands": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cmd": "(set_local",
+          "parameters": [
+            "$2"
+          ],
+          "commands": [
+            {
+              "cmd": "(call",
+              "parameters": [],
+              "commands": [
+                {
+                  "cmd": "(i32.const",
+                  "parameters": [
+                    "5"
+                  ],
+                  "commands": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cmd": "(set_local",
+          "parameters": [
+            "$3"
+          ],
+          "commands": [
+            {
+              "cmd": "(call",
+              "parameters": [],
+              "commands": [
+                {
+                  "cmd": "(get_local",
+                  "parameters": [
+                    "$4"
+                  ],
+                  "commands": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cmd": "(i32.store",
+          "parameters": [
+            "offset=4"
+          ],
+          "commands": [
+            {
+              "cmd": "(i32.const",
+              "parameters": [
+                "0"
+              ],
+              "commands": []
+            },
+            {
+              "cmd": "(i32.add",
+              "parameters": [],
+              "commands": [
+                {
+                  "cmd": "(get_local",
+                  "parameters": [
+                    "$4"
+                  ],
+                  "commands": []
+                },
+                {
+                  "cmd": "(i32.const",
+                  "parameters": [
+                    "32"
+                  ],
+                  "commands": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cmd": "(i32.add",
+          "parameters": [],
+          "commands": [
+            {
+              "cmd": "(get_local",
+              "parameters": [
+                "$3"
+              ],
+              "commands": []
+            },
+            {
+              "cmd": "(i32.add",
+              "parameters": [],
+              "commands": [
+                {
+                  "cmd": "(get_local",
+                  "parameters": [
+                    "$2"
+                  ],
+                  "commands": []
+                },
+                {
+                  "cmd": "(i32.add",
+                  "parameters": [],
+                  "commands": [
+                    {
+                      "cmd": "(get_local",
+                      "parameters": [
+                        "$1"
+                      ],
+                      "commands": []
+                    },
+                    {
+                      "cmd": "(select",
+                      "parameters": [],
+                      "commands": [
+                        {
+                          "cmd": "(i32.const",
+                          "parameters": [
+                            "11"
+                          ],
+                          "commands": []
+                        },
+                        {
+                          "cmd": "(i32.const",
+                          "parameters": [
+                            "10"
+                          ],
+                          "commands": []
+                        },
+                        {
+                          "cmd": "(i32.gt_s",
+                          "parameters": [],
+                          "commands": [
+                            {
+                              "cmd": "(get_local",
+                              "parameters": [
+                                "$0"
+                              ],
+                              "commands": []
+                            },
+                            {
+                              "cmd": "(i32.const",
+                              "parameters": [
+                                "0"
+                              ],
+                              "commands": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "declare": "func",
+      "name": "$main",
+      "parameters": [
+        {
+          "name": "(result",
+          "params": [
+            "i32"
+          ]
+        }
+      ],
+      "locals": [],
+      "commands": [
+        {
+          "cmd": "(i32.const",
+          "parameters": [
+            "1"
+          ],
+          "commands": []
+        }
+      ]
+    }
+  ]
+}
