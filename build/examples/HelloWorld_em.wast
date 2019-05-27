@@ -9,9 +9,14 @@
  (import "env" "__memory_base" (global $__memory_base i32))
  (import "env" "__table_base" (global $__table_base i32))
  (import "env" "abortStackOverflow" (func $abortStackOverflow (param i32)))
- (import "env" "__ZN11NeoContract3nopEh" (func $__ZN11NeoContract3nopEh (param i32)))
+ (import "env" "__ZN11NeoContract4nopuEj" (func $__ZN11NeoContract4nopuEj (param i32)))
  (import "env" "__ZN11NeoContract5test1IiEET_ifN6neodev6vmtype9StackItemENS3_5ArrayE" (func $__ZN11NeoContract5test1IiEET_ifN6neodev6vmtype9StackItemENS3_5ArrayE (param i32 f64 i32 i32) (result i32)))
  (import "env" "__ZN11NeoContract5test2IN6neodev8emit_abiEEEiifNS1_6vmtype9StackItemENS3_5ArrayE" (func $__ZN11NeoContract5test2IN6neodev8emit_abiEEEiifNS1_6vmtype9StackItemENS3_5ArrayE (param i32 f64 i32 i32) (result i32)))
+ (import "env" "__ZN11NeoContract6nopintEi" (func $__ZN11NeoContract6nopintEi (param i32)))
+ (import "env" "__ZN11NeoContract7nopbyteEh" (func $__ZN11NeoContract7nopbyteEh (param i32)))
+ (import "env" "__ZN11NeoContract7nopcharEc" (func $__ZN11NeoContract7nopcharEc (param i32)))
+ (import "env" "__ZN11NeoContract7nopuintEj" (func $__ZN11NeoContract7nopuintEj (param i32)))
+ (import "env" "__ZN11NeoContract8nopucharEh" (func $__ZN11NeoContract8nopucharEh (param i32)))
  (import "env" "__ZN6neodev6vmtype5Array2atEi" (func $__ZN6neodev6vmtype5Array2atEi (param i32 i32)))
  (import "env" "__ZN6neodev6vmtype9ByteArray2atEi" (func $__ZN6neodev6vmtype9ByteArray2atEi (param i32) (result i32)))
  (import "env" "__ZN6neodev6vmtype9ByteArray3setEih" (func $__ZN6neodev6vmtype9ByteArray3setEih (param i32 i32)))
@@ -27,7 +32,7 @@
  (export "_main" (func $_main))
  (export "_soi" (global $_soi))
  (export "_stest" (global $_stest))
- (func $_main (; 10 ;) (result i32)
+ (func $_main (; 15 ;) (result i32)
   (local $$$byval_copy i32)
   (local $$$byval_copy1 i32)
   (local $$0 i32)
@@ -105,7 +110,7 @@
    (i32.const 0)
   )
  )
- (func $__ZN11NeoContract7neomainIN6neodev15emit_entrypointEEEiNS1_7abitype6StringENS1_6vmtype5ArrayE (; 11 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $__ZN11NeoContract7neomainIN6neodev15emit_entrypointEEEiNS1_7abitype6StringENS1_6vmtype5ArrayE (; 16 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$$byval_copy i32)
   (local $$$byval_copy1 i32)
   (local $$$byval_copy2 i32)
@@ -213,7 +218,22 @@
     (i32.const 12)
    )
   )
-  (call $__ZN11NeoContract3nopEh
+  (call $__ZN11NeoContract7nopbyteEh
+   (i32.const 1)
+  )
+  (call $__ZN11NeoContract7nopuintEj
+   (i32.const 1)
+  )
+  (call $__ZN11NeoContract6nopintEi
+   (i32.const 1)
+  )
+  (call $__ZN11NeoContract7nopcharEc
+   (i32.const 1)
+  )
+  (call $__ZN11NeoContract8nopucharEh
+   (i32.const 1)
+  )
+  (call $__ZN11NeoContract4nopuEj
    (i32.const 1)
   )
   (i32.store8
@@ -357,7 +377,7 @@
    (local.get $$24)
   )
  )
- (func $__apply_relocations (; 12 ;)
+ (func $__apply_relocations (; 17 ;)
   (local $temp i32)
   (i32.store
    (i32.add
@@ -396,7 +416,7 @@
    )
   )
  )
- (func $__post_instantiate (; 13 ;)
+ (func $__post_instantiate (; 18 ;)
   (global.set $STACKTOP
    (i32.add
     (global.get $__memory_base)

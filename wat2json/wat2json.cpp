@@ -244,6 +244,7 @@ class WasmImport : public WasmComponent
 {
 public:
    string name;
+   cppUtils::CppFunction cppf;
 
    WasmImport()
      : WasmComponent("import")
@@ -265,6 +266,7 @@ public:
       string func = scanLine.next();
       string name = scanLine.next();
       wimport->name = name;
+      wimport->cppf = cppUtils::Exec::demangle(name);
 
       return wimport;
    }
@@ -285,6 +287,10 @@ public:
    {
       stringstream ss;
       ss << "{\"declare\":\"import\", \"type\": \"env\" , \"notimplemented\": true, \"name\":\"" << name << "\"";
+      bool cppdemangle = true;
+      if (cppdemangle) {
+         ss << "," << cppUtils::CppFunction::toJSONField(cppf);
+      }
       ss << "}";
       return ss.str();
    }
@@ -599,21 +605,7 @@ public:
       ss << "{\"declare\":\"func\", \"name\":\"" << name << "\"";
       bool cppdemangle = true;
       if (cppdemangle) {
-         ss << ",\"cppdemangle\":{\"name\":\"" << cppf.name << "\"";
-         //if(cppf.rtype!="") // if return type is known
-         ss << ",\"rtype\":\"" << cppf.rtype << "\"";
-         if (cppf.templates.size() > 0) // if has templates
-         {
-            ss << ",\"templates\":[";
-            for (unsigned i = 0; i < cppf.templates.size(); i++)
-               ss << (i == 0 ? "" : ",") << "\"" << cppf.templates[i] << "\"";
-            ss << "]";
-         }
-         ss << ",\"params\":[";
-         for (unsigned i = 0; i < cppf.params.size(); i++)
-            ss << (i == 0 ? "" : ",") << "\"" << cppf.params[i] << "\"";
-         ss << "]";
-         ss << "}";
+         ss << "," << cppUtils::CppFunction::toJSONField(cppf);
       }
       ss << ",\"params\":[";
       for (unsigned i = 0; i < parameters.size(); i++)

@@ -95,7 +95,22 @@ class Testing
 */
 
 void
-nop(byte b);
+nopbyte(byte b);
+
+void
+nopuint(unsigned int b);
+
+void
+nopint(int b);
+
+void
+nopchar(char b);
+
+void
+nopuchar(unsigned char b);
+
+void
+nopu(unsigned b);
 
 template<typename rtype = int>
 rtype
@@ -117,7 +132,13 @@ ENTRYPOINT
 int
 neomain(String op, Array params)
 {
-   nop(1);
+   nopbyte(1);
+   nopuint(1);
+   nopint(1);
+   nopchar(1);
+   nopuchar(1);
+   nopu(1);
+
    int y1 = test1(10, 5.1f, op, params);
    int y2 = test2(10, 5.1f, op, params);
 

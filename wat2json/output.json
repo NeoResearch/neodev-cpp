@@ -25,61 +25,206 @@
       "declare": "import",
       "type": "env",
       "notimplemented": true,
-      "name": "$_ZN11NeoContract3nopEh"
+      "name": "$_ZN11NeoContract4nopuEj",
+      "cppdemangle": {
+        "name": "NeoContract::nopu",
+        "rtype": "",
+        "params": [
+          "unsigned",
+          "int"
+        ]
+      }
     },
     {
       "declare": "import",
       "type": "env",
       "notimplemented": true,
-      "name": "$_ZN11NeoContract5test1IiEET_ifN6neodev6vmtype9StackItemENS3_5ArrayE"
+      "name": "$_ZN11NeoContract5test1IiEET_ifN6neodev6vmtype9StackItemENS3_5ArrayE",
+      "cppdemangle": {
+        "name": "NeoContract::test1",
+        "rtype": "int",
+        "templates": [
+          "int"
+        ],
+        "params": [
+          "int",
+          "float",
+          "neodev::vmtype::StackItem",
+          "neodev::vmtype::Array"
+        ]
+      }
     },
     {
       "declare": "import",
       "type": "env",
       "notimplemented": true,
-      "name": "$_ZN11NeoContract5test2IN6neodev8emit_abiEEEiifNS1_6vmtype9StackItemENS3_5ArrayE"
+      "name": "$_ZN11NeoContract5test2IN6neodev8emit_abiEEEiifNS1_6vmtype9StackItemENS3_5ArrayE",
+      "cppdemangle": {
+        "name": "NeoContract::test2",
+        "rtype": "int",
+        "templates": [
+          "neodev::emit_abi"
+        ],
+        "params": [
+          "int",
+          "float",
+          "neodev::vmtype::StackItem",
+          "neodev::vmtype::Array"
+        ]
+      }
     },
     {
       "declare": "import",
       "type": "env",
       "notimplemented": true,
-      "name": "$_ZN6neodev6vmtype5Array2atEi"
+      "name": "$_ZN11NeoContract6nopintEi",
+      "cppdemangle": {
+        "name": "NeoContract::nopint",
+        "rtype": "",
+        "params": [
+          "int"
+        ]
+      }
     },
     {
       "declare": "import",
       "type": "env",
       "notimplemented": true,
-      "name": "$_ZN6neodev6vmtype9ByteArray2atEi"
+      "name": "$_ZN11NeoContract7nopbyteEh",
+      "cppdemangle": {
+        "name": "NeoContract::nopbyte",
+        "rtype": "",
+        "params": [
+          "unsigned",
+          "char"
+        ]
+      }
     },
     {
       "declare": "import",
       "type": "env",
       "notimplemented": true,
-      "name": "$_ZN6neodev6vmtype9ByteArray3setEih"
+      "name": "$_ZN11NeoContract7nopcharEc",
+      "cppdemangle": {
+        "name": "NeoContract::nopchar",
+        "rtype": "",
+        "params": [
+          "char"
+        ]
+      }
     },
     {
       "declare": "import",
       "type": "env",
       "notimplemented": true,
-      "name": "$_ZN6neodev6vmtype9ByteArray6lengthEv"
+      "name": "$_ZN11NeoContract7nopuintEj",
+      "cppdemangle": {
+        "name": "NeoContract::nopuint",
+        "rtype": "",
+        "params": [
+          "unsigned",
+          "int"
+        ]
+      }
     },
     {
       "declare": "import",
       "type": "env",
       "notimplemented": true,
-      "name": "$_ZN6neodev6vmtype9StackItem11asByteArrayEv"
+      "name": "$_ZN11NeoContract8nopucharEh",
+      "cppdemangle": {
+        "name": "NeoContract::nopuchar",
+        "rtype": "",
+        "params": [
+          "unsigned",
+          "char"
+        ]
+      }
     },
     {
       "declare": "import",
       "type": "env",
       "notimplemented": true,
-      "name": "$_ZN6neodev6vmtype9StackItem5asIntEv"
+      "name": "$_ZN6neodev6vmtype5Array2atEi",
+      "cppdemangle": {
+        "name": "neodev::vmtype::Array::at",
+        "rtype": "",
+        "params": [
+          "int"
+        ]
+      }
     },
     {
       "declare": "import",
       "type": "env",
       "notimplemented": true,
-      "name": "$_ZN6neodev7abitype6String6lengthEv"
+      "name": "$_ZN6neodev6vmtype9ByteArray2atEi",
+      "cppdemangle": {
+        "name": "neodev::vmtype::ByteArray::at",
+        "rtype": "",
+        "params": [
+          "int"
+        ]
+      }
+    },
+    {
+      "declare": "import",
+      "type": "env",
+      "notimplemented": true,
+      "name": "$_ZN6neodev6vmtype9ByteArray3setEih",
+      "cppdemangle": {
+        "name": "neodev::vmtype::ByteArray::set",
+        "rtype": "",
+        "params": [
+          "int",
+          "unsigned",
+          "char"
+        ]
+      }
+    },
+    {
+      "declare": "import",
+      "type": "env",
+      "notimplemented": true,
+      "name": "$_ZN6neodev6vmtype9ByteArray6lengthEv",
+      "cppdemangle": {
+        "name": "neodev::vmtype::ByteArray::length",
+        "rtype": "",
+        "params": []
+      }
+    },
+    {
+      "declare": "import",
+      "type": "env",
+      "notimplemented": true,
+      "name": "$_ZN6neodev6vmtype9StackItem11asByteArrayEv",
+      "cppdemangle": {
+        "name": "neodev::vmtype::StackItem::asByteArray",
+        "rtype": "",
+        "params": []
+      }
+    },
+    {
+      "declare": "import",
+      "type": "env",
+      "notimplemented": true,
+      "name": "$_ZN6neodev6vmtype9StackItem5asIntEv",
+      "cppdemangle": {
+        "name": "neodev::vmtype::StackItem::asInt",
+        "rtype": "",
+        "params": []
+      }
+    },
+    {
+      "declare": "import",
+      "type": "env",
+      "notimplemented": true,
+      "name": "$_ZN6neodev7abitype6String6lengthEv",
+      "cppdemangle": {
+        "name": "neodev::abitype::String::length",
+        "rtype": "",
+        "params": []
+      }
     },
     {
       "declare": "table",
@@ -153,9 +298,11 @@
       "declare": "func",
       "name": "$_Z14GetArrayLengthN6neodev6vmtype9ByteArrayE",
       "cppdemangle": {
-        "name": "neodev::vmtype::ByteArray",
-        "rtype": "GetArrayLength",
-        "params": []
+        "name": "GetArrayLength",
+        "rtype": "",
+        "params": [
+          "neodev::vmtype::ByteArray"
+        ]
       },
       "params": [
         {
@@ -206,8 +353,8 @@
       "declare": "func",
       "name": "$_ZN11NeoContract11NothingToDoEv",
       "cppdemangle": {
-        "name": "",
-        "rtype": "NeoContract::NothingToDo",
+        "name": "NeoContract::NothingToDo",
+        "rtype": "",
         "params": []
       },
       "params": [
@@ -231,8 +378,8 @@
       "declare": "func",
       "name": "$main",
       "cppdemangle": {
-        "name": "",
-        "rtype": "main",
+        "name": "main",
+        "rtype": "",
         "params": []
       },
       "params": [
@@ -366,6 +513,61 @@
                     }
                   ]
                 }
+              ]
+            }
+          ]
+        },
+        {
+          "cmd": "(call",
+          "deps": [
+            {
+              "cmd": "(i32.const",
+              "params": [
+                "1"
+              ]
+            }
+          ]
+        },
+        {
+          "cmd": "(call",
+          "deps": [
+            {
+              "cmd": "(i32.const",
+              "params": [
+                "1"
+              ]
+            }
+          ]
+        },
+        {
+          "cmd": "(call",
+          "deps": [
+            {
+              "cmd": "(i32.const",
+              "params": [
+                "1"
+              ]
+            }
+          ]
+        },
+        {
+          "cmd": "(call",
+          "deps": [
+            {
+              "cmd": "(i32.const",
+              "params": [
+                "1"
+              ]
+            }
+          ]
+        },
+        {
+          "cmd": "(call",
+          "deps": [
+            {
+              "cmd": "(i32.const",
+              "params": [
+                "1"
               ]
             }
           ]

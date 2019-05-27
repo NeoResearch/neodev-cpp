@@ -5,17 +5,16 @@ namespace neodev {
 
 // helper type: byte
 typedef unsigned char byte;
+//struct byte {};
 
 namespace vmtype {
 
-   /*
+/*
 extern "C" int __op(int x)
 {
   return 1;
 }
 */
-
-
 
 //int Size2(bytearray a);
 
@@ -25,15 +24,12 @@ extern "C" int __op(int x)
 
 struct ByteArray
 {
-   [[nodiscard]]
-   static int length();
+   [[nodiscard]] static int length();
 
-   [[nodiscard]]
-   static ByteArray concat(ByteArray ba);
+   [[nodiscard]] static ByteArray concat(ByteArray ba);
 
    // todo: operator[] ref
-   [[nodiscard]]
-   static byte at(int index);
+   [[nodiscard]] static byte at(int index);
 
    // todo: operator[] ref
    static void set(int index, byte value);

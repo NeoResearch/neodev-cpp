@@ -4,9 +4,14 @@
   (type $FUNCSIG$iif (func (param i32 f32) (result i32)))
   (type $FUNCSIG$ii (func (param i32) (result i32)))
   (type $FUNCSIG$vii (func (param i32 i32)))
-  (import "env" "_ZN11NeoContract3nopEh" (func $_ZN11NeoContract3nopEh (param i32)))
+  (import "env" "_ZN11NeoContract4nopuEj" (func $_ZN11NeoContract4nopuEj (param i32)))
   (import "env" "_ZN11NeoContract5test1IiEET_ifN6neodev6vmtype9StackItemENS3_5ArrayE" (func $_ZN11NeoContract5test1IiEET_ifN6neodev6vmtype9StackItemENS3_5ArrayE (param i32 f32) (result i32)))
   (import "env" "_ZN11NeoContract5test2IN6neodev8emit_abiEEEiifNS1_6vmtype9StackItemENS3_5ArrayE" (func $_ZN11NeoContract5test2IN6neodev8emit_abiEEEiifNS1_6vmtype9StackItemENS3_5ArrayE (param i32 f32) (result i32)))
+  (import "env" "_ZN11NeoContract6nopintEi" (func $_ZN11NeoContract6nopintEi (param i32)))
+  (import "env" "_ZN11NeoContract7nopbyteEh" (func $_ZN11NeoContract7nopbyteEh (param i32)))
+  (import "env" "_ZN11NeoContract7nopcharEc" (func $_ZN11NeoContract7nopcharEc (param i32)))
+  (import "env" "_ZN11NeoContract7nopuintEj" (func $_ZN11NeoContract7nopuintEj (param i32)))
+  (import "env" "_ZN11NeoContract8nopucharEh" (func $_ZN11NeoContract8nopucharEh (param i32)))
   (import "env" "_ZN6neodev6vmtype5Array2atEi" (func $_ZN6neodev6vmtype5Array2atEi (param i32 i32)))
   (import "env" "_ZN6neodev6vmtype9ByteArray2atEi" (func $_ZN6neodev6vmtype9ByteArray2atEi (param i32) (result i32)))
   (import "env" "_ZN6neodev6vmtype9ByteArray3setEih" (func $_ZN6neodev6vmtype9ByteArray3setEih (param i32 i32)))
@@ -47,7 +52,17 @@
     tee_local $4
     i32.store offset=4
     i32.const 1
-    call $_ZN11NeoContract3nopEh
+    call $_ZN11NeoContract7nopbyteEh
+    i32.const 1
+    call $_ZN11NeoContract7nopuintEj
+    i32.const 1
+    call $_ZN11NeoContract6nopintEi
+    i32.const 1
+    call $_ZN11NeoContract7nopcharEc
+    i32.const 1
+    call $_ZN11NeoContract8nopucharEh
+    i32.const 1
+    call $_ZN11NeoContract4nopuEj
     i32.const 10
     f32.const 0x1.466666p+2 (;=5.1;)
     call $_ZN11NeoContract5test1IiEET_ifN6neodev6vmtype9StackItemENS3_5ArrayE

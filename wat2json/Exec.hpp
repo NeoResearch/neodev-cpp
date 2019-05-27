@@ -4,6 +4,7 @@
 #include <array>
 #include <iostream>
 #include <memory>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 
@@ -20,6 +21,27 @@ struct CppFunction
    std::string rtype;                  // return type (if part of mangled name). Templates have this, empty string otherwise.
    std::vector<std::string> params;    // parameters
    std::vector<std::string> templates; // parameters
+
+   static string toJSONField(CppFunction cppf)
+   {
+      std::stringstream ss;
+      ss << "\"cppdemangle\":{\"name\":\"" << cppf.name << "\"";
+      //if(cppf.rtype!="") // if return type is known
+      ss << ",\"rtype\":\"" << cppf.rtype << "\"";
+      if (cppf.templates.size() > 0) // if has templates
+      {
+         ss << ",\"templates\":[";
+         for (unsigned i = 0; i < cppf.templates.size(); i++)
+            ss << (i == 0 ? "" : ",") << "\"" << cppf.templates[i] << "\"";
+         ss << "]";
+      }
+      ss << ",\"params\":[";
+      for (unsigned i = 0; i < cppf.params.size(); i++)
+         ss << (i == 0 ? "" : ",") << "\"" << cppf.params[i] << "\"";
+      ss << "]";
+      ss << "}";
+      return ss.str();
+   }
 };
 
 // thanks to: https://stackoverflow.com/questions/478898/how-do-i-execute-a-command-and-get-output-of-command-within-c-using-posix#478960
@@ -54,6 +76,8 @@ public:
       stringstream ss;
       ss << "c++filt " << mangled;
       //<< "_Z14GetArrayLengthN6neodev6vmtype9ByteArrayE";
+      // _ZN6neodev6vmtype5Array2atEi
+      // _ZN11NeoContract7neomainIN6neodev15emit_entrypointEEEiNS1_7abitype6StringENS1_6vmtype5ArrayE
       std::string ret = Scanner::trim(Exec::run(ss.str()));
       cout << "DEMANGLED: " << ret << endl;
 
@@ -61,8 +85,11 @@ public:
       // step 1: look for templates and return value
       bool hasReturn = false;
       string returnValue = ""; // default empty string (unknown return value)
-      if (ret.find("<") != 0)
+      if (ret.find("<") != -1)
+      {
          hasReturn = true; // name mangling for templates include return value
+         cout << "FOUND RETURN FOR: " << ret << endl;
+      }
       Scanner scanner(ret);
       scanner.useSeparators("(), ");
       if (hasReturn)

@@ -7,9 +7,14 @@
   (type (;5;) (func (param i32 i32) (result i32)))
   (type (;6;) (func))
   (import "env" "abortStackOverflow" (func $abortStackOverflow (type 0)))
-  (import "env" "__ZN11NeoContract3nopEh" (func $__ZN11NeoContract3nopEh (type 0)))
+  (import "env" "__ZN11NeoContract4nopuEj" (func $__ZN11NeoContract4nopuEj (type 0)))
   (import "env" "__ZN11NeoContract5test1IiEET_ifN6neodev6vmtype9StackItemENS3_5ArrayE" (func $__ZN11NeoContract5test1IiEET_ifN6neodev6vmtype9StackItemENS3_5ArrayE (type 1)))
   (import "env" "__ZN11NeoContract5test2IN6neodev8emit_abiEEEiifNS1_6vmtype9StackItemENS3_5ArrayE" (func $__ZN11NeoContract5test2IN6neodev8emit_abiEEEiifNS1_6vmtype9StackItemENS3_5ArrayE (type 1)))
+  (import "env" "__ZN11NeoContract6nopintEi" (func $__ZN11NeoContract6nopintEi (type 0)))
+  (import "env" "__ZN11NeoContract7nopbyteEh" (func $__ZN11NeoContract7nopbyteEh (type 0)))
+  (import "env" "__ZN11NeoContract7nopcharEc" (func $__ZN11NeoContract7nopcharEc (type 0)))
+  (import "env" "__ZN11NeoContract7nopuintEj" (func $__ZN11NeoContract7nopuintEj (type 0)))
+  (import "env" "__ZN11NeoContract8nopucharEh" (func $__ZN11NeoContract8nopucharEh (type 0)))
   (import "env" "__ZN6neodev6vmtype5Array2atEi" (func $__ZN6neodev6vmtype5Array2atEi (type 2)))
   (import "env" "__ZN6neodev6vmtype9ByteArray2atEi" (func $__ZN6neodev6vmtype9ByteArray2atEi (type 3)))
   (import "env" "__ZN6neodev6vmtype9ByteArray3setEih" (func $__ZN6neodev6vmtype9ByteArray3setEih (type 2)))
@@ -125,7 +130,17 @@
     i32.add
     local.set 6
     i32.const 1
-    call $__ZN11NeoContract3nopEh
+    call $__ZN11NeoContract7nopbyteEh
+    i32.const 1
+    call $__ZN11NeoContract7nopuintEj
+    i32.const 1
+    call $__ZN11NeoContract6nopintEi
+    i32.const 1
+    call $__ZN11NeoContract7nopcharEc
+    i32.const 1
+    call $__ZN11NeoContract8nopucharEh
+    i32.const 1
+    call $__ZN11NeoContract4nopuEj
     local.get 2
     local.get 22
     i32.load8_s
