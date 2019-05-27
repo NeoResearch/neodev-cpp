@@ -22,6 +22,28 @@ Suggestion: `https://mbebenita.github.io/WasmExplorer/` (Select C++1z or C++17)
 
 To compile, you will need emscripten `emcc`, since the process uses using WebAssembly Neo Compiler (see `wasm2neo` project).
 
+### clang + llvm + Binaryen + WABT (specific 2017 version)
+
+A good combination is manually install clang + llvm
+```
+mkdir make-llvm
+mkdir clang (and clone)
+mkdir llvm (and clone)
+(cd clang && git checkout e4de58127fa1d8d22ee8043cef9b4d8a807b6cde)
+(cd llvm && git checkout 08b86793476e08fc0937e70058e2a94808c988e7)
+(mkdir build && cd build && cmake -DLLVM_ENABLE_PROJECTS=clang -G "Unix Makefiles" -DLLVM_TARGETS_TO_BUILD= -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=WebAssembly ../llvm)
+```
+
+You will also need specific version of binaryen and wabt
+```
+mkdir binaryen (and clone)
+(cd binaryen && git checkout b16768ec9b72d075ae2e36cc85aa216fdf4fd354)
+mkdir wabt (and clone)
+(cd wabt && git checkout 8e1f6031e9889ba770c7be4a9b084da5f14456a0)
+
+each of these require specific builds as well.. all cmake style
+```
+
 ### Building EMSDK
 
 ```
