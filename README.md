@@ -9,6 +9,12 @@ Suggestion: `https://mbebenita.github.io/WasmExplorer/` (Select C++1z or C++17)
 
 ## Hello World example
 
+### class based 
+
+![](./Example-ClassHelloWorld.png)
+
+### global-function based 
+
 ![](./Example-HelloWorld.png)
 
 
