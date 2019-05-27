@@ -7,6 +7,11 @@ C++ devpack for Neo blockchain
 Code can be compiled using online WebAssembly editors.
 Suggestion: `https://mbebenita.github.io/WasmExplorer/` (Select C++1z or C++17)
 
+## Hello World example
+
+![](./Example-HelloWorld.png)
+
+
 ## dependencies
 
 To compile, you will need emscripten `emcc`, since the process uses using WebAssembly Neo Compiler (see `wasm2neo` project).

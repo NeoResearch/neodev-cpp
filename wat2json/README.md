@@ -9,5 +9,6 @@ It accepts "non-desugarized" versions of .wat (or .wast) starting with line `(mo
 
 `./wat2json file.wat` or `./wat2json file.wast`
 
+
 ## License
 License is currently LGPLv3, due to Scanner++ library, but can change in the future, when removing this dependency.
