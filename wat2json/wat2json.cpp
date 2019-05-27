@@ -31,7 +31,7 @@ public:
    static WasmComponent* parseComponent(string line, Scanner& scanner);
 };
 
-// smaller fields
+// smaller fields (attributes, parameters, ...)
 class WasmField
 {
 public:
@@ -55,7 +55,37 @@ public:
       return ss.str();
    }
 
-   static WasmField* parseField(Scanner& scanLine, Scanner& scanText);
+   // only single line consumption
+   static WasmField* parseField(Scanner& scanLine);
+};
+
+// complex fields and commands
+class WasmCommand
+{
+public:
+   string cmdName;
+   vector<string> options;
+   vector<WasmCommand*> commands;
+
+   WasmCommand(string _cmdName, vector<string> _options, vector<WasmCommand*> _commands)
+     : cmdName(_cmdName)
+     , options(_options)
+     , commands(_commands)
+   {
+   }
+
+   // convert to S-expression
+   virtual string toSExpr()
+   {
+      stringstream ss;
+      ss << cmdName;
+      for (unsigned i = 0; i < options.size(); i++)
+         ss << " " << options[i];
+      ss << ")";
+      return ss.str();
+   }
+
+   static WasmCommand* parseCommand(Scanner& scanLine, Scanner& scanText);
 };
 
 // ===================================================================
@@ -279,7 +309,7 @@ public:
       if (!wdata)
          error("wdata->field should not be null!");
       //cout << "WILL READ DATA!!" << endl;
-      wdata->field = WasmField::parseField(scanLine, scanner);
+      wdata->field = WasmField::parseField(scanLine);
       string value = Scanner::trim(scanLine.nextLine());
       //cout << "DATA='" << value << "'" << endl;
       wdata->value = value.substr(0, value.size() - 1);
@@ -300,7 +330,7 @@ class WasmExport : public WasmComponent
 {
 public:
    string sname; // string name
-   string name; // function name
+   string name;  // function name
 
    WasmExport()
      : WasmComponent("export")
@@ -341,7 +371,7 @@ class WasmFunc : public WasmComponent
 public:
    string name; // function name
    vector<WasmField*> parameters;
-   vector<WasmField*> commands;
+   vector<WasmCommand*> commands;
 
    WasmFunc()
      : WasmComponent("func")
@@ -364,9 +394,8 @@ public:
       cout << "will read fields for function: " << name << endl;
       // consume parameters
       while (scanLine.hasNext()) {
-         Scanner empty(""); // empty
-         WasmField* param = WasmField::parseField(scanLine, empty);
-         if(!param)
+         WasmField* param = WasmField::parseField(scanLine);
+         if (!param)
             error("func PARAM IS NULL!!");
          wfunc->parameters.push_back(param);
       }
@@ -375,7 +404,13 @@ public:
 
       string endline = Scanner::trim(scanner.nextLine());
       while (endline != ")") {
-         cout << "DROPPING '" << endline << "'" << endl;
+         cout << "-----> parseFunc: got line '" << endline << "'" << endl;
+         Scanner scanLine2(endline);
+         WasmCommand* cmd = WasmCommand::parseCommand(scanLine2, scanner);
+         cout << "FUNC got command!" << endl;
+         if (!cmd)
+            error("COMMAND IS NULL ON FUNC!!");
+         wfunc->commands.push_back(cmd);
          endline = Scanner::trim(scanner.nextLine());
       }
 
@@ -392,8 +427,8 @@ public:
       for (unsigned i = 0; i < parameters.size(); i++)
          ss << " " << parameters[i]->toSExpr();
       ss << endl;
-      ss << "(COMMANDS HERE)";
-      ss << endl;
+      for (unsigned i = 0; i < commands.size(); i++)
+         ss << commands[i]->toSExpr() << endl;
       ss << ")";
       return ss.str();
    }
@@ -425,25 +460,62 @@ WasmComponent::parseComponent(string line, Scanner& scanner)
    error(ss.str());
 }
 
-// Field may consume a single (current) or multiple lines
+// Field may consume a single (current) line only
 WasmField*
-WasmField::parseField(Scanner& scanLine, Scanner& scanText)
+WasmField::parseField(Scanner& scanLine)
 {
    string fieldName = scanLine.next();
    if (fieldName == "(i32.const") {
       string val = scanLine.next(); // e.g. (i32.const 40) -> on "(data"
-      scanLine.nextLine(); // drop rest of line
+      scanLine.nextLine();          // drop rest of line
       vector<string> options(1, val.substr(0, val.size() - 1));
       return new WasmField(fieldName, options);
    }
 
    if (fieldName == "(result") {
       string val = scanLine.next(); // e.g. (result i32) -> on "(func"
-      scanLine.nextLine(); // drop rest of line
+      scanLine.nextLine();          // drop rest of line
       vector<string> options(1, val.substr(0, val.size() - 1));
       return new WasmField(fieldName, options);
    }
 
+   return nullptr;
+}
+
+// Command may consume a single (current) or multiple lines
+WasmCommand*
+WasmCommand::parseCommand(Scanner& scanLine, Scanner& scanText)
+{
+   string cmdName = scanLine.next();
+   cout << "======> parseCommand: working with command: " << cmdName << endl;
+   vector<string> options;
+   vector<WasmCommand*> commands;
+
+   // single line command
+   if ((cmdName == "(i32.const") || (cmdName == "(call")) {
+      cout << "GOT I32" << endl;
+      string val = scanLine.next(); // e.g. (i32.const 40)
+      scanLine.nextLine();          // drop rest of line
+      vector<string> options(1, val.substr(0, val.size() - 1));
+      cout << "creating new command!" << endl;
+      return new WasmCommand(cmdName, options, commands);
+   }
+
+   // multi line command
+   if ((cmdName == "(select") || (cmdName == "(i32.gt_s")) {
+      scanLine.nextLine(); // drop rest of line
+      string line2 = Scanner::trim(scanText.nextLine());
+      while (line2 != ")") {
+         Scanner scanLine2(line2);
+         WasmCommand* cmd = WasmCommand::parseCommand(scanLine2, scanText);
+         commands.push_back(cmd);
+         line2 = Scanner::trim(scanText.nextLine());
+      }
+      return new WasmCommand(cmdName, options, commands);
+   }
+
+   cout << "RETURNING NULL COMMAND! READ '" << cmdName << "'" << endl;
+   error("no command!");
    return nullptr;
 }
 
