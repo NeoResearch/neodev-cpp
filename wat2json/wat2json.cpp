@@ -1,3 +1,4 @@
+#include <iomanip> // hex format
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -110,14 +111,20 @@ public:
    virtual string toJSON()
    {
       stringstream ss;
-      ss << "{\"cmd\":\"" << cmdName << "\",\"parameters\":[";
-      for (unsigned i = 0; i < options.size(); i++)
-         ss << (i == 0 ? "" : ",") << "\"" << options[i] << "\"";
-      ss << "]";
-      ss << ",\"commands\":[";
-      for (unsigned i = 0; i < commands.size(); i++)
-         ss << (i == 0 ? "" : ",") << commands[i]->toJSON() << endl;
-      ss << "]}";
+      ss << "{\"cmd\":\"" << cmdName << "\"";
+      if (options.size() > 0) {
+         ss << ",\"params\":[";
+         for (unsigned i = 0; i < options.size(); i++)
+            ss << (i == 0 ? "" : ",") << "\"" << options[i] << "\"";
+         ss << "]";
+      }
+      if (commands.size() > 0) {
+         ss << ",\"deps\":[";
+         for (unsigned i = 0; i < commands.size(); i++)
+            ss << (i == 0 ? "" : ",") << commands[i]->toJSON() << endl;
+         ss << "]";
+      }
+      ss << "}";
 
       return ss.str();
    }
@@ -376,6 +383,35 @@ public:
    WasmField* field;
    string value;
 
+   string valToHexString(string val) const
+   {
+      if (val.length() == 0)
+         return "";
+      stringstream ss;
+      int i = 0;
+      if (val[0] == '"')
+         i++; // skip first
+      int n = val.length() - 1;
+      if (val[n] == '"')
+         n--; // skip last
+      ss << "0x";
+      while (i <= n) {
+         if (val[i] == '\\') // hex digit
+         {
+            ss << val[i + 1] << val[i + 2];
+            i += 3;
+         } else // regular digit
+         {
+            stringstream s2;
+            s2 << setfill('0') << setw(2) << std::hex << (int)((unsigned char)val[i]);
+            ss << s2.str();
+            //cout << " xxxxxxxxxxxxxxx converting char '" << val[i] << "' to " << s2.str() << endl;
+            i++;
+         }
+      }
+      return ss.str();
+   }
+
    WasmData()
      : WasmComponent("data")
    {
@@ -414,7 +450,7 @@ public:
    virtual string toJSON() override
    {
       stringstream ss;
-      ss << "{\"declare\": \"data\", \"field\":" << field->toJSON() << ",\"value\":\"" << value << "\"}";
+      ss << "{\"declare\": \"data\", \"field\":" << field->toJSON() << ",\"value\":\"" << valToHexString(value) << "\"}";
       return ss.str();
    }
 };
@@ -554,14 +590,16 @@ public:
    virtual string toJSON() override
    {
       stringstream ss;
-      ss << "{\"declare\":\"func\", \"name\":\"" << name << "\", \"parameters\":[";
+      ss << "{\"declare\":\"func\", \"name\":\"" << name << "\", \"params\":[";
       for (unsigned i = 0; i < parameters.size(); i++)
          ss << (i == 0 ? "" : ",") << parameters[i]->toJSON();
       ss << "]," << endl;
-      ss << "\"locals\":[";
-      for (unsigned i = 0; i < locals.size(); i++)
-         ss << (i == 0 ? "" : ",") << locals[i]->toJSON();
-      ss << "]," << endl;
+      if (locals.size() > 0) {
+         ss << "\"locals\":[";
+         for (unsigned i = 0; i < locals.size(); i++)
+            ss << (i == 0 ? "" : ",") << locals[i]->toJSON();
+         ss << "]," << endl;
+      }
       ss << "\"commands\":[";
       for (unsigned i = 0; i < commands.size(); i++)
          ss << (i == 0 ? "" : ",") << commands[i]->toJSON() << endl;
@@ -603,14 +641,14 @@ WasmField::parseField(Scanner& scanLine)
    string fieldName = scanLine.next();
    if (fieldName == "(i32.const") {
       string val = scanLine.next(); // e.g. (i32.const 40) -> on "(data"
-      scanLine.nextLine();          // drop rest of line
+      //scanLine.nextLine();          // drop rest of line
       vector<string> options(1, val.substr(0, val.size() - 1));
       return new WasmField(fieldName, options);
    }
 
    if (fieldName == "(result") {
       string val = scanLine.next(); // e.g. (result i32) -> on "(func"
-      scanLine.nextLine();          // drop rest of line
+      //scanLine.nextLine();          // drop rest of line
       vector<string> options(1, val.substr(0, val.size() - 1));
       return new WasmField(fieldName, options);
    }
@@ -619,7 +657,7 @@ WasmField::parseField(Scanner& scanLine)
       // e.g. (local $0 i32)
       string val1 = scanLine.next(); // e.g. $0
       string val2 = scanLine.next(); // e.g. i32)
-      scanLine.nextLine();           // drop rest of line
+      //scanLine.nextLine();           // drop rest of line
       vector<string> options;
       options.push_back(val1);
       options.push_back(val2.substr(0, val2.size() - 1));

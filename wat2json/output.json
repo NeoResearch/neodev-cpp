@@ -75,7 +75,7 @@
           "16"
         ]
       },
-      "value": ""
+      "value": "0x6f6900"
     },
     {
       "declare": "data",
@@ -85,7 +85,7 @@
           "20"
         ]
       },
-      "value": ""
+      "value": "0x10000000"
     },
     {
       "declare": "data",
@@ -95,7 +95,7 @@
           "32"
         ]
       },
-      "value": ""
+      "value": "0x7465737400"
     },
     {
       "declare": "data",
@@ -105,7 +105,7 @@
           "40"
         ]
       },
-      "value": ""
+      "value": "0x20000000"
     },
     {
       "declare": "export",
@@ -135,7 +135,7 @@
     {
       "declare": "func",
       "name": "$_Z14GetArrayLengthN6neodev6vmtype9ByteArrayE",
-      "parameters": [
+      "params": [
         {
           "name": "(result",
           "params": [
@@ -143,43 +143,36 @@
           ]
         }
       ],
-      "locals": [],
       "commands": [
         {
           "cmd": "(select",
-          "parameters": [],
-          "commands": [
+          "deps": [
             {
               "cmd": "(i32.const",
-              "parameters": [
+              "params": [
                 "10"
-              ],
-              "commands": []
+              ]
             },
             {
               "cmd": "(i32.const",
-              "parameters": [
+              "params": [
                 "30"
-              ],
-              "commands": []
+              ]
             },
             {
               "cmd": "(i32.gt_s",
-              "parameters": [],
-              "commands": [
+              "deps": [
                 {
                   "cmd": "(call",
-                  "parameters": [
+                  "params": [
                     "$_ZN6neodev6vmtype9ByteArray6lengthEv"
-                  ],
-                  "commands": []
+                  ]
                 },
                 {
                   "cmd": "(i32.const",
-                  "parameters": [
+                  "params": [
                     "0"
-                  ],
-                  "commands": []
+                  ]
                 }
               ]
             }
@@ -190,7 +183,7 @@
     {
       "declare": "func",
       "name": "$_ZN11NeoContract11NothingToDoEv",
-      "parameters": [
+      "params": [
         {
           "name": "(result",
           "params": [
@@ -198,21 +191,19 @@
           ]
         }
       ],
-      "locals": [],
       "commands": [
         {
           "cmd": "(i32.const",
-          "parameters": [
+          "params": [
             "0"
-          ],
-          "commands": []
+          ]
         }
       ]
     },
     {
       "declare": "func",
       "name": "$_ZN11NeoContract4mainEN6neodev7abitype6StringENS0_6vmtype5ArrayE",
-      "parameters": [
+      "params": [
         {
           "name": "(result",
           "params": [
@@ -260,48 +251,44 @@
       "commands": [
         {
           "cmd": "(i32.store",
-          "parameters": [
+          "params": [
             "offset=4"
           ],
-          "commands": [
+          "deps": [
             {
               "cmd": "(i32.const",
-              "parameters": [
+              "params": [
                 "0"
-              ],
-              "commands": []
+              ]
             },
             {
               "cmd": "(tee_local",
-              "parameters": [
+              "params": [
                 "$4"
               ],
-              "commands": [
+              "deps": [
                 {
                   "cmd": "(i32.sub",
-                  "parameters": [],
-                  "commands": [
+                  "deps": [
                     {
                       "cmd": "(i32.load",
-                      "parameters": [
+                      "params": [
                         "offset=4"
                       ],
-                      "commands": [
+                      "deps": [
                         {
                           "cmd": "(i32.const",
-                          "parameters": [
+                          "params": [
                             "0"
-                          ],
-                          "commands": []
+                          ]
                         }
                       ]
                     },
                     {
                       "cmd": "(i32.const",
-                      "parameters": [
+                      "params": [
                         "32"
-                      ],
-                      "commands": []
+                      ]
                     }
                   ]
                 }
@@ -311,31 +298,27 @@
         },
         {
           "cmd": "(set_local",
-          "parameters": [
+          "params": [
             "$0"
           ],
-          "commands": [
+          "deps": [
             {
               "cmd": "(call",
-              "parameters": [],
-              "commands": [
+              "deps": [
                 {
                   "cmd": "(i32.add",
-                  "parameters": [],
-                  "commands": [
+                  "deps": [
                     {
                       "cmd": "(get_local",
-                      "parameters": [
+                      "params": [
                         "$4"
-                      ],
-                      "commands": []
+                      ]
                     },
                     {
                       "cmd": "(i32.const",
-                      "parameters": [
+                      "params": [
                         "24"
-                      ],
-                      "commands": []
+                      ]
                     }
                   ]
                 }
@@ -345,58 +328,49 @@
         },
         {
           "cmd": "(call",
-          "parameters": [],
-          "commands": [
+          "deps": [
             {
               "cmd": "(i32.add",
-              "parameters": [],
-              "commands": [
+              "deps": [
                 {
                   "cmd": "(get_local",
-                  "parameters": [
+                  "params": [
                     "$4"
-                  ],
-                  "commands": []
+                  ]
                 },
                 {
                   "cmd": "(i32.const",
-                  "parameters": [
+                  "params": [
                     "16"
-                  ],
-                  "commands": []
+                  ]
                 }
               ]
             },
             {
               "cmd": "(i32.const",
-              "parameters": [
+              "params": [
                 "0"
-              ],
-              "commands": []
+              ]
             }
           ]
         },
         {
           "cmd": "(call",
-          "parameters": [],
-          "commands": [
+          "deps": [
             {
               "cmd": "(i32.add",
-              "parameters": [],
-              "commands": [
+              "deps": [
                 {
                   "cmd": "(get_local",
-                  "parameters": [
+                  "params": [
                     "$4"
-                  ],
-                  "commands": []
+                  ]
                 },
                 {
                   "cmd": "(i32.const",
-                  "parameters": [
+                  "params": [
                     "8"
-                  ],
-                  "commands": []
+                  ]
                 }
               ]
             }
@@ -404,84 +378,72 @@
         },
         {
           "cmd": "(call",
-          "parameters": [],
-          "commands": [
+          "deps": [
             {
               "cmd": "(i32.const",
-              "parameters": [
+              "params": [
                 "5"
-              ],
-              "commands": []
+              ]
             },
             {
               "cmd": "(i32.const",
-              "parameters": [
+              "params": [
                 "1"
-              ],
-              "commands": []
+              ]
             }
           ]
         },
         {
           "cmd": "(call",
-          "parameters": [],
-          "commands": [
+          "deps": [
             {
               "cmd": "(i32.add",
-              "parameters": [],
-              "commands": [
+              "deps": [
                 {
                   "cmd": "(get_local",
-                  "parameters": [
+                  "params": [
                     "$4"
-                  ],
-                  "commands": []
+                  ]
                 },
                 {
                   "cmd": "(i32.const",
-                  "parameters": [
+                  "params": [
                     "16"
-                  ],
-                  "commands": []
+                  ]
                 }
               ]
             },
             {
               "cmd": "(i32.const",
-              "parameters": [
+              "params": [
                 "1"
-              ],
-              "commands": []
+              ]
             }
           ]
         },
         {
           "cmd": "(set_local",
-          "parameters": [
+          "params": [
             "$1"
           ],
-          "commands": [
+          "deps": [
             {
               "cmd": "(call",
-              "parameters": [],
-              "commands": [
+              "deps": [
                 {
                   "cmd": "(i32.add",
-                  "parameters": [],
-                  "commands": [
+                  "deps": [
                     {
                       "cmd": "(get_local",
-                      "parameters": [
+                      "params": [
                         "$4"
-                      ],
-                      "commands": []
+                      ]
                     },
                     {
                       "cmd": "(i32.const",
-                      "parameters": [
+                      "params": [
                         "8"
-                      ],
-                      "commands": []
+                      ]
                     }
                   ]
                 }
@@ -491,20 +453,18 @@
         },
         {
           "cmd": "(set_local",
-          "parameters": [
+          "params": [
             "$2"
           ],
-          "commands": [
+          "deps": [
             {
               "cmd": "(call",
-              "parameters": [],
-              "commands": [
+              "deps": [
                 {
                   "cmd": "(i32.const",
-                  "parameters": [
+                  "params": [
                     "5"
-                  ],
-                  "commands": []
+                  ]
                 }
               ]
             }
@@ -512,20 +472,18 @@
         },
         {
           "cmd": "(set_local",
-          "parameters": [
+          "params": [
             "$3"
           ],
-          "commands": [
+          "deps": [
             {
               "cmd": "(call",
-              "parameters": [],
-              "commands": [
+              "deps": [
                 {
                   "cmd": "(get_local",
-                  "parameters": [
+                  "params": [
                     "$4"
-                  ],
-                  "commands": []
+                  ]
                 }
               ]
             }
@@ -533,34 +491,30 @@
         },
         {
           "cmd": "(i32.store",
-          "parameters": [
+          "params": [
             "offset=4"
           ],
-          "commands": [
+          "deps": [
             {
               "cmd": "(i32.const",
-              "parameters": [
+              "params": [
                 "0"
-              ],
-              "commands": []
+              ]
             },
             {
               "cmd": "(i32.add",
-              "parameters": [],
-              "commands": [
+              "deps": [
                 {
                   "cmd": "(get_local",
-                  "parameters": [
+                  "params": [
                     "$4"
-                  ],
-                  "commands": []
+                  ]
                 },
                 {
                   "cmd": "(i32.const",
-                  "parameters": [
+                  "params": [
                     "32"
-                  ],
-                  "commands": []
+                  ]
                 }
               ]
             }
@@ -568,72 +522,60 @@
         },
         {
           "cmd": "(i32.add",
-          "parameters": [],
-          "commands": [
+          "deps": [
             {
               "cmd": "(get_local",
-              "parameters": [
+              "params": [
                 "$3"
-              ],
-              "commands": []
+              ]
             },
             {
               "cmd": "(i32.add",
-              "parameters": [],
-              "commands": [
+              "deps": [
                 {
                   "cmd": "(get_local",
-                  "parameters": [
+                  "params": [
                     "$2"
-                  ],
-                  "commands": []
+                  ]
                 },
                 {
                   "cmd": "(i32.add",
-                  "parameters": [],
-                  "commands": [
+                  "deps": [
                     {
                       "cmd": "(get_local",
-                      "parameters": [
+                      "params": [
                         "$1"
-                      ],
-                      "commands": []
+                      ]
                     },
                     {
                       "cmd": "(select",
-                      "parameters": [],
-                      "commands": [
+                      "deps": [
                         {
                           "cmd": "(i32.const",
-                          "parameters": [
+                          "params": [
                             "11"
-                          ],
-                          "commands": []
+                          ]
                         },
                         {
                           "cmd": "(i32.const",
-                          "parameters": [
+                          "params": [
                             "10"
-                          ],
-                          "commands": []
+                          ]
                         },
                         {
                           "cmd": "(i32.gt_s",
-                          "parameters": [],
-                          "commands": [
+                          "deps": [
                             {
                               "cmd": "(get_local",
-                              "parameters": [
+                              "params": [
                                 "$0"
-                              ],
-                              "commands": []
+                              ]
                             },
                             {
                               "cmd": "(i32.const",
-                              "parameters": [
+                              "params": [
                                 "0"
-                              ],
-                              "commands": []
+                              ]
                             }
                           ]
                         }
@@ -650,7 +592,7 @@
     {
       "declare": "func",
       "name": "$main",
-      "parameters": [
+      "params": [
         {
           "name": "(result",
           "params": [
@@ -658,14 +600,12 @@
           ]
         }
       ],
-      "locals": [],
       "commands": [
         {
           "cmd": "(i32.const",
-          "parameters": [
+          "params": [
             "1"
-          ],
-          "commands": []
+          ]
         }
       ]
     }
