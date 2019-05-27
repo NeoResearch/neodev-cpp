@@ -493,6 +493,17 @@ WasmField::parseField(Scanner& scanLine)
       return new WasmField(fieldName, options);
    }
 
+   if (fieldName == "(local") {
+      // e.g. (local $0 i32)
+      string val1 = scanLine.next(); // e.g. $0
+      string val2 = scanLine.next(); // e.g. i32)
+      scanLine.nextLine();           // drop rest of line
+      vector<string> options;
+      options.push_back(val1);
+      options.push_back(val2.substr(0, val2.size() - 1));
+      return new WasmField(fieldName, options);
+   }
+
    return nullptr;
 }
 
@@ -506,8 +517,7 @@ WasmCommand::parseCommand(Scanner& scanLine, Scanner& scanText)
    vector<WasmCommand*> commands;
 
    // single line command
-   if ((cmdName == "(i32.const") || (cmdName == "(call")) {
-      cout << "GOT I32" << endl;
+   if ((cmdName == "(i32.const") || (cmdName == "(call") || (cmdName == "(get_local")) {
       string val = scanLine.next(); // e.g. (i32.const 40)
       scanLine.nextLine();          // drop rest of line
       vector<string> options(1, val.substr(0, val.size() - 1));
@@ -516,7 +526,22 @@ WasmCommand::parseCommand(Scanner& scanLine, Scanner& scanText)
    }
 
    // multi line command
-   if ((cmdName == "(select") || (cmdName == "(i32.gt_s")) {
+   if ((cmdName == "(select") || (cmdName == "(i32.gt_s") || (cmdName == "(i32.sub") || (cmdName == "(i32.add")) {
+      scanLine.nextLine(); // drop rest of line
+      string line2 = Scanner::trim(scanText.nextLine());
+      while (line2 != ")") {
+         Scanner scanLine2(line2);
+         WasmCommand* cmd = WasmCommand::parseCommand(scanLine2, scanText);
+         commands.push_back(cmd);
+         line2 = Scanner::trim(scanText.nextLine());
+      }
+      return new WasmCommand(cmdName, options, commands);
+   }
+
+   // hybrid single and multiline
+   if ((cmdName == "(i32.store") || (cmdName == "(i32.load") || (cmdName == "(tee_local") || (cmdName == "(set_local")) {
+      string val = scanLine.next(); // e.g. offset=4 (on i32.store) or $0 (on tee_local)
+      options.push_back(val);
       scanLine.nextLine(); // drop rest of line
       string line2 = Scanner::trim(scanText.nextLine());
       while (line2 != ")") {
