@@ -599,10 +599,21 @@ public:
       ss << "{\"declare\":\"func\", \"name\":\"" << name << "\"";
       bool cppdemangle = true;
       if (cppdemangle) {
-         ss << ",\"cppdemangle\":{\"name\":\"" << cppf.name << "\",\"params\":[";
+         ss << ",\"cppdemangle\":{\"name\":\"" << cppf.name << "\"";
+         //if(cppf.rtype!="") // if return type is known
+         ss << ",\"rtype\":\"" << cppf.rtype << "\"";
+         if (cppf.templates.size() > 0) // if has templates
+         {
+            ss << ",\"templates\":[";
+            for (unsigned i = 0; i < cppf.templates.size(); i++)
+               ss << (i == 0 ? "" : ",") << "\"" << cppf.templates[i] << "\"";
+            ss << "]";
+         }
+         ss << ",\"params\":[";
          for (unsigned i = 0; i < cppf.params.size(); i++)
             ss << (i == 0 ? "" : ",") << "\"" << cppf.params[i] << "\"";
-         ss << "]}";
+         ss << "]";
+         ss << "}";
       }
       ss << ",\"params\":[";
       for (unsigned i = 0; i < parameters.size(); i++)
@@ -691,7 +702,7 @@ WasmCommand::parseCommand(Scanner& scanLine, Scanner& scanText)
    vector<WasmCommand*> commands;
 
    // single line command
-   if ((cmdName == "(i32.const") || (cmdName == "(get_local")) {
+   if ((cmdName == "(i32.const") || (cmdName == "(f32.const") || (cmdName == "(get_local")) {
       string val = scanLine.next(); // e.g. (i32.const 40)
       scanLine.nextLine();          // drop rest of line
       vector<string> options(1, val.substr(0, val.size() - 1));
@@ -700,7 +711,8 @@ WasmCommand::parseCommand(Scanner& scanLine, Scanner& scanText)
    }
 
    // multi line command
-   if ((cmdName == "(select") || (cmdName == "(i32.gt_s") || (cmdName == "(i32.sub") || (cmdName == "(i32.add")) {
+   if ((cmdName == "(select") || (cmdName == "(i32.gt_s") || (cmdName == "(i32.sub") ||
+       (cmdName == "(i32.add") || (cmdName == "(drop")) {
       scanLine.nextLine(); // drop rest of line
       string line2 = Scanner::trim(scanText.nextLine());
       while (line2 != ")") {
@@ -817,7 +829,7 @@ main(int argc, char* argv[])
    if (ext_output != ".json")
       return usage();
 
-/*
+   /*
    //cppUtils::CppFunction f = cppUtils::Exec::demangle("_Z14GetArrayLengthN6neodev6vmtype9ByteArrayE");
    cppUtils::CppFunction f = cppUtils::Exec::demangle("_ZN11NeoContract4mainEN6neodev7abitype6StringENS0_6vmtype5ArrayE");
 

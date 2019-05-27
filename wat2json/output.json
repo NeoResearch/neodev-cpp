@@ -7,6 +7,14 @@
     },
     {
       "declare": "type",
+      "name": "$FUNCSIG$vi"
+    },
+    {
+      "declare": "type",
+      "name": "$FUNCSIG$iif"
+    },
+    {
+      "declare": "type",
       "name": "$FUNCSIG$ii"
     },
     {
@@ -14,8 +22,22 @@
       "name": "$FUNCSIG$vii"
     },
     {
-      "declare": "type",
-      "name": "$FUNCSIG$vi"
+      "declare": "import",
+      "type": "env",
+      "notimplemented": true,
+      "name": "$_ZN11NeoContract3nopEh"
+    },
+    {
+      "declare": "import",
+      "type": "env",
+      "notimplemented": true,
+      "name": "$_ZN11NeoContract5test1IiEET_ifN6neodev6vmtype9StackItemENS3_5ArrayE"
+    },
+    {
+      "declare": "import",
+      "type": "env",
+      "notimplemented": true,
+      "name": "$_ZN11NeoContract5test2IN6neodev8emit_abiEEEiifNS1_6vmtype9StackItemENS3_5ArrayE"
     },
     {
       "declare": "import",
@@ -124,11 +146,6 @@
     },
     {
       "declare": "export",
-      "sname": "_ZN11NeoContract4mainEN6neodev7abitype6StringENS0_6vmtype5ArrayE",
-      "func": "$_ZN11NeoContract4mainEN6neodev7abitype6StringENS0_6vmtype5ArrayE"
-    },
-    {
-      "declare": "export",
       "sname": "main",
       "func": "$main"
     },
@@ -136,10 +153,9 @@
       "declare": "func",
       "name": "$_Z14GetArrayLengthN6neodev6vmtype9ByteArrayE",
       "cppdemangle": {
-        "name": "GetArrayLength",
-        "params": [
-          "neodev::vmtype::ByteArray"
-        ]
+        "name": "neodev::vmtype::ByteArray",
+        "rtype": "GetArrayLength",
+        "params": []
       },
       "params": [
         {
@@ -190,7 +206,8 @@
       "declare": "func",
       "name": "$_ZN11NeoContract11NothingToDoEv",
       "cppdemangle": {
-        "name": "NeoContract::NothingToDo",
+        "name": "",
+        "rtype": "NeoContract::NothingToDo",
         "params": []
       },
       "params": [
@@ -212,9 +229,49 @@
     },
     {
       "declare": "func",
-      "name": "$_ZN11NeoContract4mainEN6neodev7abitype6StringENS0_6vmtype5ArrayE",
+      "name": "$main",
       "cppdemangle": {
-        "name": "NeoContract::main",
+        "name": "",
+        "rtype": "main",
+        "params": []
+      },
+      "params": [
+        {
+          "name": "(result",
+          "params": [
+            "i32"
+          ]
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "(drop",
+          "deps": [
+            {
+              "cmd": "(call",
+              "params": [
+                "$_ZN11NeoContract7neomainIN6neodev15emit_entrypointEEEiNS1_7abitype6StringENS1_6vmtype5ArrayE"
+              ]
+            }
+          ]
+        },
+        {
+          "cmd": "(i32.const",
+          "params": [
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "declare": "func",
+      "name": "$_ZN11NeoContract7neomainIN6neodev15emit_entrypointEEEiNS1_7abitype6StringENS1_6vmtype5ArrayE",
+      "cppdemangle": {
+        "name": "NeoContract::neomain",
+        "rtype": "int",
+        "templates": [
+          "neodev::emit_entrypoint"
+        ],
         "params": [
           "neodev::abitype::String",
           "neodev::vmtype::Array"
@@ -307,6 +364,61 @@
                         "32"
                       ]
                     }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cmd": "(call",
+          "deps": [
+            {
+              "cmd": "(i32.const",
+              "params": [
+                "1"
+              ]
+            }
+          ]
+        },
+        {
+          "cmd": "(drop",
+          "deps": [
+            {
+              "cmd": "(call",
+              "deps": [
+                {
+                  "cmd": "(i32.const",
+                  "params": [
+                    "10"
+                  ]
+                },
+                {
+                  "cmd": "(f32.const",
+                  "params": [
+                    "5.099999904632568"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cmd": "(drop",
+          "deps": [
+            {
+              "cmd": "(call",
+              "deps": [
+                {
+                  "cmd": "(i32.const",
+                  "params": [
+                    "10"
+                  ]
+                },
+                {
+                  "cmd": "(f32.const",
+                  "params": [
+                    "5.099999904632568"
                   ]
                 }
               ]
@@ -602,30 +714,6 @@
                 }
               ]
             }
-          ]
-        }
-      ]
-    },
-    {
-      "declare": "func",
-      "name": "$main",
-      "cppdemangle": {
-        "name": "main",
-        "params": []
-      },
-      "params": [
-        {
-          "name": "(result",
-          "params": [
-            "i32"
-          ]
-        }
-      ],
-      "commands": [
-        {
-          "cmd": "(i32.const",
-          "params": [
-            "1"
           ]
         }
       ]
