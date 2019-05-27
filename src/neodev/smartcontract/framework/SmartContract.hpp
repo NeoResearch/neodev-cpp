@@ -2,7 +2,6 @@
 #define NEODEV_SMARTCONTRACT_HPP
 
 #include "../../types.hpp"
-
 // globally using vmtype and abitype every time this is used (good for users!)
 using namespace neodev::vmtype;
 using namespace neodev::abitype;

@@ -1,14 +1,9 @@
-#include <neodev/smartcontract/framework/SmartContract.hpp>
-#include <neodev/smartcontract/framework/services/neo/Storage.hpp>
-
-using namespace neodev::smartcontract::framework;
-using namespace neodev::smartcontract::framework::services::neo;
+#include <neodev/devpack.hpp>
 
 namespace NeoContract {
 
 ENTRYPOINT
-void
-main(String op, Array params)
+void main(String op, Array params)
 {
    StorageContext ctx = Storage::CurrentContext();
 
