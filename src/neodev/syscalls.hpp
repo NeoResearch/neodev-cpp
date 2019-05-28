@@ -3,26 +3,39 @@
 
 namespace neodev {
 
+
+// convert data types
+// example: _convert_param1_String should convert first parameter to String stackitem (this should be done on compile time)
+#define CONVERT_PARAM1(x) template<typename _1 = _convert_param1_##x>
+struct _convert_param1_String
+{};
+
+
+// just ignore function
 #define NOEMIT() template<typename _1 = _noemit>
 struct _noemit
 {};
 
+
+// emit a syscall named 'x'
+// example: EMIT_SYSCALL(Neo_Storage_GetContext)
+//  =>  _emit_syscall_Neo_Storage_GetContext
 #define EMIT_SYSCALL(x) template<typename _ = _emit_syscall_##x>
 
-// example: EMIT_SYSCALL(Neo_Storage_GetContext) expands to _emit_syscall_Neo_Storage_GetContext
 
+// declare a syscall named 'x' (must be done once)
+// example: DECLARE_SYSCALL(Neo_Storage_GetContext)
+// => //struct _emit_syscall_Neo_Storage_GetContext { };
 #define DECLARE_SYSCALL(x)  \
    struct _emit_syscall_##x \
    {};
 
-// composite syscalls (manually for now)
+
+
+// emit two syscalls named 'x1' and 'x2' (in this order)
 #define EMIT_SYSCALL2(x1, x2) template<typename _1 = _emit_syscall_##x1, typename _2 = _emit_syscall_##x2>
 
-// example: DECLARE_SYSCALL(Neo_Storage_GetContext)
-// =>
-//struct _emit_syscall_Neo_Storage_GetContext
-//{
-//};
+
 
 DECLARE_SYSCALL(Neo_Storage_GetContext)
 DECLARE_SYSCALL(Neo_Storage_Get)

@@ -30,6 +30,9 @@ struct StackItem
 
    NOEMIT()
    void nop();
+
+   NOEMIT()
+   static void use(StackItem&);
 };
 
 // renaming StackItem to a more "beautiful" name

@@ -48,8 +48,10 @@ struct String : vmtype::Object
 };
 
 // convert const char (string) on neo abi String (or ByteArray)
-NOEMIT()
+// will probably read it from a "(data" field starting at a given position (i32.const value)
+CONVERT_PARAM1(String)
 String Str(const char op[]);
+
 //String operator"" _S(const char op[], unsigned int size);
 // TODO: think about operator"" ... working already for some compilers.
 

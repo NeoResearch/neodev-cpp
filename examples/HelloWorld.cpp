@@ -6,7 +6,7 @@ public:
    ENTRYPOINT
    static void main(String op, Array& params)
    {
-      //op.nop();
+      //Object::use(op);
       //params.nop();
 
       StorageContext ctx = Storage::CurrentContext();

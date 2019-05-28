@@ -13,7 +13,7 @@
  (import "env" "__ZN6neodev13smartcontract9framework8services3neo7Storage14CurrentContextINS_36_emit_syscall_Neo_Storage_GetContextEEENS3_14StorageContextEv" (func $__ZN6neodev13smartcontract9framework8services3neo7Storage14CurrentContextINS_36_emit_syscall_Neo_Storage_GetContextEEENS3_14StorageContextEv))
  (import "env" "__ZN6neodev13smartcontract9framework8services3neo7Storage3PutINS_29_emit_syscall_Neo_Storage_PutEEEvNS3_14StorageContextENS_7abitype6StringES9_" (func $__ZN6neodev13smartcontract9framework8services3neo7Storage3PutINS_29_emit_syscall_Neo_Storage_PutEEEvNS3_14StorageContextENS_7abitype6StringES9_ (param i32 i32 i32)))
  (import "env" "__ZN6neodev6vmtype5Array4InitEv" (func $__ZN6neodev6vmtype5Array4InitEv (result i32)))
- (import "env" "__ZN6neodev7abitype3StrINS_7_noemitEEENS0_6StringEPKc" (func $__ZN6neodev7abitype3StrINS_7_noemitEEENS0_6StringEPKc (param i32) (result i32)))
+ (import "env" "__ZN6neodev7abitype3StrINS_22_convert_param1_StringEEENS0_6StringEPKc" (func $__ZN6neodev7abitype3StrINS_22_convert_param1_StringEEENS0_6StringEPKc (param i32) (result i32)))
  (import "env" "__ZN6neodev7abitype6String4InitEv" (func $__ZN6neodev7abitype6String4InitEv (result i32)))
  (global $STACKTOP (mut i32) (i32.const 0))
  (global $STACK_MAX (mut i32) (i32.const 0))
@@ -84,7 +84,7 @@
    (local.get $sp)
   )
   (return
-   (i32.const 0)
+   (i32.const 16)
   )
  )
  (func $__ZN11NeoContract4mainIN6neodev13smartcontract9framework15emit_entrypointEEEvNS1_7abitype6StringERNS1_6vmtype5ArrayE (; 7 ;) (param $$0 i32) (param $$1 i32)
@@ -155,7 +155,7 @@
   )
   (call $__ZN6neodev13smartcontract9framework8services3neo7Storage14CurrentContextINS_36_emit_syscall_Neo_Storage_GetContextEEENS3_14StorageContextEv)
   (local.set $$6
-   (call $__ZN6neodev7abitype3StrINS_7_noemitEEENS0_6StringEPKc
+   (call $__ZN6neodev7abitype3StrINS_22_convert_param1_StringEEENS0_6StringEPKc
     (i32.add
      (global.get $__memory_base)
      (i32.const 0)
@@ -167,7 +167,7 @@
    (local.get $$6)
   )
   (local.set $$7
-   (call $__ZN6neodev7abitype3StrINS_7_noemitEEENS0_6StringEPKc
+   (call $__ZN6neodev7abitype3StrINS_22_convert_param1_StringEEENS0_6StringEPKc
     (i32.add
      (global.get $__memory_base)
      (i32.const 6)
