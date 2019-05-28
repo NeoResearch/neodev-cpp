@@ -28,7 +28,8 @@ struct String : vmtype::Object
 {
    const int type = 0x07;
 
-   static String& Init();
+   // initializes an empty String (should not do anything, just a stub)
+   static String init(); 
 
    [[nodiscard]]
    int length(); //__attribute__((nodiscard));
@@ -50,7 +51,7 @@ struct String : vmtype::Object
 // convert const char (string) on neo abi String (or ByteArray)
 // will probably read it from a "(data" field starting at a given position (i32.const value)
 CONVERT(String)
-String Str(const char op[]);
+String str(const char op[]);
 
 //String operator"" _S(const char op[], unsigned int size);
 // TODO: think about operator"" ... working already for some compilers.

@@ -21,7 +21,7 @@ struct emit_entrypoint
    int main()                \
    {                         \
       f;                     \
-      return 16;              \
+      return 0;              \
    };
 
 class SmartContract

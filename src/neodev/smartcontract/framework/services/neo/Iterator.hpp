@@ -11,13 +11,13 @@ class Iterator
 {
 public:
    EMIT_SYSCALL(Neo_Iterator_Next)
-   static bool Next();
+   static bool next();
 
    EMIT_SYSCALL(Neo_Iterator_Key)
-   static TKey Key();
+   static TKey key();
 
    EMIT_SYSCALL(Neo_Iterator_Value)
-   static TValue Value();
+   static TValue value();
 };
 }
 

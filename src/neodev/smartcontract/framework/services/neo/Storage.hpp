@@ -19,152 +19,152 @@ public:
    /// Returns current StorageContext
    /// </summary>
    EMIT_SYSCALL(Neo_Storage_GetContext)
-   static StorageContext CurrentContext();
+   static StorageContext getContext();
 
    /// <summary>
    /// Returns the ByteArray value corresponding to given ByteArray key for Storage context (faster: generates opcode directly)
    /// </summary>
    EMIT_SYSCALL(Neo_Storage_Get)
-   static ByteArray Get(StorageContext context, ByteArray key);
+   static ByteArray get(StorageContext context, ByteArray key);
 
    /// <summary>
    /// Returns the ByteArray value corresponding to given String key for Storage context (faster: generates opcode directly)
    /// </summary>
    EMIT_SYSCALL(Neo_Storage_Get)
-   static ByteArray Get(StorageContext context, String key);
+   static ByteArray get(StorageContext context, String key);
 
    /// <summary>
    /// Writes ByteArray value on ByteArray key for given Storage context (faster: generates opcode directly)
    /// </summary>
    EMIT_SYSCALL(Neo_Storage_Put)
-   static void Put(StorageContext context, ByteArray key, ByteArray value);
+   static void put(StorageContext context, ByteArray key, ByteArray value);
 
    /// <summary>
    /// Writes BigInt value on ByteArray key for given Storage context (faster: generates opcode directly)
    /// </summary>
    EMIT_SYSCALL(Neo_Storage_Put)
-   static void Put(StorageContext context, ByteArray key, BigInt value);
+   static void put(StorageContext context, ByteArray key, BigInt value);
 
    /// <summary>
    /// Writes String value on ByteArray key for given Storage context (faster: generates opcode directly)
    /// </summary>
    EMIT_SYSCALL(Neo_Storage_Put)
-   static void Put(StorageContext context, ByteArray key, String value);
+   static void put(StorageContext context, ByteArray key, String value);
 
    /// <summary>
    /// Writes ByteArray value on String key for given Storage context (faster: generates opcode directly)
    /// </summary>
    EMIT_SYSCALL(Neo_Storage_Put)
-   static void Put(StorageContext context, String key, ByteArray value);
+   static void put(StorageContext context, String key, ByteArray value);
 
    /// <summary>
    /// Writes BigInt value on String key for given Storage context (faster: generates opcode directly)
    /// </summary>
    EMIT_SYSCALL(Neo_Storage_Put)
-   static void Put(StorageContext context, String key, BigInt value);
+   static void put(StorageContext context, String key, BigInt value);
 
    /// <summary>
    /// Writes String value on String key for given Storage context (faster: generates opcode directly)
    /// </summary>
    EMIT_SYSCALL(Neo_Storage_Put)
-   static void Put(StorageContext context, String key, String value);
+   static void put(StorageContext context, String key, String value);
 
    /// <summary>
    /// Deletes ByteArray key from given Storage context (faster: generates opcode directly)
    /// </summary>
    EMIT_SYSCALL(Neo_Storage_Delete)
-   static void Delete(StorageContext context, ByteArray key);
+   static void del(StorageContext context, ByteArray key);
 
    /// <summary>
    /// Deletes String key from given Storage context (faster: generates opcode directly)
    /// </summary>
 
    EMIT_SYSCALL(Neo_Storage_Delete)
-   static void Delete(StorageContext context, String key);
+   static void del(StorageContext context, String key);
 
    /// <summary>
    /// Returns a ByteArray to ByteArray iterator for a ByteArray prefix on a given Storage context (faster: generates opcode directly)
    /// </summary>
    EMIT_SYSCALL(Neo_Storage_Find)
-   static Iterator<ByteArray, ByteArray> Find(StorageContext context, ByteArray prefix);
+   static Iterator<ByteArray, ByteArray> find(StorageContext context, ByteArray prefix);
 
    /// <summary>
    /// Returns a String to ByteArray iterator for a String prefix on a given Storage context (faster: generates opcode directly)
    /// </summary>
    EMIT_SYSCALL(Neo_Storage_Find)
-   static Iterator<String, ByteArray> Find(StorageContext context, String prefix);
+   static Iterator<String, ByteArray> find(StorageContext context, String prefix);
 
    /// <summary>
    /// Returns the ByteArray value corresponding to given ByteArray key for current Storage context
    /// </summary>
    EMIT_SYSCALL2(Neo_Storage_GetContext, Neo_Storage_Get)
-   static ByteArray Get(ByteArray key);
+   static ByteArray get(ByteArray key);
 
    /// <summary>
    /// Returns the ByteArray value corresponding to given String key for current Storage context
    /// </summary>
    EMIT_SYSCALL2(Neo_Storage_GetContext, Neo_Storage_Get)
-   static ByteArray Get(String key);
+   static ByteArray get(String key);
 
    /// <summary>
    /// Writes ByteArray value on ByteArray key for current Storage context
    /// </summary>
    EMIT_SYSCALL2(Neo_Storage_GetContext, Neo_Storage_Put)
-   static void Put(ByteArray key, ByteArray value);
+   static void put(ByteArray key, ByteArray value);
 
    /// <summary>
    /// Writes BigInt value on ByteArray key for current Storage context
    /// </summary>
    EMIT_SYSCALL2(Neo_Storage_GetContext, Neo_Storage_Put)
-   static void Put(ByteArray key, BigInt value);
+   static void put(ByteArray key, BigInt value);
 
    /// <summary>
    /// Writes String value on ByteArray key for current Storage context
    /// </summary>
    EMIT_SYSCALL2(Neo_Storage_GetContext, Neo_Storage_Put)
-   static void Put(ByteArray key, String value);
+   static void put(ByteArray key, String value);
 
    /// <summary>
    /// Writes ByteArray value on String key for current Storage context
    /// </summary>
    EMIT_SYSCALL2(Neo_Storage_GetContext, Neo_Storage_Put)
-   static void Put(String key, ByteArray value);
+   static void put(String key, ByteArray value);
 
    /// <summary>
    /// Writes BigInt value on String key for current Storage context
    /// </summary>
    EMIT_SYSCALL2(Neo_Storage_GetContext, Neo_Storage_Put)
-   static void Put(String key, BigInt value);
+   static void put(String key, BigInt value);
 
    /// <summary>
    /// Writes String value on String key for current Storage context
    /// </summary>
    EMIT_SYSCALL2(Neo_Storage_GetContext, Neo_Storage_Put)
-   static void Put(String key, String value);
+   static void put(String key, String value);
 
    /// <summary>
    /// Deletes ByteArray key from current Storage context
    /// </summary>
    EMIT_SYSCALL2(Neo_Storage_GetContext, Neo_Storage_Delete)
-   static void Delete(ByteArray key);
+   static void del(ByteArray key);
 
    /// <summary>
    /// Deletes String key from given Storage context
    /// </summary>
    EMIT_SYSCALL2(Neo_Storage_GetContext, Neo_Storage_Delete)
-   static void Delete(String key);
+   static void del(String key);
 
    /// <summary>
    /// Returns a ByteArray to ByteArray iterator for a ByteArray prefix on current Storage context
    /// </summary>
    EMIT_SYSCALL2(Neo_Storage_GetContext, Neo_Storage_Find)
-   static Iterator<ByteArray, ByteArray> Find(ByteArray prefix);
+   static Iterator<ByteArray, ByteArray> find(ByteArray prefix);
 
    /// <summary>
    /// Returns a String to ByteArray iterator for a String prefix on current Storage context
    /// </summary>
    EMIT_SYSCALL2(Neo_Storage_GetContext, Neo_Storage_Find)
-   static Iterator<String, ByteArray> Find(String prefix);
+   static Iterator<String, ByteArray> find(String prefix);
 };
 }
 

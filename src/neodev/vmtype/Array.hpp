@@ -11,7 +11,9 @@ struct Array : Object
 {
    const int type = 0x10;
 
-   static Array& Init();
+   // initializes an empty array ref (should not do anything, just a stub)
+   NOEMIT()
+   static Array& init();
 
    int size();
 
