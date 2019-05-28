@@ -5,9 +5,9 @@ namespace neodev {
 
 
 // convert data types
-// example: _convert_param1_String should convert first parameter to String stackitem (this should be done on compile time)
-#define CONVERT_PARAM1(x) template<typename _1 = _convert_param1_##x>
-struct _convert_param1_String
+// example: _convert_String should convert first parameter to String stackitem (this should be done on compile time)
+#define CONVERT(x) template<typename _1 = _convert_##x>
+struct _convert_String
 {};
 
 

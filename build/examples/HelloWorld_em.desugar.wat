@@ -9,7 +9,7 @@
   (import "env" "__ZN6neodev13smartcontract9framework8services3neo7Storage14CurrentContextINS_36_emit_syscall_Neo_Storage_GetContextEEENS3_14StorageContextEv" (func $__ZN6neodev13smartcontract9framework8services3neo7Storage14CurrentContextINS_36_emit_syscall_Neo_Storage_GetContextEEENS3_14StorageContextEv (type 1)))
   (import "env" "__ZN6neodev13smartcontract9framework8services3neo7Storage3PutINS_29_emit_syscall_Neo_Storage_PutEEEvNS3_14StorageContextENS_7abitype6StringES9_" (func $__ZN6neodev13smartcontract9framework8services3neo7Storage3PutINS_29_emit_syscall_Neo_Storage_PutEEEvNS3_14StorageContextENS_7abitype6StringES9_ (type 2)))
   (import "env" "__ZN6neodev6vmtype5Array4InitEv" (func $__ZN6neodev6vmtype5Array4InitEv (type 3)))
-  (import "env" "__ZN6neodev7abitype3StrINS_22_convert_param1_StringEEENS0_6StringEPKc" (func $__ZN6neodev7abitype3StrINS_22_convert_param1_StringEEENS0_6StringEPKc (type 4)))
+  (import "env" "__ZN6neodev7abitype3StrINS_15_convert_StringEEENS0_6StringEPKc" (func $__ZN6neodev7abitype3StrINS_15_convert_StringEEENS0_6StringEPKc (type 4)))
   (import "env" "__ZN6neodev7abitype6String4InitEv" (func $__ZN6neodev7abitype6String4InitEv (type 3)))
   (import "env" "__memory_base" (global (;0;) i32))
   (import "env" "__table_base" (global (;1;) i32))
@@ -100,7 +100,7 @@
     global.get 0
     i32.const 0
     i32.add
-    call $__ZN6neodev7abitype3StrINS_22_convert_param1_StringEEENS0_6StringEPKc
+    call $__ZN6neodev7abitype3StrINS_15_convert_StringEEENS0_6StringEPKc
     local.set 9
     local.get 7
     local.get 9
@@ -108,7 +108,7 @@
     global.get 0
     i32.const 6
     i32.add
-    call $__ZN6neodev7abitype3StrINS_22_convert_param1_StringEEENS0_6StringEPKc
+    call $__ZN6neodev7abitype3StrINS_15_convert_StringEEENS0_6StringEPKc
     local.set 10
     local.get 8
     local.get 10
