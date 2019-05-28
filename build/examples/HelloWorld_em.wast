@@ -3,6 +3,7 @@
  (type $FUNCSIG$v (func))
  (type $FUNCSIG$viii (func (param i32 i32 i32)))
  (type $FUNCSIG$i (func (result i32)))
+ (type $FUNCSIG$ii (func (param i32) (result i32)))
  (import "env" "memory" (memory $memory 256))
  (data (global.get $__memory_base) "Hello\00World")
  (import "env" "table" (table $table 0 funcref))
@@ -12,7 +13,7 @@
  (import "env" "__ZN6neodev13smartcontract9framework8services3neo7Storage14CurrentContextINS_36_emit_syscall_Neo_Storage_GetContextEEENS3_14StorageContextEv" (func $__ZN6neodev13smartcontract9framework8services3neo7Storage14CurrentContextINS_36_emit_syscall_Neo_Storage_GetContextEEENS3_14StorageContextEv))
  (import "env" "__ZN6neodev13smartcontract9framework8services3neo7Storage3PutINS_29_emit_syscall_Neo_Storage_PutEEEvNS3_14StorageContextENS_7abitype6StringES9_" (func $__ZN6neodev13smartcontract9framework8services3neo7Storage3PutINS_29_emit_syscall_Neo_Storage_PutEEEvNS3_14StorageContextENS_7abitype6StringES9_ (param i32 i32 i32)))
  (import "env" "__ZN6neodev6vmtype5Array4InitEv" (func $__ZN6neodev6vmtype5Array4InitEv (result i32)))
- (import "env" "__ZN6neodev7abitype3StrINS_7_noemitEEENS0_6StringEPKc" (func $__ZN6neodev7abitype3StrINS_7_noemitEEENS0_6StringEPKc (param i32)))
+ (import "env" "__ZN6neodev7abitype3StrINS_7_noemitEEENS0_6StringEPKc" (func $__ZN6neodev7abitype3StrINS_7_noemitEEENS0_6StringEPKc (param i32) (result i32)))
  (import "env" "__ZN6neodev7abitype6String4InitEv" (func $__ZN6neodev7abitype6String4InitEv (result i32)))
  (global $STACKTOP (mut i32) (i32.const 0))
  (global $STACK_MAX (mut i32) (i32.const 0))
@@ -24,6 +25,7 @@
   (local $$0 i32)
   (local $$1 i32)
   (local $$2 i32)
+  (local $$3 i32)
   (local $label i32)
   (local $sp i32)
   (local.set $sp
@@ -47,33 +49,36 @@
   (local.set $$$byval_copy
    (i32.add
     (local.get $sp)
-    (i32.const 5)
+    (i32.const 8)
    )
   )
   (local.set $$1
-   (i32.add
-    (local.get $sp)
-    (i32.const 4)
-   )
+   (local.get $sp)
   )
   (local.set $$0
    (i32.const 0)
   )
-  (drop
+  (local.set $$2
    (call $__ZN6neodev7abitype6String4InitEv)
   )
-  (local.set $$2
+  (i32.store
+   (local.get $$1)
+   (i32.load
+    (local.get $$2)
+   )
+  )
+  (local.set $$3
    (call $__ZN6neodev6vmtype5Array4InitEv)
   )
-  (i32.store8
+  (i32.store
    (local.get $$$byval_copy)
-   (i32.load8_s
+   (i32.load
     (local.get $$1)
    )
   )
   (call $__ZN11NeoContract4mainIN6neodev13smartcontract9framework15emit_entrypointEEEvNS1_7abitype6StringERNS1_6vmtype5ArrayE
    (local.get $$$byval_copy)
-   (local.get $$2)
+   (local.get $$3)
   )
   (global.set $STACKTOP
    (local.get $sp)
@@ -90,6 +95,8 @@
   (local $$3 i32)
   (local $$4 i32)
   (local $$5 i32)
+  (local $$6 i32)
+  (local $$7 i32)
   (local $label i32)
   (local $sp i32)
   (local.set $sp
@@ -98,7 +105,7 @@
   (global.set $STACKTOP
    (i32.add
     (global.get $STACKTOP)
-    (i32.const 16)
+    (i32.const 32)
    )
   )
   (if
@@ -107,60 +114,69 @@
     (global.get $STACK_MAX)
    )
    (call $abortStackOverflow
-    (i32.const 16)
+    (i32.const 32)
    )
   )
   (local.set $$$byval_copy2
    (i32.add
     (local.get $sp)
-    (i32.const 9)
+    (i32.const 20)
    )
   )
   (local.set $$$byval_copy1
    (i32.add
     (local.get $sp)
-    (i32.const 8)
+    (i32.const 16)
    )
   )
   (local.set $$$byval_copy
    (i32.add
     (local.get $sp)
-    (i32.const 7)
+    (i32.const 12)
    )
   )
   (local.set $$3
    (i32.add
     (local.get $sp)
-    (i32.const 6)
+    (i32.const 24)
    )
   )
   (local.set $$4
    (i32.add
     (local.get $sp)
-    (i32.const 5)
+    (i32.const 4)
    )
   )
   (local.set $$5
-   (i32.add
-    (local.get $sp)
-    (i32.const 4)
-   )
+   (local.get $sp)
   )
   (local.set $$2
    (local.get $$1)
   )
   (call $__ZN6neodev13smartcontract9framework8services3neo7Storage14CurrentContextINS_36_emit_syscall_Neo_Storage_GetContextEEENS3_14StorageContextEv)
-  (call $__ZN6neodev7abitype3StrINS_7_noemitEEENS0_6StringEPKc
-   (i32.add
-    (global.get $__memory_base)
-    (i32.const 0)
+  (local.set $$6
+   (call $__ZN6neodev7abitype3StrINS_7_noemitEEENS0_6StringEPKc
+    (i32.add
+     (global.get $__memory_base)
+     (i32.const 0)
+    )
    )
   )
-  (call $__ZN6neodev7abitype3StrINS_7_noemitEEENS0_6StringEPKc
-   (i32.add
-    (global.get $__memory_base)
-    (i32.const 6)
+  (i32.store
+   (local.get $$4)
+   (local.get $$6)
+  )
+  (local.set $$7
+   (call $__ZN6neodev7abitype3StrINS_7_noemitEEENS0_6StringEPKc
+    (i32.add
+     (global.get $__memory_base)
+     (i32.const 6)
+    )
    )
+  )
+  (i32.store
+   (local.get $$5)
+   (local.get $$7)
   )
   (i32.store8
    (local.get $$$byval_copy)
@@ -168,15 +184,15 @@
     (local.get $$3)
    )
   )
-  (i32.store8
+  (i32.store
    (local.get $$$byval_copy1)
-   (i32.load8_s
+   (i32.load
     (local.get $$4)
    )
   )
-  (i32.store8
+  (i32.store
    (local.get $$$byval_copy2)
-   (i32.load8_s
+   (i32.load
     (local.get $$5)
    )
   )

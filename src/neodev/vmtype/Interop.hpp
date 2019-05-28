@@ -5,8 +5,10 @@ namespace neodev {
 
 namespace vmtype {
 
-struct Interop
+struct Interop : Object
 {
+   const int type = 0xf0;
+
    // convert Interop Interface to boolean
    static bool toBool();
 };

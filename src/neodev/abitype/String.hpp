@@ -26,6 +26,8 @@ namespace abitype {
 
 struct String : vmtype::Object
 {
+   const int type = 0x07;
+
    static String& Init();
 
    [[nodiscard]]

@@ -5,8 +5,9 @@ namespace neodev {
 
 namespace vmtype {
 
-struct Boolean
+struct Boolean : Object
 {
+   const int type = 0x01;
 };
 
 } // namespace vmtype

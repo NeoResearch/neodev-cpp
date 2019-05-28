@@ -6,6 +6,9 @@ public:
    ENTRYPOINT
    static void main(String op, Array& params)
    {
+      //op.nop();
+      //params.nop();
+
       StorageContext ctx = Storage::CurrentContext();
 
       Storage::Put(ctx, Str("Hello"), Str("World"));

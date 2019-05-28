@@ -22,8 +22,10 @@ extern "C" int __op(int x)
 //[[deprecated("because Bla")]]
 //extern "C" int Size4() __attribute__((deprecated("tst"),alias("__op")));
 
-struct ByteArray
+struct ByteArray : Object
 {
+   const int type = 0x05;
+
    [[nodiscard]] static int length();
 
    [[nodiscard]] static ByteArray concat(ByteArray ba);

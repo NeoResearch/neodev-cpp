@@ -1,6 +1,8 @@
 #ifndef NEODEV_VMTYPE_STACKITEM_HPP
 #define NEODEV_VMTYPE_STACKITEM_HPP
 
+#include "../syscalls.hpp"
+
 namespace neodev {
 
 namespace vmtype {
@@ -26,6 +28,8 @@ struct StackItem
 
    int asInt();
 
+   NOEMIT()
+   void nop();
 };
 
 // renaming StackItem to a more "beautiful" name
