@@ -1,0 +1,6 @@
+[submodule "clang-llvm/clang"]
+	path = clang-llvm/clang
+	url = git@github.com:llvm-mirror/clang.git
+[submodule "clang-llvm/llvm"]
+	path = clang-llvm/llvm
+	url = git@github.com:llvm-mirror/llvm.git

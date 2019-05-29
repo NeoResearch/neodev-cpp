@@ -1,0 +1,13 @@
+cd clang
+git checkout e4de58127fa1d8d22ee8043cef9b4d8a807b6cde
+cd ..
+cd llvm
+git checkout 08b86793476e08fc0937e70058e2a94808c988e7
+cd ..
+mkdir build
+cd build
+#cmake -DLLVM_ENABLE_PROJECTS=clang -G "Unix Makefiles" ../llvm
+cmake -DLLVM_ENABLE_PROJECTS=clang -G "Unix Makefiles" -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=WebAssembly ../llvm
+# perhaps better to include -DLLVM_TARGETS_TO_BUILD=
+# otherwise it may take several hours to build + 31GB disk
+make
