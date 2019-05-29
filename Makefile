@@ -1,7 +1,7 @@
-CLANG_BIN=/home/imcoelho/git-reps/make-llvm/build/bin
-BINARYEN_BIN=/home/imcoelho/git-reps/binaryen/build/bin
-WABT_BIN=/home/imcoelho/git-reps/wabt/build
-WABT_BIN_NEW=/home/imcoelho/git-reps/wabt/bin
+CLANG_BIN=./clang-llvm/build/bin
+BINARYEN_BIN=./binaryen/build/bin
+WABT_BIN=./wabt/build
+WABT_BIN_NEW=./wabt-new/bin
 
 all: examples #spectests
 	cp build/examples/HelloWorld.wast wat2json/input.wast
