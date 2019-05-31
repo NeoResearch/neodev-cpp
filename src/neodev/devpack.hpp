@@ -13,6 +13,8 @@
 // ===========================================
 // for testing
 
+#include <string> // STD C++
+
 #define NO_STORAGE false
 #define HAS_STORAGE true
 #define NO_DYNAMICINVOKE false
@@ -22,9 +24,12 @@ struct TestContractFeatures
 {
    const bool storage;
    const bool dynamicInvoke;
-   TestContractFeatures(bool _storage, bool _dynamicInvoke)
+   const std::string name;
+
+   TestContractFeatures(bool _storage, bool _dynamicInvoke, std::string _name)
      : storage(_storage)
      , dynamicInvoke(_dynamicInvoke)
+     , name(_name)
    {
    }
 };
@@ -66,11 +71,11 @@ struct emit_entrypoint
 
 #ifdef NEODEV_CPP_TEST
 // global function that returns contract capabilities
-#define DECLARE_MAIN(f, storage, dyninvoke) \
-   TestContractFeatures _get_contract() { return TestContractFeatures(storage, dyninvoke); };
+#define DECLARE_MAIN(f, storage, dyninvoke, name) \
+   TestContractFeatures _get_contract() { return TestContractFeatures(storage, dyninvoke, name); };
 #else
 // ensures compiler won't optimize-out the main method ;)
-#define DECLARE_MAIN(f, storage, dyninvoke)                          \
+#define DECLARE_MAIN(f, storage, dyninvoke, name)                    \
    _ContractFeatures<storage, dyninvoke> _declare_contract_features; \
    int main()                                                        \
    {                                                                 \

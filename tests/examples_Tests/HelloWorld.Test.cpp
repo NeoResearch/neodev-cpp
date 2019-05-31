@@ -12,6 +12,11 @@ using namespace std;
 TestContractFeatures f = ::_get_contract();
 #endif
 
+TEST(ExampleHelloWorldTests, Test_Name)
+{
+   EXPECT_EQ(f.name, "HelloWorld");
+}
+
 TEST(ExampleHelloWorldTests, Test_Storage_Is_True)
 {
    String s;
