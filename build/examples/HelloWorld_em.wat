@@ -6,7 +6,7 @@
   (type (;4;) (func (param i32) (result i32)))
   (type (;5;) (func (param i32 i32)))
   (import "env" "abortStackOverflow" (func $abortStackOverflow (type 0)))
-  (import "env" "__ZN16ContractFeaturesI20_feature_has_storage21_feature_no_dyninvokeE6deployEv" (func $__ZN16ContractFeaturesI20_feature_has_storage21_feature_no_dyninvokeE6deployEv (type 1)))
+  (import "env" "__ZN17_ContractFeaturesI20_feature_has_storage21_feature_no_dyninvokeE6deployEv" (func $__ZN17_ContractFeaturesI20_feature_has_storage21_feature_no_dyninvokeE6deployEv (type 1)))
   (import "env" "__ZN6neodev13smartcontract9framework8services3neo7Storage10getContextINS_36_emit_syscall_Neo_Storage_GetContextEEENS3_14StorageContextEv" (func $__ZN6neodev13smartcontract9framework8services3neo7Storage10getContextINS_36_emit_syscall_Neo_Storage_GetContextEEENS3_14StorageContextEv (type 1)))
   (import "env" "__ZN6neodev13smartcontract9framework8services3neo7Storage3putINS_29_emit_syscall_Neo_Storage_PutEEEvNS3_14StorageContextENS_7abitype6StringES9_" (func $__ZN6neodev13smartcontract9framework8services3neo7Storage3putINS_29_emit_syscall_Neo_Storage_PutEEEvNS3_14StorageContextENS_7abitype6StringES9_ (type 2)))
   (import "env" "__ZN6neodev6vmtype5Array4initINS_7_noemitEEERS1_v" (func $__ZN6neodev6vmtype5Array4initINS_7_noemitEEERS1_v (type 3)))
@@ -39,7 +39,7 @@
     local.set 2
     i32.const 0
     local.set 1
-    call $__ZN16ContractFeaturesI20_feature_has_storage21_feature_no_dyninvokeE6deployEv
+    call $__ZN17_ContractFeaturesI20_feature_has_storage21_feature_no_dyninvokeE6deployEv
     call $__ZN6neodev7abitype6String4initEv
     local.set 3
     local.get 2

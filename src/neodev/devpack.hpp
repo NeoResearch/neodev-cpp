@@ -9,6 +9,26 @@
 // TODO: create a neo.hpp or neoservices.hpp
 #include <neodev/smartcontract/framework/services/neo/Storage.hpp>
 
+#ifdef NEODEV_CPP_TEST
+// ===========================================
+// for testing
+
+#define NO_STORAGE false
+#define HAS_STORAGE true
+#define NO_DYNAMICINVOKE false
+#define HAS_DYNAMICINVOKE true
+
+struct TestContractFeatures
+{
+   const bool storage;
+   const bool dynamicInvoke;
+   TestContractFeatures(bool _storage, bool _dynamicInvoke)
+     : storage(_storage)
+     , dynamicInvoke(_dynamicInvoke)
+   {
+   }
+};
+#else
 // global deploy structures
 struct _feature_has_storage
 {};
@@ -25,10 +45,13 @@ struct _feature_no_dyninvoke
 #define HAS_DYNAMICINVOKE _feature_has_dyninvoke
 
 template<typename storage, typename dynamicInvoke>
-struct ContractFeatures
+struct _ContractFeatures
 {
    static void deploy();
 };
+#endif
+
+// ===========================================
 
 // devpack main
 
@@ -42,24 +65,19 @@ struct emit_entrypoint
 #define ENTRYPOINT template<typename _emit = emit_entrypoint>
 
 #ifdef NEODEV_CPP_TEST
-// main on tests (TODO: perhaps declare Storage, DynInvoke and other features here... to pass for test engine)
-#define DECLARE_MAIN(f, storage, dyninvoke) void _nodev_nothing(){}; //\
-   //int main()                \
-   //{                         \
-   //   f;                     \
-   //   return 0;              \
-   //};
+// global function that returns contract capabilities
+#define DECLARE_MAIN(f, storage, dyninvoke) \
+   TestContractFeatures _get_contract() { return TestContractFeatures(storage, dyninvoke); };
 #else
 // ensures compiler won't optimize-out the main method ;)
-#define DECLARE_MAIN(f, storage, dyninvoke)                         \
-   ContractFeatures<storage, dyninvoke> _declare_contract_features; \
-   int main()                                                       \
-   {                                                                \
-      _declare_contract_features.deploy();                          \
-      f;                                                            \
-      return 0;                                                     \
+#define DECLARE_MAIN(f, storage, dyninvoke)                          \
+   _ContractFeatures<storage, dyninvoke> _declare_contract_features; \
+   int main()                                                        \
+   {                                                                 \
+      _declare_contract_features.deploy();                           \
+      f;                                                             \
+      return 0;                                                      \
    };
-
 #endif
 
 // globally using vmtype and abitype every time this is used (good for users!)

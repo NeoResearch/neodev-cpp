@@ -7,22 +7,20 @@
 using namespace std;
 //using namespace neodev;
 
-TEST(ExampleHelloWorldTests, Test_ReadByte_0x02)
+// takes this when flag -DNEODEV_CPP_TEST is active
+#ifdef NEODEV_CPP_TEST
+TestContractFeatures f = ::_get_contract();
+#endif
+
+TEST(ExampleHelloWorldTests, Test_Storage_Is_True)
 {
    String s;
    Array a;
-   NeoContract::main(s,a);
-   EXPECT_EQ(1,1);
+   NeoContract::main(s, a);
+   EXPECT_EQ(f.storage, true);
 }
 
-TEST(ExampleHelloWorldTests, Test_ReadByte_0x0102030405)
+TEST(ExampleHelloWorldTests, Test_Dynamic_Invoke_Is_False)
 {
-   //vbyte param = { 0x01, 0x02, 0x03, 0x04, 0x05 };
-   //BinaryReader reader(param);
-   //EXPECT_EQ(reader.ReadByte(), 0x01);
-   //EXPECT_EQ(reader.ReadByte(), 0x02);
-   //EXPECT_EQ(reader.ReadByte(), 0x03);
-   //EXPECT_EQ(reader.ReadByte(), 0x04);
-   //EXPECT_EQ(reader.ReadByte(), 0x05);
-   EXPECT_EQ(1,1);
+   EXPECT_EQ(f.dynamicInvoke, false);
 }
