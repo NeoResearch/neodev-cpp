@@ -1,6 +1,10 @@
 #ifndef NEODEV_VMTYPE_BYTEARRAY_HPP
 #define NEODEV_VMTYPE_BYTEARRAY_HPP
 
+#ifdef NEODEV_CPP_TEST
+#include<string>
+#endif
+
 namespace neodev {
 
 // helper type: byte
@@ -25,6 +29,15 @@ extern "C" int __op(int x)
 struct ByteArray : Object
 {
    const int type = 0x05;
+
+   #ifdef NEODEV_CPP_TEST
+   std::string hex_str;
+
+   ByteArray(std::string _hex_str) :
+       hex_str(_hex_str)
+   {
+   }
+   #endif
 
    [[nodiscard]] static int length();
 

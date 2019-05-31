@@ -3,10 +3,25 @@
 
 #include "../../../../types.hpp"
 
+#ifdef NEODEV_CPP_TEST
+#include <map>
+#include <string>
+#include "../../../../devpacktest.h"
+#endif
+
 namespace neodev::smartcontract::framework::services::neo {
 
 struct StorageContext
 {
+#ifdef NEODEV_CPP_TEST
+   // implement real storage
+   InternalStorage& contractStorage;
+
+   StorageContext(InternalStorage& _contractStorage)
+     : contractStorage(_contractStorage)
+   {
+   }
+#endif
 };
 
 } // namespace

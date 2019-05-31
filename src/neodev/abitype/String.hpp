@@ -4,6 +4,10 @@
 #include "../syscalls.hpp"
 #include "../vmtype/StackItem.hpp"
 
+#ifdef NEODEV_CPP_TEST
+#include<string>
+#endif 
+
 namespace neodev {
 
 namespace abitype {
@@ -27,16 +31,17 @@ struct String : vmtype::Object
    const int type = 0x07;
 
 #ifdef NEODEV_CPP_TEST
-   const char* str_base; // immutable class
+   std::string str_base; // immutable class
    String(const char op[])
      : str_base(op)
    {
    }
 
    String() // why use this?
-     : str_base(nullptr)
+     : str_base("")
    {
    }
+
 #endif
 
    // initializes an empty String (should not do anything, just a stub)

@@ -1,15 +1,10 @@
 #ifndef NEODEV_DEVPACK_HPP
 #define NEODEV_DEVPACK_HPP
 
-// basic stuff for C++ development
-
-#include "smartcontract/framework/SmartContract.hpp"
-#include "types.hpp"
-
-// TODO: create a neo.hpp or neoservices.hpp
-#include <neodev/smartcontract/framework/services/neo/Storage.hpp>
-
 #ifdef NEODEV_CPP_TEST
+
+#include "devpacktest.h"
+
 // ===========================================
 // for testing
 
@@ -71,8 +66,10 @@ struct emit_entrypoint
 
 #ifdef NEODEV_CPP_TEST
 // global function that returns contract capabilities
-#define DECLARE_MAIN(f, storage, dyninvoke, name) \
-   TestContractFeatures _get_contract() { return TestContractFeatures(storage, dyninvoke, name); };
+#define DECLARE_MAIN(f, storage, dyninvoke, name)                                                   \
+   namespace neodev {                                                                               \
+   TestContractFeatures _get_contract() { return TestContractFeatures(storage, dyninvoke, name); }; \
+   }
 #else
 // ensures compiler won't optimize-out the main method ;)
 #define DECLARE_MAIN(f, storage, dyninvoke, name)                    \
@@ -84,6 +81,23 @@ struct emit_entrypoint
       return 0;                                                      \
    };
 #endif
+
+// global system storage (for tests)
+#ifdef NEODEV_CPP_TEST
+// TODO: perhaps use scripthash
+namespace neodev {
+typedef std::map<std::string, std::string> InternalStorage;
+std::map<std::string, InternalStorage> _systemStorage;
+}
+#endif
+
+// basic stuff for C++ development
+
+#include "smartcontract/framework/SmartContract.hpp"
+#include "types.hpp"
+
+// TODO: create a neo.hpp or neoservices.hpp
+#include <neodev/smartcontract/framework/services/neo/Storage.hpp>
 
 // globally using vmtype and abitype every time this is used (good for users!)
 using namespace neodev::vmtype;

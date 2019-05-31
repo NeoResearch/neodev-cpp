@@ -168,21 +168,33 @@ public:
 };
 
 // Implementations for C++ native tests (TODO: move for external file and #include here)
+#include "../../../../devpacktest.h"
 
 #ifdef NEODEV_CPP_TEST
+// implementation of Storage stuff for native tests
+
 EMIT_SYSCALL(Neo_Storage_GetContext)
-StorageContext Storage::getContext()
+StorageContext
+Storage::getContext()
 {
-   return StorageContext();
+   return StorageContext(neodev::_systemStorage[neodev::_get_contract().name]);
 }
 
 EMIT_SYSCALL(Neo_Storage_Put)
-void Storage::put(StorageContext context, String key, String value)
+void
+Storage::put(StorageContext context, String key, String value)
 {
+   // TODO: convert to hex string before! all data must be in hex format
+   context.contractStorage[key.str_base] = value.str_base;
+}
 
+EMIT_SYSCALL(Neo_Storage_Get)
+ByteArray
+Storage::get(StorageContext context, String key)
+{
+   return ByteArray(context.contractStorage[key.str_base]);
 }
 #endif
-
 }
 
 #endif // NEODEV_SMARTCONTRACT_FRAMEWORK_SERVICES_NEO_STORAGE_HPP
