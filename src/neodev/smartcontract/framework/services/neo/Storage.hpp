@@ -166,6 +166,23 @@ public:
    EMIT_SYSCALL2(Neo_Storage_GetContext, Neo_Storage_Find)
    static Iterator<String, ByteArray> find(String prefix);
 };
+
+// Implementations for C++ native tests (TODO: move for external file and #include here)
+
+#ifdef NEODEV_CPP_TEST
+EMIT_SYSCALL(Neo_Storage_GetContext)
+StorageContext Storage::getContext()
+{
+   return StorageContext();
+}
+
+EMIT_SYSCALL(Neo_Storage_Put)
+void Storage::put(StorageContext context, String key, String value)
+{
+
+}
+#endif
+
 }
 
 #endif // NEODEV_SMARTCONTRACT_FRAMEWORK_SERVICES_NEO_STORAGE_HPP

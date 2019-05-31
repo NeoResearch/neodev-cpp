@@ -11,6 +11,19 @@ struct Array : Object
 {
    const int type = 0x10;
 
+#ifdef NEODEV_CPP_TEST
+   const Object* array_base; // immutable class
+   Array(const Object op[])
+     : array_base(op)
+   {
+   }
+
+   Array() // why use this?
+     : array_base(nullptr)
+   {
+   }
+#endif
+
    // initializes an empty array ref (should not do anything, just a stub)
    NOEMIT()
    static Array& init();
