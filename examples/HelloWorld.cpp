@@ -13,4 +13,4 @@ public:
 };
 
 // declare entrypoint NeoContract::main as real main function
-DECLARE_MAIN(NeoContract::main(String::init(), Array::init()))
+DECLARE_MAIN(NeoContract::main(String::init(), Array::init()), HAS_STORAGE, NO_DYNAMICINVOKE)

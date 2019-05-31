@@ -6,6 +6,7 @@
   (type (;4;) (func (param i32) (result i32)))
   (type (;5;) (func (param i32 i32)))
   (import "env" "abortStackOverflow" (func $abortStackOverflow (type 0)))
+  (import "env" "__ZN16ContractFeaturesI20_feature_has_storage21_feature_no_dyninvokeE6deployEv" (func $__ZN16ContractFeaturesI20_feature_has_storage21_feature_no_dyninvokeE6deployEv (type 1)))
   (import "env" "__ZN6neodev13smartcontract9framework8services3neo7Storage10getContextINS_36_emit_syscall_Neo_Storage_GetContextEEENS3_14StorageContextEv" (func $__ZN6neodev13smartcontract9framework8services3neo7Storage10getContextINS_36_emit_syscall_Neo_Storage_GetContextEEENS3_14StorageContextEv (type 1)))
   (import "env" "__ZN6neodev13smartcontract9framework8services3neo7Storage3putINS_29_emit_syscall_Neo_Storage_PutEEEvNS3_14StorageContextENS_7abitype6StringES9_" (func $__ZN6neodev13smartcontract9framework8services3neo7Storage3putINS_29_emit_syscall_Neo_Storage_PutEEEvNS3_14StorageContextENS_7abitype6StringES9_ (type 2)))
   (import "env" "__ZN6neodev6vmtype5Array4initINS_7_noemitEEERS1_v" (func $__ZN6neodev6vmtype5Array4initINS_7_noemitEEERS1_v (type 3)))
@@ -38,6 +39,7 @@
     local.set 2
     i32.const 0
     local.set 1
+    call $__ZN16ContractFeaturesI20_feature_has_storage21_feature_no_dyninvokeE6deployEv
     call $__ZN6neodev7abitype6String4initEv
     local.set 3
     local.get 2
@@ -51,12 +53,12 @@
     i32.store
     local.get 0
     local.get 4
-    call $__ZN11NeoContract4mainIN6neodev13smartcontract9framework15emit_entrypointEEEvNS1_7abitype6StringERNS1_6vmtype5ArrayE
+    call $__ZN11NeoContract4mainI15emit_entrypointEEvN6neodev7abitype6StringERNS2_6vmtype5ArrayE
     local.get 6
     global.set 2
     i32.const 0
     return)
-  (func $__ZN11NeoContract4mainIN6neodev13smartcontract9framework15emit_entrypointEEEvNS1_7abitype6StringERNS1_6vmtype5ArrayE (type 5) (param i32 i32)
+  (func $__ZN11NeoContract4mainI15emit_entrypointEEvN6neodev7abitype6StringERNS2_6vmtype5ArrayE (type 5) (param i32 i32)
     (local i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32)
     global.get 2
     local.set 12
@@ -143,6 +145,8 @@
   (global (;2;) (mut i32) (i32.const 0))
   (global (;3;) (mut i32) (i32.const 0))
   (global (;4;) (mut f32) (f32.const 0x0p+0 (;=0;)))
+  (global (;5;) i32 (i32.const 5242896))
   (export "__post_instantiate" (func $__post_instantiate))
   (export "_main" (func $_main))
+  (export "__declare_contract_features" (global 5))
   (data (;0;) (global.get 0) "Hello\00World"))

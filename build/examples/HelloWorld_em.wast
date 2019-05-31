@@ -10,6 +10,7 @@
  (import "env" "__memory_base" (global $__memory_base i32))
  (import "env" "__table_base" (global $__table_base i32))
  (import "env" "abortStackOverflow" (func $abortStackOverflow (param i32)))
+ (import "env" "__ZN16ContractFeaturesI20_feature_has_storage21_feature_no_dyninvokeE6deployEv" (func $__ZN16ContractFeaturesI20_feature_has_storage21_feature_no_dyninvokeE6deployEv))
  (import "env" "__ZN6neodev13smartcontract9framework8services3neo7Storage10getContextINS_36_emit_syscall_Neo_Storage_GetContextEEENS3_14StorageContextEv" (func $__ZN6neodev13smartcontract9framework8services3neo7Storage10getContextINS_36_emit_syscall_Neo_Storage_GetContextEEENS3_14StorageContextEv))
  (import "env" "__ZN6neodev13smartcontract9framework8services3neo7Storage3putINS_29_emit_syscall_Neo_Storage_PutEEEvNS3_14StorageContextENS_7abitype6StringES9_" (func $__ZN6neodev13smartcontract9framework8services3neo7Storage3putINS_29_emit_syscall_Neo_Storage_PutEEEvNS3_14StorageContextENS_7abitype6StringES9_ (param i32 i32 i32)))
  (import "env" "__ZN6neodev6vmtype5Array4initINS_7_noemitEEERS1_v" (func $__ZN6neodev6vmtype5Array4initINS_7_noemitEEERS1_v (result i32)))
@@ -18,9 +19,11 @@
  (global $STACKTOP (mut i32) (i32.const 0))
  (global $STACK_MAX (mut i32) (i32.const 0))
  (global $f0 (mut f32) (f32.const 0))
+ (global $__declare_contract_features i32 (i32.const 5242896))
  (export "__post_instantiate" (func $__post_instantiate))
  (export "_main" (func $_main))
- (func $_main (; 6 ;) (result i32)
+ (export "__declare_contract_features" (global $__declare_contract_features))
+ (func $_main (; 7 ;) (result i32)
   (local $$$byval_copy i32)
   (local $$0 i32)
   (local $$1 i32)
@@ -58,6 +61,7 @@
   (local.set $$0
    (i32.const 0)
   )
+  (call $__ZN16ContractFeaturesI20_feature_has_storage21_feature_no_dyninvokeE6deployEv)
   (local.set $$2
    (call $__ZN6neodev7abitype6String4initEv)
   )
@@ -74,7 +78,7 @@
     (local.get $$1)
    )
   )
-  (call $__ZN11NeoContract4mainIN6neodev13smartcontract9framework15emit_entrypointEEEvNS1_7abitype6StringERNS1_6vmtype5ArrayE
+  (call $__ZN11NeoContract4mainI15emit_entrypointEEvN6neodev7abitype6StringERNS2_6vmtype5ArrayE
    (local.get $$$byval_copy)
    (local.get $$3)
   )
@@ -85,7 +89,7 @@
    (i32.const 0)
   )
  )
- (func $__ZN11NeoContract4mainIN6neodev13smartcontract9framework15emit_entrypointEEEvNS1_7abitype6StringERNS1_6vmtype5ArrayE (; 7 ;) (param $$0 i32) (param $$1 i32)
+ (func $__ZN11NeoContract4mainI15emit_entrypointEEvN6neodev7abitype6StringERNS2_6vmtype5ArrayE (; 8 ;) (param $$0 i32) (param $$1 i32)
   (local $$$byval_copy i32)
   (local $$$byval_copy1 i32)
   (local $$$byval_copy2 i32)
@@ -204,7 +208,7 @@
   )
   (return)
  )
- (func $__post_instantiate (; 8 ;)
+ (func $__post_instantiate (; 9 ;)
   (global.set $STACKTOP
    (i32.add
     (global.get $__memory_base)

@@ -8,32 +8,6 @@ using namespace neodev::abitype;
 
 namespace neodev::smartcontract::framework {
 
-struct emit_abi
-{};
-struct emit_entrypoint
-{};
-// marks function to export ABI
-#define EXPORT_ABI template<typename _emit = emit_abi>
-// marks function as contract entrypoint
-#define ENTRYPOINT template<typename _emit = emit_entrypoint>
-
-#ifdef NEODEV_CPP_TEST
-// main on tests (TODO: perhaps declare Storage, DynInvoke and other features here... to pass for test engine)
-#define DECLARE_MAIN(f) void _nodev_nothing(){};  //\
-   //int main()                \
-   //{                         \
-   //   f;                     \
-   //   return 0;              \
-   //};
-#else
-// ensures compiler won't optimize-out the main method ;)
-#define DECLARE_MAIN(f) \
-   int main()                \
-   {                         \
-      f;                     \
-      return 0;              \
-   };
-#endif
 
 class SmartContract
 {
