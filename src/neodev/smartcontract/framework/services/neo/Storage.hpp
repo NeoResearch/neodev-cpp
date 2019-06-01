@@ -189,7 +189,7 @@ Storage::put(StorageContext context, String key, String value)
    std::cout << "DEBUG: WRITING ON STORAGE!" << std::endl;
    neodevtest::worldState.gasCount += neodevtest::worldState.getSyscallPrice("Neo.Storage.Put", 10000);
    // TODO: convert to hex string before! all data must be in hex format
-   context.contractStorage[key.str_base] = value.str_base;
+   context.contractStorage[neodevtest::ASCIIToHexString(key.str_base)] = neodevtest::ASCIIToHexString(value.str_base);
 }
 
 EMIT_SYSCALL(Neo_Storage_Get)
@@ -198,7 +198,7 @@ Storage::get(StorageContext context, String key)
 {
    std::cout << "DEBUG: READING FROM STORAGE!" << std::endl;
    neodevtest::worldState.gasCount += neodevtest::worldState.getSyscallPrice("Neo.Storage.Get");
-   return ByteArray(context.contractStorage[key.str_base]);
+   return ByteArray(context.contractStorage[neodevtest::ASCIIToHexString(key.str_base)]);
 }
 #endif
 }

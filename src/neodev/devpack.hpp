@@ -15,6 +15,8 @@
 #define NO_DYNAMICINVOKE false
 #define HAS_DYNAMICINVOKE true
 
+namespace neodevtest {
+
 class TestContractFeatures
 {
 public:
@@ -25,7 +27,7 @@ public:
    // TODO: improve this function with something better from runtime (hash of name?)
    std::string getScriptHash() const
    {
-      return name;
+      return ASCIIToHexString(name);
    }
 
    TestContractFeatures(bool _storage, bool _dynamicInvoke, std::string _name)
@@ -35,6 +37,8 @@ public:
    {
    }
 };
+
+} // namespace neodevtest
 #else
 // global deploy structures
 struct _feature_has_storage
