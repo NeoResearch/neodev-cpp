@@ -15,9 +15,9 @@ struct StorageContext
 {
 #ifdef NEODEV_CPP_TEST
    // implement real storage
-   InternalStorage& contractStorage;
+   neodevtest::ContractStorage& contractStorage;
 
-   StorageContext(InternalStorage& _contractStorage)
+   StorageContext(neodevtest::ContractStorage& _contractStorage)
      : contractStorage(_contractStorage)
    {
    }

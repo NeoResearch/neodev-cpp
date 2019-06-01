@@ -67,8 +67,8 @@ struct emit_entrypoint
 #ifdef NEODEV_CPP_TEST
 // global function that returns contract capabilities
 #define DECLARE_MAIN(f, storage, dyninvoke, name)                                                   \
-   namespace neodev {                                                                               \
-   TestContractFeatures _get_contract() { return TestContractFeatures(storage, dyninvoke, name); }; \
+   namespace neodevtest {                                                                               \
+   TestContractFeatures getContract() { return TestContractFeatures(storage, dyninvoke, name); }; \
    }
 #else
 // ensures compiler won't optimize-out the main method ;)
@@ -85,9 +85,23 @@ struct emit_entrypoint
 // global system storage (for tests)
 #ifdef NEODEV_CPP_TEST
 // TODO: perhaps use scripthash
-namespace neodev {
-typedef std::map<std::string, std::string> InternalStorage;
-std::map<std::string, InternalStorage> _systemStorage;
+namespace neodevtest {
+
+typedef std::map<std::string, std::string> ContractStorage;
+
+struct WorldState
+{
+   std::map<std::string, ContractStorage> systemStorage;
+   long gasCount;
+
+   void initialize()
+   {
+      systemStorage.clear();
+      gasCount = 0;
+   }
+};
+
+WorldState worldState;
 }
 #endif
 

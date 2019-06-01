@@ -177,13 +177,15 @@ EMIT_SYSCALL(Neo_Storage_GetContext)
 StorageContext
 Storage::getContext()
 {
-   return StorageContext(neodev::_systemStorage[neodev::_get_contract().name]);
+   std::cout << "DEBUG: GETTING CONTEXT FROM STORAGE!" << std::endl;
+   return StorageContext(neodevtest::worldState.systemStorage[neodevtest::getContract().name]);
 }
 
 EMIT_SYSCALL(Neo_Storage_Put)
 void
 Storage::put(StorageContext context, String key, String value)
 {
+   std::cout << "DEBUG: WRITING ON STORAGE!" << std::endl;
    // TODO: convert to hex string before! all data must be in hex format
    context.contractStorage[key.str_base] = value.str_base;
 }
@@ -192,6 +194,7 @@ EMIT_SYSCALL(Neo_Storage_Get)
 ByteArray
 Storage::get(StorageContext context, String key)
 {
+   std::cout << "DEBUG: READING FROM STORAGE!" << std::endl;
    return ByteArray(context.contractStorage[key.str_base]);
 }
 #endif

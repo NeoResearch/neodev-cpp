@@ -7,18 +7,18 @@
 
 #include <map>
 #include <string>
+#include <iostream> // for tests
 
 struct TestContractFeatures;
 
-namespace neodev {
+namespace neodevtest {
 
 TestContractFeatures
-_get_contract();
-}
+getContract();
 
-namespace neodev {
-typedef std::map<std::string, std::string> InternalStorage;
-extern std::map<std::string, InternalStorage> _systemStorage;
+struct WorldState;
+
+extern WorldState worldState;
 }
 
 #endif

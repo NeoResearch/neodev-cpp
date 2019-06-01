@@ -9,33 +9,30 @@ using namespace std;
 
 // takes this when flag -DNEODEV_CPP_TEST is active
 #ifdef NEODEV_CPP_TEST
-TestContractFeatures _contract = neodev::_get_contract();
+TestContractFeatures myContract = neodevtest::getContract();
 #endif
 
 TEST(ExampleHelloWorldTests, Test_Name)
 {
-   EXPECT_EQ(_contract.name, "HelloWorld");
+   EXPECT_EQ(myContract.name, "HelloWorld");
 }
 
 TEST(ExampleHelloWorldTests, Test_Storage_Is_True)
 {
-   String s;
-   Array a;
-   NeoContract::main(s, a);
-   EXPECT_EQ(_contract.storage, true);
+   EXPECT_EQ(myContract.storage, true);
 }
 
 TEST(ExampleHelloWorldTests, Test_Dynamic_Invoke_Is_False)
 {
-   EXPECT_EQ(_contract.dynamicInvoke, false);
+   EXPECT_EQ(myContract.dynamicInvoke, false);
 }
 
-TEST(ExampleHelloWorldTests, Test_Run_Storage_Is_Correct)
+TEST(ExampleHelloWorldTests, Test_Invoke_Storage_Is_Correct)
 {
-   neodev::_systemStorage.clear(); // cleaning world (TODO: put this elsewhere)
-   EXPECT_EQ(neodev::_systemStorage[_contract.name]["Hello"], "");
+   neodevtest::worldState.initialize(); // cleaning world
+   EXPECT_EQ(neodevtest::worldState.systemStorage[myContract.name]["Hello"], "");
    String s;
    Array a;
    NeoContract::main(s, a);
-   EXPECT_EQ(neodev::_systemStorage[_contract.name]["Hello"], "World");
+   EXPECT_EQ(neodevtest::worldState.systemStorage[myContract.name]["Hello"], "World");
 }
