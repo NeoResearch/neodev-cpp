@@ -1,4 +1,4 @@
-# neo-cpp-devpack
+# neodev-cpp
 C++ devpack for Neo blockchain
 
 
