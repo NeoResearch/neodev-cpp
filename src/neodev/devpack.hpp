@@ -15,11 +15,18 @@
 #define NO_DYNAMICINVOKE false
 #define HAS_DYNAMICINVOKE true
 
-struct TestContractFeatures
+class TestContractFeatures
 {
+public:
    const bool storage;
    const bool dynamicInvoke;
    const std::string name;
+
+   // TODO: improve this function with something better from runtime (hash of name?)
+   std::string getScriptHash() const
+   {
+      return name;
+   }
 
    TestContractFeatures(bool _storage, bool _dynamicInvoke, std::string _name)
      : storage(_storage)

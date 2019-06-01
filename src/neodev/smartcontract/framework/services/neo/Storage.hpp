@@ -179,7 +179,7 @@ Storage::getContext()
 {
    std::cout << "DEBUG: GETTING CONTEXT FROM STORAGE!" << std::endl;
    neodevtest::worldState.gasCount += neodevtest::worldState.getSyscallPrice("Neo.Storage.GetContext");
-   return StorageContext(neodevtest::worldState.systemStorage[neodevtest::getContract().name]);
+   return StorageContext(neodevtest::worldState.systemStorage[neodevtest::getContract().getScriptHash()]);
 }
 
 EMIT_SYSCALL(Neo_Storage_Put)
