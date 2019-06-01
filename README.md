@@ -15,8 +15,8 @@ Suggestion: `https://mbebenita.github.io/WasmExplorer/` (Select C++1z or C++17)
 
 ## Integrated Unit Testing during development 
 
-Users can easily write Unit Tests to verify the behavior of contract for given test invocations.
-So, a complete testing stack can be performed before even generating a `nvm` (Neo Virtual Machine script).
+Users can easily write C++ Unit Tests to verify the behavior of contract for given test invocations.
+So, a complete testing stack can be performed before even generating a `nvm` (Neo Virtual Machine script) and privatenet/testnet testing.
 
 ![](./HelloWorld-Integrated-Testing.png)
 
