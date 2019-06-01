@@ -30,9 +30,11 @@ TEST(ExampleHelloWorldTests, Test_Dynamic_Invoke_Is_False)
 TEST(ExampleHelloWorldTests, Test_Invoke_Storage_Is_Correct)
 {
    neodevtest::worldState.initialize(); // cleaning world
-   EXPECT_EQ(neodevtest::worldState.systemStorage[myContract.name]["Hello"], "");
+   EXPECT_EQ(neodevtest::worldState.gasCount, 0); // no gas consumed (yet)
+   EXPECT_EQ(neodevtest::worldState.systemStorage[myContract.name]["Hello"], ""); // empty storage on key "Hello"
    String s;
    Array a;
    NeoContract::main(s, a);
+   EXPECT_EQ(neodevtest::worldState.gasCount, 1); // consumed some gas (TODO: fix this value)
    EXPECT_EQ(neodevtest::worldState.systemStorage[myContract.name]["Hello"], "World");
 }
