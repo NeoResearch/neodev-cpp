@@ -8,6 +8,8 @@
 #include <iostream> // for tests
 #include <map>
 #include <string>
+#include <sstream>
+#include <iomanip> // hex
 
 namespace neodevtest {
 
