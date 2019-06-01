@@ -11,7 +11,7 @@ typedef std::map<std::string, std::string> ContractStorage;
 class WorldState
 {
 public:
-   std::map<std::string, ContractStorage> systemStorage;
+   std::map<std::string, ContractStorage> storage;
    long gasCount{ 0 };
    std::map<std::string, long> syscallFixedPrices;
 
@@ -22,7 +22,7 @@ public:
 
    void initialize()
    {
-      systemStorage.clear();
+      storage.clear();
       syscallFixedPrices.clear();
       gasCount = 0;
       setPrices();

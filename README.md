@@ -13,9 +13,12 @@ Suggestion: `https://mbebenita.github.io/WasmExplorer/` (Select C++1z or C++17)
 
 ![](./Example-ClassHelloWorld.png)
 
-### global-function based 
+## Integrated Unit Testing during development 
 
-![](./Example-HelloWorld.png)
+Users can easily write Unit Tests to verify the behavior of contract for given test invocations.
+So, a complete testing stack can be performed before even generating a `nvm` (Neo Virtual Machine script).
+
+![](./HelloWorld-Integrated-Testing.png)
 
 
 ## dependencies

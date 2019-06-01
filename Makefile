@@ -27,7 +27,7 @@ srctest:
 	#$(WABT_BIN_NEW)/wat2wasm build/dapp.wast > build/dapp2.wasm
 	#$(WABT_BIN_NEW)/wasm2wat build/dapp2.wasm > build/dapp2.wat
 
-examples: HelloWorld HelloWorld_em Minimal_emc
+examples: HelloWorld HelloWorldTests HelloWorld_em Minimal_emc
 	@echo Building examples!
 
 # examples

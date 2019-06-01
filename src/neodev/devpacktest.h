@@ -30,6 +30,12 @@ ASCIIToHexString(const std::string& chars)
    return ss.str();
 }
 
+std::string
+toHex(const std::string& chars)
+{
+   return ASCIIToHexString(chars);
+}
+
 } // namespace neodevtest
 
 #endif
